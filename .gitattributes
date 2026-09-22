@@ -1,0 +1,20 @@
+# 换行符统一：多人协作时避免整文件"被改了一遍"的假 diff。
+# 检出时一律 LF；Windows 上的编辑器请配置为 LF。
+* text=auto eol=lf
+
+# 明确声明为二进制，避免 Git 尝试做文本转换 / 行尾处理
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.psd   binary
+*.aseprite binary
+*.ogg   binary
+*.wav   binary
+*.mp3   binary
+*.ttf   binary
+*.otf   binary
+
+# 锁文件与生成物：合并时不要逐行比对，冲突时以一侧为准
+*.lock  -diff merge=binary
