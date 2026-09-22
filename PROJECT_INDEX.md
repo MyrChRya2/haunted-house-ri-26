@@ -67,8 +67,10 @@
 
 | 路径 | 作用 |
 |------|------|
-| `.gitignore` | 根级 Git 忽略规则（引擎已定 Godot，待按 Godot 裁剪） |
+| `.gitignore` | 根级 Git 忽略规则 —— 已按 **Godot 4** 裁剪（忽略 `.godot/`）；`.dsh/bitable.json` 刻意不提交 |
+| `.gitattributes` | 行尾与二进制声明 —— 强制 LF、Godot 文本资源钉 LF，避免异地协作的假 diff |
 | `PROJECT_INDEX.md` | 本文件 — 索引与 skill 配置入口 |
+| GitHub 仓库 | `https://github.com/MyrChRya2/retro-game-jam-2026`（**私有**，项目结束后开源）—— 待推送后核对 |
 | `.dsh/team/` | 团队直投日志与决策队列（`log.jsonl`、`decisions.md`），由 team-comms 自动维护 |
 | `.dsh/bitable.json` | 飞书「Jam 项目总表」的 app_token 与各表 id（由 feishu-bitable 插件维护） |
 
@@ -76,26 +78,35 @@
 
 | 路径 | 作用 |
 |------|------|
-| `project.godot` | Godot 工程文件 —— **待生成**，建工程时创建 |
-| <!-- 导出预设、构建脚本等，建好 Godot 工程后补充 --> |
+| `retro-game-jam-2026/project.godot` | Godot 工程文件 —— **待生成**（用 Godot 编辑器在该目录新建工程） |
+| `retro-game-jam-2026/export_presets.cfg` | 网页导出预设 —— **纳入版本控制**（团队共享配置，别本地私自改） |
+| `retro-game-jam-2026/{scenes,scripts,autoload,ui,assets}/` | 目录骨架已建（含 `.gitkeep`）—— 约定见 `docs/GDD.md` 3.1 |
 
-> 引擎已确定为 **Godot**（2026-09-22，由 Ray 决定）；Godot 版本、渲染后端与导出平台
-> 待 20:00 会议与建工程时定。确定后请在此补充，并同步更新第四节的目录树。
+> 引擎 **Godot**（2026-09-22 由 Ray 决定）；**版本与渲染后端待装好编辑器后确定**，并回填本文件。
+> `res://` 指向 `retro-game-jam-2026/`，该目录即 Godot 工程根。
 
 ## 四、目录结构速览
 
 ```
-FirstProject/                     # 项目根（Git 仓库根）
+FirstProject/                     # 项目根（Git 仓库根）：管理文档与游戏本体同仓
 ├── docs/                         # 文档中心
 │   ├── GDD.md                    # 设计文档
 │   ├── ROADMAP.md                # 路线图
 │   └── devlog/                   # 开发日志
 │       ├── TEMPLATE.md           # 日志模板
 │       └── YYYY-MM-DD(-x).md     # 日志正文
-├── .dsh/                         # 团队直投、决策队列、bitable 状态（自动生成）
-├── project.godot                 # Godot 工程文件（待生成）
+├── retro-game-jam-2026/          # 游戏本体 —— Godot 工程根（res:// 指向此处）
+│   ├── project.godot             # 工程文件（待用编辑器生成）
+│   ├── scenes/                   # 场景 .tscn —— 一人一场景
+│   ├── scripts/                  # GDScript .gd
+│   ├── autoload/                 # 全局单例
+│   ├── ui/                       # 界面场景
+│   └── assets/                   # art(精灵图) / audio(音乐音效，均归 Ray) / fonts
+├── .dsh/                         # 团队直投、决策队列（bitable.json 本地不提交）
+├── .gitattributes                # 行尾与二进制声明
+├── .gitignore                    # Godot 4 忽略规则
 ├── PROJECT_INDEX.md              # 本文件
-└── ...                           # Godot 工程目录按实际补充
+└── DSH 飞书接入与 Jam 项目管理启动路径.md
 ```
 
 ## 五、文档协作工作流（当前约定）
@@ -121,3 +132,4 @@ FirstProject/                     # 项目根（Git 仓库根）
 - 2026-09-22：创建本文件（索引首版）；由 DSH 会话完成飞书接入与 Jam 项目管理 Agent 的搭建。
 - 2026-09-22：填入队员 **Ray / Illya**（异地合作）；确定引擎 **Godot**；主题、平台、截止时间待当日 20:00 会议。
 - 2026-09-22（会后）：Jam 选定 **Retro Game Jam**（09-30 06:00 → 10-07 06:00，UTC+8）；确认**主题未公开**；目标平台定为网页优先；分工定为 Illya 编辑器内（关卡/代码/测试/Bug）、Ray 编辑器外（美术/音频）。
+- 2026-09-22（结构）：游戏本体定为子目录 **`retro-game-jam-2026/`**（Godot 工程根），与管理文档同仓；目录骨架、Godot 4 版 `.gitignore` 与 LF 行尾规则已就位；本地分支改名 `main`。
