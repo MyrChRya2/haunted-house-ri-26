@@ -173,7 +173,7 @@ Jam 项目管理 Agent 的第一句话就是"读 `PROJECT_INDEX.md`"，所以骨
 
 ---
 
-## 6. 重启 DSH Web 并扫码 ⏳ 待用户执行
+## 6. 重启 DSH Web 并扫码 ✅ 已完成
 
 > **Agent 无法代为完成这一步**：插件配置**只在启动时读取一次**，必须重启；
 > 而重启会终止当前正在跑这个会话的 DSH 进程。扫码也必须由人完成。
@@ -204,7 +204,11 @@ feishu-channel: direct messages: anyone the app is visible to (narrow with sende
 
 ## 7. 验证连通性 ⏳ 待用户执行
 
-在飞书里给机器人发任意消息（群聊需 @ 它）。
+> ⚠️ **前置条件：先把机器人拉进群**（群设置 → 群机器人 → 添加机器人）。
+> 2026-09-22 查过：机器人当时**不在任何群里**（`GET /im/v1/chats` 返回 0 条），
+> 所以在此之前 @ 它不会有任何反应。
+
+在飞书群里 @ 机器人发任意消息。
 
 **预期结果**：
 
@@ -268,6 +272,52 @@ feishu-channel: direct messages: anyone the app is visible to (narrow with sende
 （互不干扰的子任务、批量同质任务），不是常驻角色 —— 它们没有跨会话记忆、
 不落盘、不参与决策队列。**不要**用它们替代 team-comms。
 
+### 群聊接入方式
+
+- **把机器人拉进群**（群设置 → 群机器人 → 添加机器人）。
+- `requireMention: true` 已是当前配置，**群聊必须 @ 才响应**，@ 即用，无需改配置。
+- `groupAllowlist` 目前为空 = 机器人所在的任何群都能用。机器人只在你这个群里，
+  所以实际等价于只有你们能用；想显式收窄可填该群的 `oc_...` id。
+- ⚠️ **一个飞书聊天 = 一个独立 Agent 会话**。所以请**统一只用那个群**：
+  如果你私下 DM 机器人、搭档也私下 DM，会产生**两个同角色的「Jam 项目管理」Agent**
+  —— 它们会并发改同一批文档和 `decisions.md`，而且 team-comms 拒绝同角色互投。
+  用群 = 两人驱动**同一个** Agent，这才是双人 Jam 该有的形态。
+
+### 多维表格（Jam 项目总表）
+
+飞书通道插件只做**对话**，不做多维表格。为此单独写了一个插件
+`~/.dsh/plugins/feishu-bitable.mjs`，**只挂在 `jam-manager` 上**（长期项目的 preset 不受影响）。
+
+四个工具：
+
+| 工具 | 作用 |
+|------|------|
+| `bitable_setup` | 幂等建立「Jam 项目总表」：一块多维表格，内含**任务表 / Bug 表 / 决策表**；返回链接 |
+| `bitable_add` | 往某张表加一条记录 |
+| `bitable_update` | 改一条记录（只改传入的字段） |
+| `bitable_list` | 列出记录，顺带拿 `record_id` |
+
+设计要点：
+
+- **凭据不重复配**：从宿主 `settings` 的 `feishu-channel` 命名空间读 —— 就是扫码落盘的那一份。
+- **状态跟项目走**：`app_token` 与各表 id 记在 `<工作目录>/.dsh/bitable.json`。
+- **状态/严重度用单选字段**：工具参数带 enum，模型写不出 `"doing"` 这种值 —— 文本字段早筛就废了。
+- 三张表与 `docs/ROADMAP.md` 是**镜像关系**：对话里写文档，群里看表。
+
+**权限前置条件**（飞书自建应用默认没有）：
+
+```
+https://open.feishu.cn/app/cli_aa3b42f79df8dbe7/auth?q=bitable:app,drive:drive
+```
+
+开通 `bitable:app`（建表与读写）和 `drive:drive`（把表共享给群成员），
+然后**必须到「版本管理与发布」发布一个新版本**，权限才生效 —— 这一步最容易漏。
+
+> 为什么不用现成插件：[`dsh-feishu-mcp`](https://github.com/zhengjy01/dsh-feishu-mcp)
+> （封装官方 lark-mcp，功能更全）要求 DSH ≥ 0.1.5-rc.1，本机是 **0.1.0-rc.6**，版本不符；
+> [`dsh-feishu-reader`](https://github.com/Mr-SYGao/dsh-feishu-reader) 只读且面向 desktop
+> profile。所以按"项目管理刚好需要的那三张表"写了这个窄工具面的插件。
+
 ---
 
 ## 9. 与原稿的差异（为什么改）
@@ -293,9 +343,12 @@ feishu-channel: direct messages: anyone the app is visible to (narrow with sende
 - [x] team-comms 增量登记「Jam 项目管理」角色
 - [x] 配置飞书通道 `cwd` + `preset`，`--dump-config` 验证补丁生效
 - [x] Jam 项目文档骨架 + `git init` + 首次提交
-- [ ] **重启 `dsh web`**（用户执行）
-- [ ] **飞书扫码创建应用**（用户执行）
-- [ ] 在飞书发消息验证：Agent 自称「Game Jam 项目管理」、cwd 正确
+- [x] **重启 `dsh web`**（12:05，新 PID 936）
+- [x] **飞书扫码创建应用**（凭据已落盘 `settings.yaml`，长连接已建立）
+- [x] 写 `feishu-bitable` 插件（4 个工具，逻辑已冒烟测试）+ 挂载校验通过
+- [ ] **把机器人拉进群**（群设置 → 群机器人 → 添加机器人）
+- [ ] 群里 @ 机器人发消息验证：Agent 自称「Game Jam 项目管理」、cwd 正确
+- [ ] **开通多维表格权限并发布新版本**，重启后验证 `bitable_setup`
 - [ ] 填写 `PROJECT_INDEX.md` 的 Jam 信息与搭档分工
 - [ ] 确定引擎与目录结构，同步 `PROJECT_INDEX.md` 第三节并裁剪 `.gitignore`
 - [ ] **收紧飞书安全配置**（见下）
