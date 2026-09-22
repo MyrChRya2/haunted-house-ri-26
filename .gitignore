@@ -13,38 +13,26 @@ desktop.ini
 .dsh-meow/
 .jam-persona.tmp.md
 
-# ── 引擎（⚠️ 确定引擎后删掉无关的段落）────────────────────────────
-# 目前引擎未定，三个主流引擎的规则都先留着；定下来之后请把另外两段删掉，
-# 避免误伤（例如 Godot 段的 *.import 规则会误伤 Unity 项目里的同名文件）。
+# 飞书总表的状态文件含 app_token，而该表当前是「互联网上获得链接的人可编辑」；
+# 本仓库将来要开源 → 不提交它，避免把一张可写表的入口一起公开。
+.dsh/bitable.json
 
-# Godot 4
-# .godot/
-# /android/
-# *.translation
-# export_presets.cfg
+# ── 引擎：Godot 4（2026-09-22 定为 Godot，Unity / Unreal 段已删除）────
+# ⚠️ `.godot/` 是 Godot 4 的导入缓存，**必须忽略**：提交它会让两人每天都产生冲突。
+.godot/
+/android/
+*.translation
+mono_crash.*.json
+.mono/
+data_*/
 
-# Unity
-# [Ll]ibrary/
-# [Tt]emp/
-# [Oo]bj/
-# [Bb]uild/
-# [Bb]uilds/
-# [Ll]ogs/
-# [Uu]ser[Ss]ettings/
-# *.csproj
-# *.sln
-# *.user
-
-# Unreal
-# Binaries/
-# DerivedDataCache/
-# Intermediate/
-# Saved/
-# *.VC.db
+# export_presets.cfg 刻意**不忽略**：网页导出配置是团队共享的工程配置，
+# 丢了要重做（网页导出参数容易配错）。改动走 git 历史追溯，别本地私自改。
 
 # ── 构建产物与临时文件 ──────────────────────────────────────────────
 build/
 dist/
 out/
+export/
 *.tmp
 *.log
