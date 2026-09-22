@@ -1,0 +1,50 @@
+# ── 操作系统 / 编辑器 ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+*.code-workspace
+
+# ── DSH 本地状态 ────────────────────────────────────────────────────
+# 团队信箱的日志与决策队列是项目记忆，要提交；已读水位是本机状态，不提交。
+.dsh/team/read/
+.dsh-meow/
+.jam-persona.tmp.md
+
+# ── 引擎（⚠️ 确定引擎后删掉无关的段落）────────────────────────────
+# 目前引擎未定，三个主流引擎的规则都先留着；定下来之后请把另外两段删掉，
+# 避免误伤（例如 Godot 段的 *.import 规则会误伤 Unity 项目里的同名文件）。
+
+# Godot 4
+# .godot/
+# /android/
+# *.translation
+# export_presets.cfg
+
+# Unity
+# [Ll]ibrary/
+# [Tt]emp/
+# [Oo]bj/
+# [Bb]uild/
+# [Bb]uilds/
+# [Ll]ogs/
+# [Uu]ser[Ss]ettings/
+# *.csproj
+# *.sln
+# *.user
+
+# Unreal
+# Binaries/
+# DerivedDataCache/
+# Intermediate/
+# Saved/
+# *.VC.db
+
+# ── 构建产物与临时文件 ──────────────────────────────────────────────
+build/
+dist/
+out/
+*.tmp
+*.log
