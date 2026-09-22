@@ -18,3 +18,10 @@
 
 # 锁文件与生成物：合并时不要逐行比对，冲突时以一侧为准
 *.lock  -diff merge=binary
+
+# Godot 文本资源：显式钉成 LF。Godot 在 Windows 上会写 CRLF，
+# 不清除的话异地双人每次保存都会产生"整文件被改了一遍"的假 diff。
+*.gd    text eol=lf
+*.tscn  text eol=lf
+*.tres  text eol=lf
+*.godot text eol=lf

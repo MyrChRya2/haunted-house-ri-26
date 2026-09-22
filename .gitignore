@@ -20,11 +20,14 @@ desktop.ini
 # ── 引擎：Godot 4（2026-09-22 定为 Godot，Unity / Unreal 段已删除）────
 # ⚠️ `.godot/` 是 Godot 4 的导入缓存，**必须忽略**：提交它会让两人每天都产生冲突。
 .godot/
-/android/
+android/
 *.translation
 mono_crash.*.json
 .mono/
 data_*/
+
+# 以上规则不带前导斜杠，对任意深度的子目录都生效 ——
+# 游戏本体在 `retro-game-jam-2026/` 下，它的 `.godot/` 同样被忽略。
 
 # export_presets.cfg 刻意**不忽略**：网页导出配置是团队共享的工程配置，
 # 丢了要重做（网页导出参数容易配错）。改动走 git 历史追溯，别本地私自改。
