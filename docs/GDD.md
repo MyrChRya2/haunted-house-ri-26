@@ -28,7 +28,8 @@
 
 | 项 | 决定 | 备注 |
 |----|------|------|
-| 引擎 / 版本 | **Godot**（版本待定） | 2026-09-22 由 Ray 决定；两人开工前必须统一版本号与渲染后端 |
+| 引擎 / 版本 | **Godot 4.7** | 工程已建于 `retro-game-jam-2026/`（`config_version=5`）；两人版本必须完全一致 |
+| 渲染后端 | ⚠️ **需改为 Compatibility**（当前 Forward+） | **Godot 4 的 Web 导出只支持 Compatibility**，Forward+ 导不出网页 —— 见飞书 Bug 表第一条 |
 | 目标平台 | **网页（Web）优先**，Windows 备选 | Jam 规则第 1 条推荐浏览器可玩；Web 导出便于评审 |
 | 美术形式 | 复古风（待定细节） | 评审含 Atmosphere 分："does it play like a retro game"，复古风是加分项 |
 | 音效 | 复古风（Ray 负责） | 同上，气氛分 |
@@ -67,7 +68,7 @@ Jam 的头号杀手是范围蔓延。以下三类明确**不做**：
 
 | # | 问题 | 需要谁拍板 | 状态 |
 |---|------|-----------|------|
-| 1 | Godot 版本与渲染后端（两人统一） | Ray | open |
+| 1 | 渲染后端改为 **Compatibility**（Web 导出必需，当前为 Forward+） | Ray | open |
 | 2 | 远程仓库选型（GitHub / Gitee）与是否用 Git LFS | Ray | open |
 | 3 | **AI 使用边界**（向主办方 Discord 问明 No generative AI 的范围） | Ray | open |
 | 4 | 主题公布后 2 小时内的核心循环与不做清单 | Ray + Illya | 待 09-30 06:00 |

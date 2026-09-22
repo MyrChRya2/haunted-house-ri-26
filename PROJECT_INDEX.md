@@ -69,7 +69,7 @@
 | `.gitignore` | 根级 Git 忽略规则 —— 已按 **Godot 4** 裁剪（忽略 `.godot/`）；`.dsh/bitable.json` 刻意不提交 |
 | `.gitattributes` | 行尾与二进制声明 —— 强制 LF、Godot 文本资源钉 LF，避免异地协作的假 diff |
 | `PROJECT_INDEX.md` | 本文件 — 索引与 skill 配置入口 |
-| GitHub 仓库 | `https://github.com/MyrChRya2/retro-game-jam-2026`（**私有**，项目结束后开源）—— 待推送后核对 |
+| GitHub 仓库 | `https://github.com/MyrChRya2/retro-game-jam-2026`（**私有**，项目结束后开源）—— ✅ 已连通，后端 `origin/main` |
 | `.dsh/team/` | 团队直投日志与决策队列（`log.jsonl`、`decisions.md`），由 team-comms 自动维护 |
 | `.dsh/bitable.json` | 飞书「Jam 项目总表」的 app_token 与各表 id（由 feishu-bitable 插件维护） |
 
@@ -77,12 +77,15 @@
 
 | 路径 | 作用 |
 |------|------|
-| `retro-game-jam-2026/project.godot` | Godot 工程文件 —— **待生成**（用 Godot 编辑器在该目录新建工程） |
-| `retro-game-jam-2026/export_presets.cfg` | 网页导出预设 —— **纳入版本控制**（团队共享配置，别本地私自改） |
+| `retro-game-jam-2026/project.godot` | Godot 工程文件 —— ✅ 已生成（**Godot 4.7**，`config_version=5`） |
+| `retro-game-jam-2026/export_presets.cfg` | 网页导出预设 —— **纳入版本控制**（团队共享配置，别本地私自改）；**待生成** |
 | `retro-game-jam-2026/{scenes,scripts,autoload,ui,assets}/` | 目录骨架已建（含 `.gitkeep`）—— 约定见 `docs/GDD.md` 3.1 |
+| `retro-game-jam-2026/icon.svg` (+`.import`) | 工程图标；`*.import` 要提交，`.godot/` 不提交 |
 
-> 引擎 **Godot**（2026-09-22 由 Ray 决定）；**版本与渲染后端待装好编辑器后确定**，并回填本文件。
+> 引擎 **Godot 4.7**（2026-09-22 建工程时确定）；**渲染后端当前是 Forward+，但网页导出只支持
+> Compatibility，必须改**（见飞书 Bug 表第一条）。
 > `res://` 指向 `retro-game-jam-2026/`，该目录即 Godot 工程根。
+> 编辑器生成的两套配置（子目录 `.gitignore` / `.gitattributes`）与根级并存，规则不冲突。
 
 ## 四、目录结构速览
 
