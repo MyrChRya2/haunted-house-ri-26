@@ -351,7 +351,42 @@ https://open.feishu.cn/app/cli_aa3b42f79df8dbe7/auth?q=bitable:app,drive:drive
 
 开通 `bitable:app`（建表与读写）和 `drive:drive`（把表共享给群成员），
 然后**必须到「版本管理与发布」发布一个新版本**，权限才生效 —— 这一步最容易漏。
-（可与「对外共享」的认证在**同一个版本**里一起提交，省一次审核。）
+
+#### ⚠️ 顺序陷阱（2026-09-22 实际踩过）
+
+**飞书的版本是「权限快照」**：创建版本的那一刻，把当时的权限配置固化进去。
+
+```
+正确：权限管理里开通 bitable:app  →  再创建版本  →  申请发布    ✅
+错误：先创建版本  →  再开通权限     →  发布                 ❌ 版本里没带权限
+```
+
+实际发生的正是后者：版本 1.0.1 **发布成功了**（`status=1`），但它的 scope 列表里
+**一个 bitable 权限都没有**，只剩 1.0.0 时就有的 `drive:drive.metadata:readonly`。
+表现是 `bitable_setup` 始终报 `code=99991672` —— 看起来像"没发布"，
+其实是"**发布了，但那个版本没带权限**"。
+
+**这个坑的迷惑性在于**：应用详情页显示"版本已发布""状态正常"，一切看起来都对，
+只有细看版本的 scope 列表才能发现问题。
+
+#### 怎么验证权限到底进版本了没有
+
+不用猜，直接查开放平台（比在后台翻页面更准）：
+
+```
+GET /open-apis/application/v6/applications/{app_id}?lang=zh_cn            # 线上版本的 scope
+GET /open-apis/application/v6/applications/{app_id}/app_versions?lang=zh_cn  # 各版本状态与 scope
+```
+
+判据：**当前线上版本**的 `scopes` 数组里要能找到 `bitable:app`。
+找不到就是没进版本，不管后台显示什么状态。
+
+#### 生效时机
+
+- **发布后立即生效，不需要重启 `dsh web`** —— 权限在飞书服务端裁定，本地无缓存。
+- 补充实测结论：改 preset 里的插件行（如新增 `feishu-bitable`）**同样不需要重启**。
+  roster 会检测到组合文件变化并建立新的 standing generation。
+  先前"必须重启"的判断过于保守 —— 实测飞书会话直接就用上了 `bitable_*` 工具。
 
 > ⚠️ **未验证的风险：外部群成员能不能打开这块表？**
 > 多维表格由应用（tenant 身份）创建，归属**你的租户云盘**。搭档是**外部用户**，
@@ -394,10 +429,11 @@ https://open.feishu.cn/app/cli_aa3b42f79df8dbe7/auth?q=bitable:app,drive:drive
 - [x] **飞书扫码创建应用**（凭据已落盘 `settings.yaml`，长连接已建立）
 - [x] 写 `feishu-bitable` 插件（4 个工具，逻辑已冒烟测试）+ 挂载校验通过
 - [x] 判定群类型：**外部群**（搭档在别的租户）→ 必须走对外共享 + 认证
-- [ ] **创建版本 1.0.1**：个人实名认证 → 勾选对外共享 → 可用范围改全体成员 → 加 `bitable:app`+`drive:drive` → 申请发布
-- [ ] **把机器人拉进群**（群设置 → 群机器人 → 添加机器人 → 搜索 `DSH Agent`）
-- [ ] 群里 @ 机器人发消息验证：Agent 自称「Game Jam 项目管理」、cwd 正确
-- [ ] 重启 `dsh web` 让 `bitable_*` 工具生效，跑 `bitable_setup` 建表
+- [x] **创建版本 1.0.1 并发布成功**（个人实名认证 + 对外共享通过）
+- [x] **机器人已加入群** `GameJam`（`oc_d7ee64c5c4c8d21f00582f3efbb1baaa`）
+- [x] 群里 @ 机器人 → **运行时验证通过**：Agent 的 preset = `jam-manager`、cwd = Jam 工作区
+- [ ] ⚠️ **版本 1.0.1 没带上 `bitable:app`**（顺序错了）→ 开通权限**后**再建 **1.0.2**，重发
+- [ ] 重新查 `app_versions` 确认线上版本 scope 含 `bitable:app`，再跑 `bitable_setup` 建表
 - [ ] **让搭档点一次表链接**，确认外部用户能否打开（未验证风险，见第 8 节）
 - [ ] 重置泄露的自定义机器人 webhook
 - [ ] 填写 `PROJECT_INDEX.md` 的 Jam 信息与搭档分工
