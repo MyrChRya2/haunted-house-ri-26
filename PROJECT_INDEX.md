@@ -77,13 +77,15 @@
 
 | 路径 | 作用 |
 |------|------|
-| `retro-game-jam-2026/project.godot` | Godot 工程文件 —— ✅ 已生成（**Godot 4.7**，`config_version=5`） |
-| `retro-game-jam-2026/export_presets.cfg` | 网页导出预设 —— **纳入版本控制**（团队共享配置，别本地私自改）；**待生成** |
+| `retro-game-jam-2026/project.godot` | Godot 工程文件 —— ✅ 已生成（**Godot 4.7.1-stable**，`config_version=5`；渲染方法已改为 `gl_compatibility`） |
+| `retro-game-jam-2026/export_presets.cfg` | 网页导出预设 —— **纳入版本控制**（团队共享配置，别本地私自改）；⚠️ **尚未创建** |
 | `retro-game-jam-2026/{scenes,scripts,autoload,ui,assets}/` | 目录骨架已建（含 `.gitkeep`）—— 约定见 `docs/GDD.md` 3.1 |
 | `retro-game-jam-2026/icon.svg` (+`.import`) | 工程图标；`*.import` 要提交，`.godot/` 不提交 |
 
-> 引擎 **Godot 4.7**（2026-09-22 建工程时确定）；**渲染后端当前是 Forward+，但网页导出只支持
-> Compatibility，必须改**（见飞书 Bug 表第一条）。
+> 引擎 **Godot 4.7.1-stable**（2026-09-22 建工程时确定）；渲染后端已改为 **Compatibility**
+> （`gl_compatibility`，2026-09-22，Web 导出因此可行）；纹理过滤 Nearest、像素吸附已开。
+> ⚠️ 视口尺寸现为 **192×160**，与 Atari 2600 的 160 列 × 192 行网格相反 —— Ray 称"要的就是这个比例"，
+> 待与 Illya 对齐后作为最终美术像素网格（改它等于素材重画）。
 > `res://` 指向 `retro-game-jam-2026/`，该目录即 Godot 工程根。
 > 编辑器生成的两套配置（子目录 `.gitignore` / `.gitattributes`）与根级并存，规则不冲突。
 

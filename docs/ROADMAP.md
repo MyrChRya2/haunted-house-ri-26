@@ -86,4 +86,4 @@
 
 | # | 描述 | 严重度 | 状态 | 发现日 |
 |---|------|--------|------|--------|
-| B1 | Godot 工程渲染后端是 **Forward+**，而官方文档明确 "Forward+/Mobile are not supported on the web platform" —— 当前配置**导不出网页**，必须改为 Compatibility | 高 | 待修（Ray） | 2026-09-22 |
+| B1 | ~~Godot 工程渲染后端是 Forward+，导不出网页~~ —— **已修复 2026-09-22**：渲染方法改为 `gl_compatibility`、纹理过滤改 Nearest、像素吸附已开（提交 `f3f07c8`） | 高 | **已修复** | 2026-09-22 |

@@ -28,8 +28,8 @@
 
 | 项 | 决定 | 备注 |
 |----|------|------|
-| 引擎 / 版本 | **Godot 4.7** | 工程已建于 `retro-game-jam-2026/`（`config_version=5`）；两人版本必须完全一致 |
-| 渲染后端 | ⚠️ **需改为 Compatibility**（当前 Forward+） | **Godot 4 的 Web 导出只支持 Compatibility**，Forward+ 导不出网页 —— 见飞书 Bug 表第一条 |
+| 引擎 / 版本 | **Godot 4.7.1-stable** | 工程已建于 `retro-game-jam-2026/`（`config_version=5`）；两人版本必须完全一致 |
+| 渲染后端 | ✅ **Compatibility**（`gl_compatibility`） | 2026-09-22 已改（提交 `f3f07c8`），Web 导出因此可行；纹理过滤 Nearest、像素吸附已开 |
 | 目标平台 | **网页（Web）优先**，Windows 备选 | Jam 规则第 1 条推荐浏览器可玩；Web 导出便于评审 |
 | 美术形式 | **Atari 2600 风格**（雅达利时代） | 主办方已明确"最好是雅达利时代的游戏风格"；评审含 Atmosphere 分 |
 | 屏幕网格 | **160×192 像素** | Atari 2600 基准（2026-09-22 由 Ray 定）；像素宽高比方案见 3.2 |
@@ -58,13 +58,17 @@
 2. 调色板：**NTSC 128 色**（16 色相 × 8 亮度）
 3. 风格基准：**雅达利 2600**
 
-**Godot 侧必须对齐的设置（改完两人都要同步）**
+**Godot 侧设置状态（2026-09-22）**
 
-1. `Project Settings → Display → Window`：Viewport Width = 160、Height = 192；窗口尺寸按整数倍放大。
-2. `Stretch`：Mode = `viewport`；Aspect 由像素宽高比方案决定（见待决策 6）。
-3. `Rendering → Textures → Canvas Textures → Default Texture Filter` = **Nearest** —— Godot 4 默认是 Linear，会把像素糊掉。
-4. `Rendering → 2D`：打开 `Snap 2D Transforms to Pixel` 与 `Snap 2D Vertices to Pixel`，避免亚像素抖动。
-5. 美术资源导入：Filter 关、Mipmaps 关。
+| 项 | 状态 |
+|----|------|
+| 渲染方法 = `gl_compatibility` | ✅ 已改（提交 `f3f07c8`） |
+| 纹理过滤 = Nearest（`default_texture_filter=0`） | ✅ 已改 |
+| `Snap 2D Transforms / Vertices to Pixel` | ✅ 已开 |
+| Viewport 尺寸 | ⚠️ 工程现为 **192 宽 × 160 高**，与 Atari 2600 的 160 列 × 192 行网格**相反** —— Ray 称"要的就是这个比例"，待与 Illya 对齐后作为最终美术网格（**这个数字就是美术像素网格，改它等于所有素材重画**） |
+| 窗口尺寸覆盖 / Stretch Mode / Scale Mode | ⏳ 待调（Ray：其他设置到时再调） |
+| 导出预设（`export_presets.cfg`） | ⚠️ **尚未创建** —— 没有 Web 预设，导出按钮不可用 |
+| 美术资源导入：Filter 关、Mipmaps 关 | ⏳ 待确认 |
 
 **像素宽高比（先定这个，否则 Ray 画的图会"看起来对、显示起来错"）**
 
