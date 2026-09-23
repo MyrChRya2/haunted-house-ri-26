@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cmbemh0l1lb35"]
+
+[ext_resource type="Texture2D" uid="uid://h60dqx1wburk" path="res://icon.svg" id="1_lvpmt"]
+[ext_resource type="Script" uid="uid://cdwmx7vigejtg" path="res://dev/sprite_2d.gd" id="2_yww77"]
+
+[node name="TextPlayground" type="Node2D" unique_id=1862634266]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1036433351]
+position = Vector2(91, 79)
+scale = Vector2(0.19921875, 0.19921875)
+texture = ExtResource("1_lvpmt")
+script = ExtResource("2_yww77")
