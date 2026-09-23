@@ -37,5 +37,10 @@ build/
 dist/
 out/
 export/
+# Godot 网页导出产物（Ray 放在 retro-game-jam-2026/EXPORTS/）：
+# 是**可重新生成**的构建输出，单个 .wasm 就 ~38MB —— 进仓库会让每次导出都产生
+# 巨大 diff 并迅速撑爆历史，因此一律不提交。
+EXPORTS/
+exports/
 *.tmp
 *.log
