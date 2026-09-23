@@ -45,7 +45,7 @@
 | 0.5 | 接口约定定稿进 GDD 3.1（场景归属/资源命名/autoload/signal） | Ray + Illya | 两人确认无异议 | open |
 | 0.6 | Illya 学 Godot：官方入门 + 一个能跑的小 demo | Illya | 能独立做出"角色移动 + 碰撞 + 场景切换" | open |
 | 0.7 | Ray 产出**少量**复古素材（精灵图、音乐/音效） | Ray | 素材进 `res://assets/`，可署名来源 | open |
-| 0.8 | 向主办方 Discord 问明 **"No generative Ai" 的边界** | Ray | 得到明确答复并记录进 GDD 第四节 | open |
+| 0.8 | 向主办方 Discord 问明 **"No generative Ai" 的边界** | Ray | 得到明确答复并记录进 GDD 第四节 | **done**（09-23：允许 AI 做项目管理；**代码与美术等游戏本体是红线**） |
 | 0.9 | 主题公布后 2 小时内定核心循环 + 不做清单 | Ray + Illya | GDD 二、五节填写完毕 | 待 09-30 06:00 |
 | 0.10 | 视觉规格落地：Godot 显示设置（160×192 viewport / Nearest 过滤 / 像素吸附）+ 像素宽高比方案定案 | Ray | 工程配置改完并推送，两人打开画面一致 | open |
 | 0.11 | 主题草案：**Horror 与 4th wall break 双兼容**玩法（只写进 GDD，不做实现） | Ray + Illya | 主题公布后 2 小时内能直接定稿 | open |
