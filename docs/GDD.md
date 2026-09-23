@@ -67,7 +67,7 @@
 | 纹理过滤 = Nearest（`default_texture_filter=0`） | ✅ 已改 |
 | `Snap 2D Transforms / Vertices to Pixel` | ✅ 已开 |
 | 窗口尺寸覆盖 / Stretch Mode / Scale Mode | ⏳ 待调（Ray：其他设置到时再调）；**建议** 方形像素 + 整数倍窗口，如 4× = **768×640**，Stretch Mode = `viewport`、Aspect = `keep`、Scale = `integer` |
-| 导出预设（`export_presets.cfg`） | ⚠️ **尚未创建** —— 没有 Web 预设，导出按钮不可用 |
+| 导出预设（`export_presets.cfg`） | ✅ 已创建并纳入版本控制；**首次 Web 导出成功**（09-23，36.5MB，浏览器完整加载 wasm/pck 并启动引擎） |
 | 美术资源导入：Filter 关、Mipmaps 关 | ⏳ 待确认 |
 
 **显示缩放方案（网格已定为 192×160，这里只决定"怎么放大到屏幕"）**

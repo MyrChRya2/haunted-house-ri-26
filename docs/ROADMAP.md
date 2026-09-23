@@ -41,7 +41,7 @@
 | 0.1 | Jam 基本信息落档（名称/时间/平台/规则约束） | Jam 项目管理 | `PROJECT_INDEX.md` 无 ⚠️ | **done**（09-22） |
 | 0.2 | 远程仓库就绪 + 双人权限（含 LFS 决策） | Ray | Illya 能 clone 并 push 一次测试提交 | **done**（09-22，用 Ray 的私有仓库；`ylybushirbq` 已获 write 并接受，两人均可拉推） |
 | 0.3 | 统一 Godot 版本与渲染后端，建工程骨架 + `.gitignore` | Ray | 两人都能打开工程并 F5 运行 | doing（Godot 4.7 工程已建；**渲染后端待改 Compatibility**） |
-| 0.4 | **Web 导出验证**：导出一次并试传 itch.io（占位包） | Ray | itch 上有可玩链接，评审路径提前打通 | open |
+| 0.4 | **Web 导出验证**：导出一次并试传 itch.io（占位包） | Ray | itch 上有可玩链接，评审路径提前打通 | doing（**本地导出已验证通过** 09-23：浏览器成功加载 wasm/pck 并启动引擎；待①入口改名 `index.html`、②itch 试传） |
 | 0.5 | 接口约定定稿进 GDD 3.1（场景归属/资源命名/autoload/signal） | Ray + Illya | 两人确认无异议 | open |
 | 0.6 | Illya 学 Godot：官方入门 + 一个能跑的小 demo | Illya | 能独立做出"角色移动 + 碰撞 + 场景切换" | open |
 | 0.7 | Ray 产出**少量**复古素材（精灵图、音乐/音效） | Ray | 素材进 `res://assets/`，可署名来源 | open |
