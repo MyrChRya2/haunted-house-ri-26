@@ -7,6 +7,7 @@
 radius = 2.5
 
 [node name="key" type="Area2D" unique_id=157284153]
+light_mask = 2
 collision_layer = 16
 script = ExtResource("1_wupe0")
 

@@ -9,7 +9,7 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
 radius = 4.0
 
-[node name="Ghost" type="CharacterBody2D" unique_id=1951286666]
+[node name="Ghost" type="CharacterBody2D" unique_id=1951286666 groups=["monster"]]
 collision_layer = 0
 collision_mask = 25
 script = ExtResource("1_rcv15")
@@ -27,6 +27,7 @@ shape = SubResource("CircleShape2D_qg826")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=312283716]
 
 [node name="Ghost" type="Sprite2D" parent="." unique_id=1077288267]
+light_mask = 0
 position = Vector2(1.4901161e-08, -1.0000001)
 scale = Vector2(0.45915395, 0.49991247)
 texture = ExtResource("2_erua2")

@@ -84,7 +84,7 @@ func _on_held_changed(_old_kind: int, _new_kind: int) -> void:
 func _on_item_dropped(_kind: int, _count: int) -> void:
 	_sync_item_icon()
 
-## 从背包读状态 → 设那一张图（整个项目里唯一改图标的地方）
+#从背包读状态
 func _sync_item_icon() -> void:
 	if _inv == null:
 		return
@@ -97,4 +97,3 @@ func _sync_item_icon() -> void:
 #火把使用数显示
 func match_used_count(matches_used):
 	matchuse.text = "match: %d" % matches_used
-	pass

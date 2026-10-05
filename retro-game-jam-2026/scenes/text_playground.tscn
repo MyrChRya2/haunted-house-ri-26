@@ -9,24 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dj1doix5tg5rq" path="res://resources——temper/texture/scepter.tres" id="5_iwkhi"]
 [ext_resource type="Texture2D" uid="uid://c3mp0cnmxe23n" path="res://resources——temper/texture/weng.tres" id="6_m2evi"]
 [ext_resource type="Texture2D" uid="uid://d0g6xruuf15gn" path="res://resources——temper/texture/piece.tres" id="7_r1koc"]
+[ext_resource type="PackedScene" uid="uid://bbq55fa3epb3a" path="res://monster/Vampire.tscn" id="7_uml2q"]
 [ext_resource type="Texture2D" uid="uid://dixqria3leja" path="res://resources——temper/texture/pieces.tres" id="8_iwkhi"]
+[ext_resource type="PackedScene" uid="uid://bl1n8a534i34u" path="res://monster/Ghost.tscn" id="8_vleex"]
 [ext_resource type="PackedScene" uid="uid://dbn2okjqtob6v" path="res://monster/Tarantula.tscn" id="13_g27bw"]
 [ext_resource type="Script" uid="uid://bppvrrt1psmbp" path="res://data/room.gd" id="14_uml2q"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
-a = Vector2(152, 0)
-b = Vector2(-8, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_qg826"]
-b = Vector2(0, 256)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_12ix5"]
-a = Vector2(0, 256)
-b = Vector2(160, 256)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_n41l7"]
-a = Vector2(160, 256)
-b = Vector2(160, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2evi"]
 texture = ExtResource("4_u3uuk")
@@ -67,21 +54,105 @@ size = Vector2(80, 88)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dljv0"]
 size = Vector2(80, 88)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
+a = Vector2(152, 0)
+b = Vector2(-8, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qg826"]
+b = Vector2(0, 256)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_12ix5"]
+a = Vector2(0, 256)
+b = Vector2(160, 256)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_n41l7"]
+a = Vector2(160, 256)
+b = Vector2(160, 0)
+
 [node name="Level1" type="Node2D" unique_id=695431144]
 script = ExtResource("1_3t0l8")
 
-[node name="FloorContents" type="Node2D" parent="." unique_id=1580055893]
+[node name="WorldDark" type="CanvasModulate" parent="." unique_id=910000003]
+color = Color(0.04, 0.04, 0.04, 1)
 
-[node name="Data" type="Node2D" parent="." unique_id=260947339 node_paths=PackedStringArray("contents")]
+[node name="Scenery" type="Node2D" parent="." unique_id=910000001]
+
+[node name="FloorContents" type="Node2D" parent="Scenery" unique_id=1580055893]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Scenery" unique_id=917800612]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAADAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAJAAEAAAAAAAIAAAAJAAIAAAAAAAIAAAAJAAMAAAAAAAIAAAAJAAQAAAAAAAIAAAAJAAUAAAAAAAIAAAAJAAYAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAgAAAAAAAIAAAAJAAkAAAAAAAIAAAAJAAoAAAAAAAIAAAAJAAsAAAAAAAIAAAAIAAoAAAAAAAIAAAAJAAwAAAAAAAIAAAAJAA0AAAAAAAIAAAAJAA4AAAAAAAIAAAAJAA8AAAAAAAIAAAAIAA8AAAAAAAIAAAAFAA8AAAAAAAIAAAAEAA8AAAAAAAIAAAADAA8AAAAAAAIAAAAGAA8AAAAAAAIAAAAFAA4AAAAAAAIAAAAEAA4AAAAAAAIAAAAFAAwAAAAAAAIAAAAEAAwAAAAAAAIAAAAEAAsAAAAAAAIAAAAEAAoAAAAAAAIAAAAEAAkAAAAAAAIAAAAFAAkAAAAAAAIAAAAFAAoAAAAAAAIAAAAFAAsAAAAAAAIAAAAGAAoAAAAAAAIAAAADAAoAAAAAAAIAAAABAA8AAAAAAAIAAAAAAA8AAAAAAAIAAAAAAA4AAAAAAAIAAAAAAA0AAAAAAAIAAAAAAAwAAAAAAAIAAAAAAAsAAAAAAAIAAAAAAAoAAAAAAAIAAAAAAAkAAAAAAAIAAAAAAAgAAAAAAAIAAAABAAoAAAAAAAIAAAAEAAcAAAAAAAIAAAAEAAYAAAAAAAIAAAAEAAUAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAFAAUAAAAAAAIAAAAFAAYAAAAAAAIAAAAFAAcAAAAAAAIAAAAGAAUAAAAAAAIAAAADAAUAAAAAAAIAAAABAAUAAAAAAAIAAAAAAAYAAAAAAAIAAAAAAAUAAAAAAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAIAAAAAAAIAAAAAAAIAAAAAAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAEAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAFAAEAAAAAAAIAAAA=")
+tile_set = SubResource("TileSet_qiptx")
+script = ExtResource("14_uml2q")
+
+[node name="room1" type="Area2D" parent="Scenery/TileMapLayer2" unique_id=1597139924]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/TileMapLayer2/room1" unique_id=80902576]
+position = Vector2(40, 44)
+shape = SubResource("RectangleShape2D_4u2dp")
+
+[node name="room2" type="Area2D" parent="Scenery/TileMapLayer2" unique_id=1947240117]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/TileMapLayer2/room2" unique_id=1431515671]
+position = Vector2(120, 44)
+shape = SubResource("RectangleShape2D_qg826")
+
+[node name="room3" type="Area2D" parent="Scenery/TileMapLayer2" unique_id=363564507]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/TileMapLayer2/room3" unique_id=1259733199]
+position = Vector2(40, 128)
+shape = SubResource("RectangleShape2D_12ix5")
+
+[node name="room4" type="Area2D" parent="Scenery/TileMapLayer2" unique_id=1800355365]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/TileMapLayer2/room4" unique_id=463481882]
+position = Vector2(120, 128)
+shape = SubResource("RectangleShape2D_n41l7")
+
+[node name="room5" type="Area2D" parent="Scenery/TileMapLayer2" unique_id=959959870]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/TileMapLayer2/room5" unique_id=734352894]
+position = Vector2(40, 212)
+shape = SubResource("RectangleShape2D_xrui7")
+
+[node name="room6" type="Area2D" parent="Scenery/TileMapLayer2" unique_id=40561095]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/TileMapLayer2/room6" unique_id=689656038]
+position = Vector2(120, 212)
+shape = SubResource("RectangleShape2D_dljv0")
+
+[node name="Items" type="Node2D" parent="." unique_id=910000002]
+
+[node name="Data" type="Node2D" parent="." unique_id=260947339 node_paths=PackedStringArray("contents", "items")]
 script = ExtResource("2_kc17k")
-contents = NodePath("../FloorContents")
+contents = NodePath("../Scenery/FloorContents")
+items = NodePath("../Items")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=434770906]
+[node name="Player" parent="." unique_id=129093540 instance=ExtResource("5_28wb5")]
+position = Vector2(48, 128)
+
+[node name="Monsters" type="Node2D" parent="." unique_id=1438510232]
+
+[node name="Tarantula" parent="Monsters" unique_id=1741896096 instance=ExtResource("13_g27bw")]
+position = Vector2(120, 224)
+
+[node name="Vampire" parent="Monsters" unique_id=717006068 instance=ExtResource("7_uml2q")]
+position = Vector2(24, 32)
+
+[node name="Ghost" parent="Monsters" unique_id=1951286666 instance=ExtResource("8_vleex")]
+position = Vector2(48, 48)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=434770906 groups=["hub"]]
 script = ExtResource("3_vleex")
 item_icons = Array[Texture2D]([null, ExtResource("4_28wb5"), ExtResource("5_iwkhi"), ExtResource("6_m2evi"), ExtResource("7_r1koc"), ExtResource("8_iwkhi")])
 
 [node name="Lives" type="Label" parent="CanvasLayer" unique_id=1749726384]
-light_mask = 8
+light_mask = 0
 visibility_layer = 1023
 anchors_preset = -1
 anchor_left = 0.25
@@ -107,11 +178,10 @@ offset_top = 56.0
 offset_right = 148.0
 offset_bottom = 101.0
 
-[node name="winthegame" type="Label" parent="CanvasLayer" unique_id=2069562871 groups=["hub"]]
-offset_left = 56.0
-offset_top = 48.0
-offset_right = 96.0
-offset_bottom = 71.0
+[node name="winthegame" type="Label" parent="CanvasLayer" unique_id=2069562871]
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 39.0
 
 [node name="ItemIcon" type="TextureRect" parent="CanvasLayer" unique_id=973470486]
 anchors_preset = -1
@@ -126,8 +196,6 @@ offset_left = 16.0
 offset_top = 80.0
 offset_right = 56.0
 offset_bottom = 103.0
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1972113530]
 
 [node name="WorldBounds" type="Node2D" parent="." unique_id=164700440]
 
@@ -155,58 +223,3 @@ collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/StaticBody2D4" unique_id=2023994744]
 shape = SubResource("SegmentShape2D_n41l7")
-
-[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=917800612]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAADAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAJAAEAAAAAAAIAAAAJAAIAAAAAAAIAAAAJAAMAAAAAAAIAAAAJAAQAAAAAAAIAAAAJAAUAAAAAAAIAAAAJAAYAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAgAAAAAAAIAAAAJAAkAAAAAAAIAAAAJAAoAAAAAAAIAAAAJAAsAAAAAAAIAAAAIAAoAAAAAAAIAAAAJAAwAAAAAAAIAAAAJAA0AAAAAAAIAAAAJAA4AAAAAAAIAAAAJAA8AAAAAAAIAAAAIAA8AAAAAAAIAAAAFAA8AAAAAAAIAAAAEAA8AAAAAAAIAAAADAA8AAAAAAAIAAAAGAA8AAAAAAAIAAAAFAA4AAAAAAAIAAAAEAA4AAAAAAAIAAAAFAAwAAAAAAAIAAAAEAAwAAAAAAAIAAAAEAAsAAAAAAAIAAAAEAAoAAAAAAAIAAAAEAAkAAAAAAAIAAAAFAAkAAAAAAAIAAAAFAAoAAAAAAAIAAAAFAAsAAAAAAAIAAAAGAAoAAAAAAAIAAAADAAoAAAAAAAIAAAABAA8AAAAAAAIAAAAAAA8AAAAAAAIAAAAAAA4AAAAAAAIAAAAAAA0AAAAAAAIAAAAAAAwAAAAAAAIAAAAAAAsAAAAAAAIAAAAAAAoAAAAAAAIAAAAAAAkAAAAAAAIAAAAAAAgAAAAAAAIAAAABAAoAAAAAAAIAAAAEAAcAAAAAAAIAAAAEAAYAAAAAAAIAAAAEAAUAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAFAAUAAAAAAAIAAAAFAAYAAAAAAAIAAAAFAAcAAAAAAAIAAAAGAAUAAAAAAAIAAAADAAUAAAAAAAIAAAABAAUAAAAAAAIAAAAAAAYAAAAAAAIAAAAAAAUAAAAAAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAIAAAAAAAIAAAAAAAIAAAAAAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAEAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAFAAEAAAAAAAIAAAA=")
-tile_set = SubResource("TileSet_qiptx")
-script = ExtResource("14_uml2q")
-
-[node name="room1" type="Area2D" parent="TileMapLayer2" unique_id=1597139924]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer2/room1" unique_id=80902576]
-position = Vector2(40, 44)
-shape = SubResource("RectangleShape2D_4u2dp")
-
-[node name="room2" type="Area2D" parent="TileMapLayer2" unique_id=1947240117]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer2/room2" unique_id=1431515671]
-position = Vector2(120, 44)
-shape = SubResource("RectangleShape2D_qg826")
-
-[node name="room3" type="Area2D" parent="TileMapLayer2" unique_id=363564507]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer2/room3" unique_id=1259733199]
-position = Vector2(40, 128)
-shape = SubResource("RectangleShape2D_12ix5")
-
-[node name="room4" type="Area2D" parent="TileMapLayer2" unique_id=1800355365]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer2/room4" unique_id=463481882]
-position = Vector2(120, 128)
-shape = SubResource("RectangleShape2D_n41l7")
-
-[node name="room5" type="Area2D" parent="TileMapLayer2" unique_id=959959870]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer2/room5" unique_id=734352894]
-position = Vector2(40, 212)
-shape = SubResource("RectangleShape2D_xrui7")
-
-[node name="room6" type="Area2D" parent="TileMapLayer2" unique_id=40561095]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer2/room6" unique_id=689656038]
-position = Vector2(120, 212)
-shape = SubResource("RectangleShape2D_dljv0")
-
-[node name="Player" parent="." unique_id=129093540 instance=ExtResource("5_28wb5")]
-position = Vector2(40, 56)
-
-[node name="monster" type="Node2D" parent="." unique_id=1438510232]
-
-[node name="Tarantula" parent="." unique_id=1741896096 instance=ExtResource("13_g27bw")]
-position = Vector2(112, 64)

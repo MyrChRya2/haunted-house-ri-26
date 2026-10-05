@@ -32,6 +32,9 @@ signal lives_changed(current: int)
 var is_dead : bool = false
 #死亡信号
 signal player_dead()
+signal hit_invincible_started()
+signal scepter_invincible_started()
+signal monsters_redeploy()
 
 #楼层
 var current_floor: int = 1
@@ -43,7 +46,7 @@ const FLOOR_MAX := 4
 var is_win = false
 
 
-
+@onready var _match_light: Node = $MatchLight
 
 func _ready() -> void:
 	#timer初始化
@@ -98,15 +101,18 @@ func take_damage() -> void:
 	#ui用，接受这个信号改变血量
 	lives_changed.emit(lives)#广播掉血信号
 	_invincible_timer.start(invincible_seconds)
+	hit_invincible_started.emit()
 #退出无敌
 func invincible_out() -> void:
 	is_invincible = false
+	monsters_redeploy.emit()
 #无敌时间归0
 func _on_invincible_seconds () -> void:
 	invincible_out()
 #权杖用代码，拾取权杖改变状态
 func scepter_invincible_apply():
-	scepter_invincible = true 
+	scepter_invincible = true
+	scepter_invincible_started.emit()
 func scepter_invincible_exit():
 	scepter_invincible = false
 
@@ -126,9 +132,7 @@ func try_use_stair(delta: int) -> bool:
 	floor_changed.emit(current_floor)
 	return true
 
-#拾取物品
-func try_pickup(kind: HeldItemInventory.HeldItem) -> bool:
-	return _inventory.try_pickup(kind)
+
 #询问是否有钥匙开门用
 func has_key() -> bool:
 	return _inventory.has_key()
@@ -158,3 +162,13 @@ func _on_item_dropped(kind: HeldItemInventory.HeldItem, count: int) -> void:
 		return
 	var loader = get_tree().get_first_node_in_group("floor_loader")
 	loader.register_drop(packed, global_position, current_floor)
+
+func is_lit_at(pos: Vector2) -> bool:
+	if _match_light == null:
+		return false
+	return _match_light.is_position_illuminated(pos)
+	
+func try_pickup_at(kind: HeldItemInventory.HeldItem, pos: Vector2) -> bool:
+	if not is_lit_at(pos):
+		return false                       # ★ 没照亮 → 什么都不发生：不拿、不换、不生成掉落物
+	return _inventory.try_pickup(kind)     # 只有过了这一关才真的进背包

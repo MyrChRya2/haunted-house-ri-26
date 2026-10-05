@@ -1,6 +1,9 @@
 extends Node2D
+
+const LIGHT_LAYER_SCENERY := 1
+const LIGHT_LAYER_ITEM := 2
 #火把脚本
-class_name match_light
+
 #都是label节点直接读名字就行
 @onready var _light: PointLight2D = $Light
 
@@ -19,6 +22,7 @@ var matches_used : int = 0
 
 #初始化计时器
 func _ready() -> void:
+	_light.range_item_cull_mask = LIGHT_LAYER_SCENERY | LIGHT_LAYER_ITEM
 	_burn_timer.one_shot = true
 	_burn_timer.timeout.connect(_on_burn_timer_timeout)
 	extinguish(&"init")

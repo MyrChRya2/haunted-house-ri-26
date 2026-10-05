@@ -18,7 +18,9 @@ func _on_body_entered(body: Node2D) -> void:
 			var loader = get_tree().get_first_node_in_group("floor_loader")
 			if loader:
 				loader.mark_taken(get_meta("spawn_id"))
+	if body.has_method("try_pickup_at") and body.try_pickup_at(item_kind, global_position):
 		queue_free()
+
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		wait_leave = false

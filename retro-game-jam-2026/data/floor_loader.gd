@@ -1,6 +1,15 @@
 extends Node
 
 @export var contents: Node2D
+@export var items: Node2D
+
+## 门/楼梯/胜利门进 FloorContents；钥匙等道具进 Items（含丢弃物）。
+const SCENERY_SCENES := {
+	HouseData.DOOR: true,
+	HouseData.STAIR_UP: true,
+	HouseData.STAIR_DOWN: true,
+	HouseData.VICTORYDOOR: true,
+}
 
 var _spawned: Dictionary = {}
 var _taken: Dictionary = {}
@@ -12,7 +21,9 @@ func _ready() -> void:
 	add_to_group("floor_loader")
 	await get_tree().process_frame
 	var player = get_tree().get_first_node_in_group("player")
-	assert(player != null, "关卡里找不到 player 组的节点")
+	assert(player != null, "关卡里找不到 player 组节点")
+	assert(contents != null, "FloorLoader.contents 未绑定")
+	assert(items != null, "FloorLoader.items 未绑定")
 	player.floor_changed.connect(_load_floor, CONNECT_DEFERRED)
 	_load_floor(player.current_floor)
 
@@ -27,6 +38,11 @@ func register_drop(packed: PackedScene, pos: Vector2, floor_num: int) -> Node2D:
 	_drops[floor_num].append({"id": id, "scene": packed, "pos": pos})
 	return _spawn_item(id, packed, pos, true)
 
+func _parent_for(packed: PackedScene) -> Node2D:
+	if SCENERY_SCENES.has(packed.resource_path):
+		return contents
+	return items
+
 func _spawn_item(id: String, packed: PackedScene, pos: Vector2, set_wait_leave: bool, open: bool = false) -> Node2D:
 	var node: Node2D = packed.instantiate()
 	node.set_meta("spawn_id", id)
@@ -34,7 +50,7 @@ func _spawn_item(id: String, packed: PackedScene, pos: Vector2, set_wait_leave: 
 		node.set("is_open", true)
 	if set_wait_leave and "wait_leave" in node:
 		node.wait_leave = true
-	contents.add_child(node)
+	_parent_for(packed).add_child(node)
 	node.global_position = pos
 	_spawned[id] = node
 	return node
@@ -42,6 +58,8 @@ func _spawn_item(id: String, packed: PackedScene, pos: Vector2, set_wait_leave: 
 func _load_floor(floor_num: int) -> void:
 	_remember_doors()
 	for child in contents.get_children():
+		child.queue_free()
+	for child in items.get_children():
 		child.queue_free()
 	_spawned.clear()
 	for entry in HouseData.get_entries(floor_num):

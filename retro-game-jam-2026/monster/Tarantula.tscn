@@ -13,6 +13,7 @@ radius = 5.0
 collision_layer = 0
 collision_mask = 25
 script = ExtResource("1_pltir")
+uses_stairs = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=852571815]
 shape = SubResource("CircleShape2D_qg826")
@@ -25,6 +26,7 @@ collision_mask = 25
 shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="PicturePickup" type="Sprite2D" parent="." unique_id=1668709997]
+light_mask = 0
 scale = Vector2(0.53333336, 0.6)
 texture = ExtResource("2_vvv12")
 

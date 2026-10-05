@@ -7,6 +7,7 @@
 radius = 4.1231055
 
 [node name="Pieces" type="Area2D" unique_id=1964370108]
+light_mask = 2
 script = ExtResource("1_kew4n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348003141]
