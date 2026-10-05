@@ -172,10 +172,14 @@
 - 朝向：`u` `d` `l` `r`；无朝向的用两位帧号 `00` `01` …
 - 例：`eye_l_00.png`、`enemy_bat_01.png`、`item_urn_00.png`、`tile_wall_00.png`、`ui_digit_3.png`
 
-> ⚠️ **现实与本节不一致，必须收敛（2026-10-05）**：现在仓库里**并存两套**写法 ——
-> Ray 用 `res://assets/sprite/tiles/walls/wall_1.png`，Illya 用 `res://assets/art/stairs/*`，
-> 而本节写的是 `res://assets/art/` + `tile_wall_00.png` 式命名。**三处必须收敛成一套**，否则合并那天会出现断裂引用。
-> 定哪一套由 Ray 拍板；定了之后 Agent 改本节、Illya 改场景里的路径引用。
+> ⚠️ **现实已跑在前面，本节要按现实改写（2026-10-05）**：Ray 的两条分支落地后，**实际在用的结构是**
+> `res://assets/sprite/<类别>/<子类>/<名字>.png` —— 例 `assets/sprite/player/player.png`、
+> `assets/sprite/mobs/{ghost,spider,vampire}.png`、`assets/sprite/tiles/walls/wall_1.png`、
+> `assets/sprite/tiles/doors/{door-h,door-v}.png`。文件名用朴素小写名（`ghost.png`），不带帧号后缀。
+> **待 Ray 一句话确认**：是否以这套为正式规范？确认后 Agent 改本节、Illya 把 `assets/art/stairs/*` 迁到
+> `assets/sprite/tiles/stairs/*` 并改掉那 14 处引用；**在此之前两套路径并存**。
+>
+> ⚠️ **另有一处不合规**：`door-h.png` 是 **23×8**、`door-v.png` 是 **8×23** —— **不是 16 的倍数**，与 D1"精灵尺寸统一取 16 的倍数"冲突，按格对齐时会错位。需重画成 16 的倍数（如 16×16 或 32×8 的倍格方案）。
 
 **D3. 清单**
 
