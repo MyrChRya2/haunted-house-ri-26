@@ -172,6 +172,11 @@
 - 朝向：`u` `d` `l` `r`；无朝向的用两位帧号 `00` `01` …
 - 例：`eye_l_00.png`、`enemy_bat_01.png`、`item_urn_00.png`、`tile_wall_00.png`、`ui_digit_3.png`
 
+> ⚠️ **现实与本节不一致，必须收敛（2026-10-05）**：现在仓库里**并存两套**写法 ——
+> Ray 用 `res://assets/sprite/tiles/walls/wall_1.png`，Illya 用 `res://assets/art/stairs/*`，
+> 而本节写的是 `res://assets/art/` + `tile_wall_00.png` 式命名。**三处必须收敛成一套**，否则合并那天会出现断裂引用。
+> 定哪一套由 Ray 拍板；定了之后 Agent 改本节、Illya 改场景里的路径引用。
+
 **D3. 清单**
 
 **P0 —— 不画就跑不通循环（13 张，全是 16×16）**
