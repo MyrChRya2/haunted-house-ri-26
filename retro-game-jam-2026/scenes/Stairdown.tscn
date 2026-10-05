@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c3li4n3nxhmlm"]
+
+[ext_resource type="Script" uid="uid://bucobeonikieq" path="res://scripts/stairdown.gd" id="1_si5a3"]
+[ext_resource type="Texture2D" uid="uid://d2c4xfrvu4rrf" path="res://resources——temper/stairs_art/stair_down_16.png" id="2_nveti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
+size = Vector2(11, 11)
+
+[node name="Stairdown" type="Area2D" unique_id=2147323999]
+script = ExtResource("1_si5a3")
+
+[node name="StairDown16" type="Sprite2D" parent="." unique_id=234138114]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_nveti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=730644050]
+shape = SubResource("RectangleShape2D_4u2dp")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2111347501]

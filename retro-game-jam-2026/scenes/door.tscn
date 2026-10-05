@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bgkg8pxymgeqs"]
+
+[ext_resource type="Script" uid="uid://uhu6745knccn" path="res://scripts/door.gd" id="1_6p5mf"]
+[ext_resource type="Texture2D" uid="uid://dj1doix5tg5rq" path="res://resources——temper/texture/scepter.tres" id="2_dgqnr"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qg826"]
+b = Vector2(16, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
+size = Vector2(20, 4)
+
+[node name="Doro" type="StaticBody2D" unique_id=1261577480]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_6p5mf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=166119394]
+shape = SubResource("SegmentShape2D_qg826")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1509631382]
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1684158949]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_4u2dp")
+
+[node name="NewAtlasTexture1" type="Sprite2D" parent="." unique_id=2122542939]
+position = Vector2(6.8083744, 0)
+scale = Vector2(1.170232, 0.25)
+texture = ExtResource("2_dgqnr")

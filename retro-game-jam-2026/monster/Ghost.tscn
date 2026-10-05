@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bl1n8a534i34u"]
+
+[ext_resource type="Script" uid="uid://ljemukyvsnn8" path="res://monster/ghost.gd" id="1_rcv15"]
+[ext_resource type="Texture2D" uid="uid://cxyo3lybmsmgv" path="res://resources——temper/texture/ghost.tres" id="2_erua2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
+radius = 4.0
+
+[node name="Ghost" type="CharacterBody2D" unique_id=1951286666]
+collision_layer = 0
+collision_mask = 25
+script = ExtResource("1_rcv15")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=18646193]
+shape = SubResource("CircleShape2D_4u2dp")
+
+[node name="HurtArea" type="Area2D" parent="." unique_id=1334561345]
+collision_layer = 4
+collision_mask = 25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" unique_id=914452486]
+shape = SubResource("CircleShape2D_qg826")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=312283716]
+
+[node name="Ghost" type="Sprite2D" parent="." unique_id=1077288267]
+position = Vector2(1.4901161e-08, -1.0000001)
+scale = Vector2(0.45915395, 0.49991247)
+texture = ExtResource("2_erua2")

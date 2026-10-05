@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d15pu8yv6w8g8"]
+
+[ext_resource type="Script" uid="uid://bkkwate3mi485" path="res://scripts/victorydoor.gd" id="1_gbmfw"]
+[ext_resource type="Texture2D" uid="uid://d170kjkd70yfk" path="res://resources——temper/texture/victorydoor.tres" id="2_f6ipo"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
+a = Vector2(6, 7)
+b = Vector2(6, -7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qg826"]
+size = Vector2(3.9786148, 13.999935)
+
+[node name="Victory" type="StaticBody2D" unique_id=1760742482 groups=["victory"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_gbmfw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=628363977]
+position = Vector2(-6, 0)
+shape = SubResource("SegmentShape2D_4u2dp")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1558870171]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1180748309]
+position = Vector2(5.9604645e-08, 0)
+rotation = 0.0030523608
+shape = SubResource("RectangleShape2D_qg826")
+
+[node name="NewAtlasTexture3" type="Sprite2D" parent="." unique_id=400933165]
+position = Vector2(-1.9553852e-09, 0.044734)
+rotation = 1.5707964
+scale = Vector2(0.10867603, 0.0234375)
+texture = ExtResource("2_f6ipo")

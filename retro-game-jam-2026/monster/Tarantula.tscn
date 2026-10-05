@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dbn2okjqtob6v"]
+
+[ext_resource type="Script" uid="uid://vtp5nlm564pq" path="res://monster/tarantula.gd" id="1_pltir"]
+[ext_resource type="Texture2D" uid="uid://dter3210os4pi" path="res://resources——temper/texture/tarantula.tres" id="2_vvv12"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
+radius = 5.0
+
+[node name="Tarantula" type="CharacterBody2D" unique_id=1741896096]
+collision_layer = 0
+collision_mask = 25
+script = ExtResource("1_pltir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=852571815]
+shape = SubResource("CircleShape2D_qg826")
+
+[node name="HurtArea" type="Area2D" parent="." unique_id=1350617704]
+collision_layer = 4
+collision_mask = 25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" unique_id=2099721425]
+shape = SubResource("CircleShape2D_4u2dp")
+
+[node name="PicturePickup" type="Sprite2D" parent="." unique_id=1668709997]
+scale = Vector2(0.53333336, 0.6)
+texture = ExtResource("2_vvv12")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=405583006]

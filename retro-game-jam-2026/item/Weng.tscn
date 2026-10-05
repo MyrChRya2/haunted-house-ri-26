@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cgg2wmr8wey4n"]
+
+[ext_resource type="Script" uid="uid://cw8n00l0xy7xw" path="res://item/weng.gd" id="1_823qn"]
+[ext_resource type="Texture2D" uid="uid://c3mp0cnmxe23n" path="res://resources——temper/texture/weng.tres" id="2_fi1of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqvy8"]
+size = Vector2(5, 5)
+
+[node name="Weng" type="Area2D" unique_id=1273580505]
+collision_layer = 32
+script = ExtResource("1_823qn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1248836985]
+shape = SubResource("RectangleShape2D_yqvy8")
+
+[node name="NewAtlasTexture2" type="Sprite2D" parent="." unique_id=656087353]
+scale = Vector2(0.46666667, 0.5)
+texture = ExtResource("2_fi1of")
