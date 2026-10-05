@@ -1,64 +1,124 @@
 extends Node2D
+# 火柴：IgniteFlash 一帧 + VisionMask 乘算遮罩（黑底圆洞），不叠 PointLight
 
-const LIGHT_LAYER_SCENERY := 1
-const LIGHT_LAYER_ITEM := 2
-#火把脚本
+const MASK_SIZE := Vector2(2048, 2048)
+const SOFTNESS := 14.0
 
-#都是label节点直接读名字就行
 @onready var _light: PointLight2D = $Light
-
 @onready var _burn_timer: Timer = $BurnTimer
+@onready var _ignite_flash: Sprite2D = $IgniteFlash
+@onready var _vision_mask: ColorRect = $VisionMask
 
 @export var burn_seconds: float = 3.0
+@export var full_radius: float = 64.0
+@export var expand_seconds: float = 0.2
+@export var shrink_seconds: float = 0.2
+## 关卡里的 Scenery 节点（闪光插到它前面）
+@export var scenery_path: NodePath = ^"../../Scenery"
 
-@export var light_energy: float = 1.2
-#点亮范围（可拾取物品）
-@export var illuminate_radius: float = 32.0
+var is_lit: bool = false
+var matches_used: int = 0
+var _current_radius: float = 0.0
+var _radius_tween: Tween
+var _busy: bool = false
 
-#火把状态
-var is_lit : bool = false
-#火把计数器
-var matches_used : int = 0
+signal match_used
 
-#初始化计时器
 func _ready() -> void:
-	_light.range_item_cull_mask = LIGHT_LAYER_SCENERY | LIGHT_LAYER_ITEM
+	show_behind_parent = true
+	# 停用 PointLight，避免与 VisionMask 双重变亮
+	_light.enabled = false
+	_light.energy = 0.0
+	_ignite_flash.visible = false
+	_ignite_flash.centered = true
+	_vision_mask.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_vision_mask.size = MASK_SIZE
+	_vision_mask.position = -MASK_SIZE * 0.5
+	_vision_mask.color = Color.WHITE
+	_apply_mask_uniforms()
+	_set_radius(0.0)
 	_burn_timer.one_shot = true
-	_burn_timer.timeout.connect(_on_burn_timer_timeout)
+	if not _burn_timer.timeout.is_connected(_on_burn_timer_timeout):
+		_burn_timer.timeout.connect(_on_burn_timer_timeout)
 	extinguish(&"init")
 
-#输入
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("light_match"):
 		try_light()
-#发出信号并且传出参数，给hub用显示火把计数
-signal match_used
-#点燃火把
+
 func try_light() -> void:
-	if is_lit:#防止重复点燃
+	if is_lit or _busy:
 		return
-	matches_used += 1#火把计数
+	_busy = true
+	matches_used += 1
 	match_used.emit(matches_used)
 	is_lit = true
-	_light.enabled = true
-	_light.energy = light_energy
-	_burn_timer.start(burn_seconds)  #重置燃烧时间
-	
+	_kill_radius_tween()
+	await _play_ignite_flash()
+	_set_radius(0.0)
+	_radius_tween = create_tween()
+	_radius_tween.tween_method(_set_radius, 0.0, full_radius, expand_seconds).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_burn_timer.start(burn_seconds)
+	_busy = false
 
-# 熄灭，参数是原因，后期引入多种熄灭方式，与怪物同房间/吹灭
 func extinguish(reason: StringName) -> void:
+	_busy = false
 	is_lit = false
-	_burn_timer.stop()  # 防止中途熄灭还会再 timeout 一次
+	_burn_timer.stop()
+	_kill_radius_tween()
+	_ignite_flash.visible = false
+	_set_radius(0.0)
 	_light.enabled = false
 	_light.energy = 0.0
 
-
 func _on_burn_timer_timeout() -> void:
-	extinguish(&"burn_out")
+	_start_shrink()
 
-
-## 某全局坐标是否在光照逻辑半径内（以后捡东西用）
-func is_position_illuminated(global_pos: Vector2) -> bool:
+func _start_shrink() -> void:
 	if not is_lit:
+		return
+	_kill_radius_tween()
+	var from := _current_radius
+	_radius_tween = create_tween()
+	_radius_tween.tween_method(_set_radius, from, 0.0, shrink_seconds).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	_radius_tween.tween_callback(func() -> void: extinguish(&"burn_out"))
+
+func _play_ignite_flash() -> void:
+	var old_parent := _ignite_flash.get_parent()
+	var scenery: Node = get_node_or_null(scenery_path)
+	if scenery:
+		var level := scenery.get_parent()
+		var idx := scenery.get_index()
+		var gp := global_position
+		_ignite_flash.reparent(level)
+		level.move_child(_ignite_flash, idx)
+		_ignite_flash.global_position = gp
+	_ignite_flash.visible = true
+	await get_tree().process_frame
+	_ignite_flash.visible = false
+	if old_parent and is_instance_valid(old_parent):
+		_ignite_flash.reparent(old_parent)
+		_ignite_flash.position = Vector2.ZERO
+
+func _set_radius(r: float) -> void:
+	_current_radius = maxf(r, 0.0)
+	_apply_mask_uniforms()
+
+func _apply_mask_uniforms() -> void:
+	var mat := _vision_mask.material as ShaderMaterial
+	if mat == null:
+		return
+	mat.set_shader_parameter("radius", _current_radius)
+	mat.set_shader_parameter("softness", SOFTNESS)
+	mat.set_shader_parameter("rect_size", MASK_SIZE)
+
+func _kill_radius_tween() -> void:
+	if _radius_tween != null and _radius_tween.is_valid():
+		_radius_tween.kill()
+	_radius_tween = null
+
+## 捡道具：用当前遮罩半径（扩圈/缩圈中途也会变）
+func is_position_illuminated(global_pos: Vector2) -> bool:
+	if not is_lit or _current_radius <= 0.0:
 		return false
-	return global_position.distance_squared_to(global_pos) <= illuminate_radius * illuminate_radius
+	return global_position.distance_squared_to(global_pos) <= _current_radius * _current_radius

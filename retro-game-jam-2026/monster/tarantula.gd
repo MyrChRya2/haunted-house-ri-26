@@ -311,6 +311,7 @@ func _on_segment(p: Vector2, a: Vector2, b: Vector2) -> bool:
 	return t2 > 0.05 and t2 < 0.95
 
 
+
 func _can_chase() -> bool:
 	if _player.is_invincible:
 		return false
