@@ -6,7 +6,7 @@ extends RefCounted
 const STAIR_UP := "res://scenes/Stairup.tscn"
 const STAIR_DOWN := "res://scenes/Stairdown.tscn"
 const DOOR := "res://scenes/door.tscn"
-const KEY := "res://item/key.tscn"
+const KEY := "res://item/Key.tscn"
 const SCEPTER := "res://item/Scepter.tscn"
 const VICTORYDOOR := "res://scenes/VictoryDoor.tscn"
 #房间坐标，前两位是房间左上角的点坐标，后两位是x和y轴的长度
