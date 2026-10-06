@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://chm0hnlyrsyb1" path="res://scripts/canvas_layer.gd" id="3_vleex"]
 [ext_resource type="Texture2D" uid="uid://bmsrw14604ogk" path="res://resources——temper/texture/瓦片.png" id="4_u3uuk"]
 [ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="5_28wb5"]
-[ext_resource type="Texture2D" uid="uid://dj1doix5tg5rq" path="res://resources——temper/texture/scepter.tres" id="5_iwkhi"]
-[ext_resource type="Texture2D" uid="uid://xc3bhq4jbhv8" path="res://resources——temper/texture/道具ui.png" id="7_ixuf1"]
+[ext_resource type="Texture2D" uid="uid://bbd1vxjolo6fw" path="res://assets/sprite/items/keys/key_normal.png" id="7_kc17k"]
+[ext_resource type="SpriteFrames" uid="uid://b7ybcgruoruig" path="res://item/shild.tres" id="9_3t0l8"]
 [ext_resource type="Texture2D" uid="uid://tlruhavk5gww" path="res://assets/sprite/items/keys/piecel.tres" id="9_g8d2g"]
 [ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="10_3t0l8"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="11_uml2q"]
@@ -50,10 +50,6 @@ size = Vector2(80, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dljv0"]
 size = Vector2(80, 88)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_chh1v"]
-atlas = ExtResource("7_ixuf1")
-region = Rect2(34, 34, 11, 11)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
 a = Vector2(152, 0)
@@ -134,14 +130,15 @@ contents = NodePath("../Scenery/FloorContents")
 items = NodePath("../Items")
 
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("5_28wb5")]
+visible = false
 position = Vector2(48, 128)
 
 [node name="Monsters" type="Node2D" parent="." unique_id=1438510232]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=434770906 groups=["hub"]]
 script = ExtResource("3_vleex")
-item_icons = Array[Texture2D]([null, SubResource("AtlasTexture_chh1v"), ExtResource("5_iwkhi"), null, ExtResource("9_g8d2g"), null])
-item_frames = Array[SpriteFrames]([null, null, null, ExtResource("10_3t0l8"), null, ExtResource("11_uml2q")])
+item_icons = Array[Texture2D]([null, ExtResource("7_kc17k"), null, null, ExtResource("9_g8d2g"), null])
+item_frames = Array[SpriteFrames]([null, null, ExtResource("9_3t0l8"), ExtResource("10_3t0l8"), null, ExtResource("11_uml2q")])
 
 [node name="Lives" type="Label" parent="CanvasLayer" unique_id=1749726384]
 light_mask = 0

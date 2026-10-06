@@ -7,6 +7,12 @@
 [ext_resource type="Shader" uid="uid://ytnkc8x28uju" path="res://shaders/vision_mask.gdshader" id="4_vmask"]
 [ext_resource type="Texture2D" uid="uid://mt10cuh6i5cx" path="res://assets/sprite/player/light_spark.png" id="5_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://cmceen1m0tck1" path="res://assets/sprite/effect/filter.png" id="6_mask"]
+[ext_resource type="Script" uid="uid://chm0hnlyrsyb1" path="res://scripts/canvas_layer.gd" id="8_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://bbd1vxjolo6fw" path="res://assets/sprite/items/keys/key_normal.png" id="9_p7iby"]
+[ext_resource type="Texture2D" uid="uid://tlruhavk5gww" path="res://assets/sprite/items/keys/piecel.tres" id="10_0rnld"]
+[ext_resource type="SpriteFrames" uid="uid://b7ybcgruoruig" path="res://item/shild.tres" id="11_srp4u"]
+[ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="12_jfpux"]
+[ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="13_61ith"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 6.0
@@ -96,7 +102,6 @@ lives = 6
 one_shot = true
 
 [node name="Body" type="CollisionShape2D" parent="." unique_id=614898363]
-visible = false
 shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966072067]
@@ -133,3 +138,86 @@ mouse_filter = 2
 
 [node name="BurnTimer" type="Timer" parent="MatchLight" unique_id=30644840]
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1746974270 groups=["hub"]]
+script = ExtResource("8_lkdrv")
+item_icons = Array[Texture2D]([null, ExtResource("9_p7iby"), null, null, ExtResource("10_0rnld"), null])
+item_frames = Array[SpriteFrames]([null, null, ExtResource("11_srp4u"), ExtResource("12_jfpux"), null, ExtResource("13_61ith")])
+
+[node name="Lives" type="Label" parent="CanvasLayer" unique_id=2104809965]
+light_mask = 0
+visibility_layer = 1023
+offset_right = 36.0
+offset_bottom = 23.0
+size_flags_horizontal = 2
+
+[node name="Floor" type="Label" parent="CanvasLayer" unique_id=891988332]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 26.0
+offset_bottom = 11.5
+grow_vertical = 2
+
+[node name="Item" type="Label" parent="CanvasLayer" unique_id=593783033]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ItemIcon" type="TextureRect" parent="CanvasLayer" unique_id=1928790074]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -29.667297
+offset_top = -11.408119
+offset_bottom = 11.408119
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0066482257
+
+[node name="gameover" type="Label" parent="CanvasLayer" unique_id=978164956]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -11.5
+offset_right = 16.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="winthegame" type="Label" parent="CanvasLayer" unique_id=284676861]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="match" type="Label" parent="CanvasLayer" unique_id=1008497429]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+metadata/_edit_use_anchors_ = true
