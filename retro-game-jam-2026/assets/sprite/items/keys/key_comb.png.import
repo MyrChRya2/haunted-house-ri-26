@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3nddx2bhgq1f"
-path="res://.godot/imported/door_h.png-b4c73ea6b61a60d9b61ab0d89d77abde.ctex"
+uid="uid://cv4qcvprtkcrh"
+path="res://.godot/imported/key_comb.png-28180e9cd6541dec5d871f2cb4a60834.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprite/tiles/doors/door_h.png"
-dest_files=["res://.godot/imported/door_h.png-b4c73ea6b61a60d9b61ab0d89d77abde.ctex"]
+source_file="res://assets/sprite/items/keys/key_comb.png"
+dest_files=["res://.godot/imported/key_comb.png-28180e9cd6541dec5d871f2cb4a60834.ctex"]
 
 [params]
 
