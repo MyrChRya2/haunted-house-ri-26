@@ -210,3 +210,5 @@ collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/StaticBody2D4" unique_id=2023994744]
 shape = SubResource("SegmentShape2D_n41l7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1945859548]

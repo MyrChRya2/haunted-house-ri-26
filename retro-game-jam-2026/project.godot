@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="retro-game-jam-2026"
-run/main_scene="uid://cmbemh0l1lb35"
+
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,7 @@ player=""
 victory=""
 hub=""
 monster=""
+monsters=""
 
 [input]
 
@@ -59,8 +60,12 @@ light_match={
 
 [layer_names]
 
-2d_render/layer_1="Scenery"
-2d_render/layer_2="Item"
+2d_render/layer_1="Player"
+2d_render/layer_2="EnemyBody"
+2d_render/layer_3="EnemySensor"
+2d_render/layer_4="Scenery"
+2d_render/layer_5="Door"
+2d_render/layer_6="Item"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="EnemyBody"
 2d_physics/layer_3="EnemySensor"
@@ -77,6 +82,6 @@ light_match={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.27996668, 0.2799667, 0.27996668, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

@@ -44,7 +44,12 @@ const FLOOR_MAX := 4
 
 #游戏胜利
 var is_win = false
-
+#动画节点
+@onready var body_sprite: AnimatedSprite2D = $BodySprite
+#动画名前缀
+const NORMAL_ANIMATION_PREFIX := &"normal"
+#后缀
+var facing_suffix := &"right"
 
 @onready var _match_light: Node = $MatchLight
 
@@ -59,6 +64,8 @@ func _ready() -> void:
 	_inventory.invincible_exit.connect(scepter_invincible_exit)
 	#加组
 	add_to_group("player")
+	_udpdate_animation()
+
 #八向移动
 func _physics_process(delta: float) -> void:
 	#生命归零冻结操作
@@ -76,11 +83,29 @@ func _physics_process(delta: float) -> void:
 	#楼层
 	if _stair_cooldown > 0.0:
 		_stair_cooldown -= delta
+	if move_input != Vector2.ZERO:
+		facing_suffix =_vector_to_facing_suffix(move_input)
+	_udpdate_animation()
+#动画实现
+#前后缀拼出动画名
+func _udpdate_animation()->void:
+	var animation_name := StringName("%s_%s" % [NORMAL_ANIMATION_PREFIX, facing_suffix])
+
+	if not body_sprite.sprite_frames.has_animation(animation_name):
+		push_warning("Missing player animation: %s" % animation_name)
+		return
+	if body_sprite.animation != animation_name:
+		body_sprite.play(animation_name)
+
+func _vector_to_facing_suffix (direction: Vector2) -> StringName:
+	if abs(direction.x) >= abs(direction.y):
+		return &"right" if direction.x > 0.0 else &"left"
+		
+	return &"down" if direction.y > 0.0 else &"up"
+
 #改变状态
 func win():
 	is_win = true
-
-
 
 #受击掉血
 func take_damage() -> void:
@@ -162,13 +187,13 @@ func _on_item_dropped(kind: HeldItemInventory.HeldItem, count: int) -> void:
 		return
 	var loader = get_tree().get_first_node_in_group("floor_loader")
 	loader.register_drop(packed, global_position, current_floor)
-
+#是否点亮火把
 func is_lit_at(pos: Vector2) -> bool:
 	if _match_light == null:
 		return false
 	return _match_light.is_position_illuminated(pos)
-	
+#点亮状态下可拾取物品
 func try_pickup_at(kind: HeldItemInventory.HeldItem, pos: Vector2) -> bool:
 	if not is_lit_at(pos):
-		return false                       # ★ 没照亮 → 什么都不发生：不拿、不换、不生成掉落物
-	return _inventory.try_pickup(kind)     # 只有过了这一关才真的进背包
+		return false
+	return _inventory.try_pickup(kind)

@@ -2,13 +2,83 @@
 
 [ext_resource type="Script" uid="uid://co6ves24y5ps5" path="res://scripts/player.gd" id="1_1jryi"]
 [ext_resource type="Script" uid="uid://cu57kijimw77u" path="res://item/held_item.gd" id="1_mdl7e"]
-[ext_resource type="Texture2D" uid="uid://cxqpao3612yn0" path="res://resources——temper/texture/icon.png" id="2_b1h3a"]
 [ext_resource type="Texture2D" uid="uid://dxdy2tmya01ny" path="res://resources——temper/ligh——texture/match_light_cookie.png" id="3_mdl7e"]
 [ext_resource type="Script" uid="uid://dkg84ssqqppf3" path="res://scripts/match_light.gd" id="3_qu4a1"]
+[ext_resource type="Texture2D" uid="uid://wd45o86e1ltc" path="res://assets/sprite/player/player.png" id="4_cw2d6"]
 [ext_resource type="Shader" uid="uid://ytnkc8x28uju" path="res://shaders/vision_mask.gdshader" id="4_vmask"]
+[ext_resource type="Texture2D" uid="uid://mt10cuh6i5cx" path="res://assets/sprite/player/light_spark.png" id="5_cw2d6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khinc"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bruh7"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eyey"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3wef"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4126"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkdrv"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7iby"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rnld"]
+atlas = ExtResource("4_cw2d6")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4u2dp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bruh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eyey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3wef")
+}],
+"loop": 1,
+"name": &"normal_left",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4126")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkdrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7iby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rnld")
+}],
+"loop": 1,
+"name": &"normal_right",
+"speed": 4.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmask"]
 shader = ExtResource("4_vmask")
@@ -24,41 +94,40 @@ lives = 6
 [node name="Timer" type="Timer" parent="." unique_id=311276830]
 one_shot = true
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=1586226373]
-light_mask = 0
-position = Vector2(-2.3841858e-07, -4.7683716e-07)
-scale = Vector2(0.03125, 0.03125)
-texture = ExtResource("2_b1h3a")
-
 [node name="Body" type="CollisionShape2D" parent="." unique_id=614898363]
+visible = false
 shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966072067]
+
+[node name="Inventory" type="Node" parent="." unique_id=273272589]
+script = ExtResource("1_mdl7e")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=250736260]
+sprite_frames = SubResource("SpriteFrames_4u2dp")
+animation = &"normal_left"
+autoplay = "normal_right"
 
 [node name="MatchLight" type="Node2D" parent="." unique_id=802325956]
 show_behind_parent = true
 script = ExtResource("3_qu4a1")
 
 [node name="Light" type="PointLight2D" parent="MatchLight" unique_id=761431707]
-enabled = false
+energy = 7.0
 range_item_cull_mask = 3
-texture = ExtResource("3_mdl7e")
+texture = ExtResource("5_cw2d6")
 
 [node name="IgniteFlash" type="Sprite2D" parent="MatchLight" unique_id=1151982448]
-visible = false
 modulate = Color(1.4, 1.25, 0.9, 1)
 texture = ExtResource("3_mdl7e")
 
 [node name="VisionMask" type="ColorRect" parent="MatchLight" unique_id=1214880723]
 material = SubResource("ShaderMaterial_vmask")
-offset_left = -1024.0
-offset_top = -1024.0
-offset_right = 1024.0
-offset_bottom = 1024.0
+offset_left = -1082.0
+offset_top = -1054.0
+offset_right = 966.0
+offset_bottom = 994.0
 mouse_filter = 2
 
 [node name="BurnTimer" type="Timer" parent="MatchLight" unique_id=30644840]
 one_shot = true
-
-[node name="Inventory" type="Node" parent="." unique_id=273272589]
-script = ExtResource("1_mdl7e")

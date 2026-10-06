@@ -9,7 +9,7 @@ const SOFTNESS := 14.0
 @onready var _ignite_flash: Sprite2D = $IgniteFlash
 @onready var _vision_mask: ColorRect = $VisionMask
 
-@export var burn_seconds: float = 3.0
+@export var burn_seconds: float = 5.0
 @export var full_radius: float = 64.0
 @export var expand_seconds: float = 0.2
 @export var shrink_seconds: float = 0.2
