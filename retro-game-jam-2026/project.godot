@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="retro-game-jam-2026"
-run/main_scene="uid://4p60k427qe8i"
+run/main_scene="uid://dbdsoqkwgd4q7"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

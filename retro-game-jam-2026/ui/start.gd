@@ -13,7 +13,8 @@ func _on_game_start_pressed() -> void:
 	if level_scene:
 		get_tree().change_scene_to_packed(level_scene)
 	else:
-		get_tree().change_scene_to_file("res://scenes/levels/leve1/level1.tscn")
+		pass
+		get_tree().change_scene_to_file("res://scenes/text_playground.tscn")
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()

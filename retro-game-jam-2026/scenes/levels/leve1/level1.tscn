@@ -25,6 +25,7 @@ tile_map_data = PackedByteArray("AAALAAUAAAABAAAAAAALAAYAAAABAAIAAAAKAAUAAAACAAU
 
 [node name="DoorV" parent="." unique_id=1808965014 instance=ExtResource("2_vi5qs")]
 position = Vector2(176, 96)
+collision_layer = 24
 
 [node name="VictoryDoor" parent="." unique_id=1760742482 instance=ExtResource("3_n5jho")]
 position = Vector2(80, 146)
@@ -33,7 +34,9 @@ position = Vector2(80, 146)
 position = Vector2(34, 35)
 
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("6_n5jho")]
+visible = false
 position = Vector2(99, 101)
+collision_mask = 56
 
 [node name="key" parent="." unique_id=157284153 instance=ExtResource("6_5pvav")]
 position = Vector2(160, 146)
