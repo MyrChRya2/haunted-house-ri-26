@@ -311,6 +311,30 @@
 
 > 评审标准：Fun / Theme usage / Visuals / **Atmosphere（是否像复古游戏）**。
 
+#### 4.1 主办方规则原文（2026-10-06 重新抓取自 jam 页，逐条核对）
+
+> RULES ——
+> 1. Any game engine is okay but I strongly recommend browser playable ones.
+> 2. **No generative Ai!**
+> 3. No hate speech and NSFW!
+> 4. Be respectful and don't manipulate ratings.
+> 5. **Game should be made during the jam period, small amount of pre-made assests are okay, just credit them properly.**
+> 6. Join our discord server to vote on the theme and claim the prizes.
+> 7. Have fun!
+>
+> 同页确认：**递交窗口 2026-09-29 22:00 UTC → 2026-10-08 22:00 UTC**（＝ UTC+8 的 **09-30 06:00 → 10-09 06:00**，与 Ray 转述的"延期到 9 号早上 6 点"一致）；评审 Fun / Theme usage / Visuals / Atmosphere。
+
+**❓ 关于字体（Illya 2026-10-06 提问）—— 主办方没有专门条款**
+
+- **逐字核查：7 条规则里没有任何一条提到字体 / typeface / 字库**。所以"字体"不适用任何特殊规定，只适用上面两条通用条款：
+  1. **规则 5（预制素材）** —— 第三方字体属于"pre-made asset"：**允许少量，但必须在 credits 里正确署名**（字体名 + 作者 + 许可证）。
+  2. **规则 2（No generative Ai）** —— **AI 生成的字模 / 字体一律不能用**。
+- ⚠️ **但"署名"不等于"可以随便用"** —— 规则只要求 credit，**许可范围仍由字体自身决定**。若某字体的许可写着"仅个人使用 / 非商业"，而本作是公开可下载的参赛作品（且奖品带商业价值），就超出了许可。
+- ✅ **本项目口径（与 Ray 的"美术全部重绘"一致）**：
+  1. **首选自绘位图字体**（8×8 / 16×16 字模）—— 零版权、零署名负担，而且 Atari 时代本来就是位图字体，与视觉基准天然一致；
+  2. 次选 **OFL / CC0 / 公有领域的像素字体**，并在 itch 页面与游戏内 credits 署名；
+  3. ⛔ **不要用 `resources——temper/font/IPix.ttf`** —— 它来自第三方教程包，来源与许可证均未核实，属 Bug **B2** 范畴，**不得出包**。`assets/fonts/` 目前是空的。
+
 ### 4.1 二创与署名要求（2026-09-30 Ray 定"二创重制"后新增）
 
 > 本作是 **fan remake（二创重制）**，不是官方作品。以下三条是**上架前的硬检查项**：
