@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://cgg2wmr8wey4n" path="res://item/Weng.tscn" id="1_1yg7u"]
 [ext_resource type="Texture2D" uid="uid://bcd7iclo12ejg" path="res://assets/sprite/tiles/walls/wall_2.png" id="1_7noth"]
-[ext_resource type="Texture2D" uid="uid://5raef1s5cetx" path="res://assets/sprite/tiles/doors/door_v.png" id="2_xlxrd"]
 [ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="5_pjgxg"]
-[ext_resource type="PackedScene" uid="uid://bmj3u21ua6pfa" path="res://item/Piecel.tscn" id="6_qjupb"]
+[ext_resource type="PackedScene" uid="uid://bmj3u21ua6pfa" path="res://item/piece_l.tscn" id="6_qjupb"]
 [ext_resource type="PackedScene" uid="uid://bl1n8a534i34u" path="res://monster/Ghost.tscn" id="6_uqdpt"]
-[ext_resource type="PackedScene" uid="uid://duslsrowtj2sn" path="res://item/Piecer.tscn" id="7_y0r6w"]
-[ext_resource type="PackedScene" uid="uid://kxox7co301ov" path="res://item/Piecem.tscn" id="8_327e2"]
+[ext_resource type="PackedScene" uid="uid://duslsrowtj2sn" path="res://item/piece_r.tscn" id="7_y0r6w"]
+[ext_resource type="PackedScene" uid="uid://kxox7co301ov" path="res://item/piece_m.tscn" id="8_327e2"]
+[ext_resource type="PackedScene" uid="uid://dj0svhiclo7fi" path="res://item/shild/shild.tscn" id="9_qjupb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wa2bl"]
 texture = ExtResource("1_7noth")
@@ -344,40 +344,43 @@ sources/0 = SubResource("TileSetAtlasSource_wa2bl")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4y6"]
 size = Vector2(4, 20)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1yg7u"]
+load_path = "res://.godot/imported/door_v.png-2389b9abf74e29f45d59dd0da6434d9f.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjgxg"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(0, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqdpt"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(0, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1lbv2"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(7, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1yg7u"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(14, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjupb"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(21, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0r6w"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(28, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_327e2"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(35, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axuwn"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(42, 0, 7, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lu2e4"]
-atlas = ExtResource("2_xlxrd")
+atlas = SubResource("CompressedTexture2D_1yg7u")
 region = Rect2(49, 0, 7, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cs4y6"]
@@ -446,11 +449,14 @@ position = Vector2(95, 53)
 [node name="Ghost" parent="." unique_id=1951286666 instance=ExtResource("6_uqdpt")]
 position = Vector2(78, 74)
 
-[node name="Piecel" parent="." unique_id=1765561640 instance=ExtResource("6_qjupb")]
+[node name="PieceL" parent="." unique_id=1765561640 instance=ExtResource("6_qjupb")]
 position = Vector2(39, 51)
 
-[node name="Piecer" parent="." unique_id=321558726 instance=ExtResource("7_y0r6w")]
+[node name="PieceR" parent="." unique_id=321558726 instance=ExtResource("7_y0r6w")]
 position = Vector2(46, 51)
 
-[node name="Piecem" parent="." unique_id=1954231467 instance=ExtResource("8_327e2")]
+[node name="PieceM" parent="." unique_id=1954231467 instance=ExtResource("8_327e2")]
 position = Vector2(42, 57)
+
+[node name="Shild" parent="." unique_id=1753281634 instance=ExtResource("9_qjupb")]
+position = Vector2(81, 51)

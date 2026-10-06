@@ -1,13 +1,7 @@
-[gd_scene format=3 uid="uid://bgkg8pxymgeqs"]
+[gd_scene format=3 uid="uid://b4o280c8q0o5j"]
 
 [ext_resource type="Script" uid="uid://uhu6745knccn" path="res://scripts/door.gd" id="1_6p5mf"]
-[ext_resource type="Texture2D" uid="uid://d3nddx2bhgq1f" path="res://assets/sprite/tiles/doors/door_h.png" id="2_uvdjg"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_qg826"]
-b = Vector2(16, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
-size = Vector2(20, 4)
+[ext_resource type="Texture2D" uid="uid://d3nddx2bhgq1f" path="res://assets/sprite/tiles/doors/door_final.png" id="2_uvdjg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83dcw"]
 atlas = ExtResource("2_uvdjg")
@@ -73,23 +67,32 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Doro" type="StaticBody2D" unique_id=1261577480]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8gb5"]
+size = Vector2(20, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
+size = Vector2(20, 4)
+
+[node name="DoorV" type="StaticBody2D" unique_id=1261577480]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_6p5mf")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1260376492]
+sprite_frames = SubResource("SpriteFrames_4u2dp")
+autoplay = "default"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=166119394]
-position = Vector2(-8, 0)
-shape = SubResource("SegmentShape2D_qg826")
+shape = SubResource("RectangleShape2D_y8gb5")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1509631382]
 collision_layer = 8
 collision_mask = 7
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1684158949]
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_4u2dp")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1260376492]
-scale = Vector2(0.8, 0.5)
-sprite_frames = SubResource("SpriteFrames_4u2dp")
-autoplay = "default"
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" unique_id=1968890141]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_4u2dp")

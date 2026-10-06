@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ngoofiat11sw" path="res://assets/sprite/tiles/steps/stair.tres" id="2_si5a3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
-size = Vector2(16, 16)
+size = Vector2(16, 8)
 
 [node name="Stairup" type="Area2D" unique_id=1145574436]
 script = ExtResource("1_8ktn7")
@@ -16,5 +16,4 @@ shape = SubResource("RectangleShape2D_4u2dp")
 
 [node name="Stair" type="Sprite2D" parent="." unique_id=586937667]
 position = Vector2(0, -2.3841858e-07)
-scale = Vector2(1, 2)
 texture = ExtResource("2_si5a3")
