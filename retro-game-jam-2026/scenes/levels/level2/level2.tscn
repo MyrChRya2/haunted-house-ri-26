@@ -1,16 +1,22 @@
 [gd_scene format=3 uid="uid://cr2id2npeeocx"]
 
 [ext_resource type="PackedScene" uid="uid://vkijonwgkl5a" path="res://scenes/levels/level2/map.tscn" id="1_e0cvd"]
+[ext_resource type="Script" uid="uid://c3ymxju0hyllc" path="res://scenes/levels/leve1/map_spawn.gd" id="1_iq8gt"]
 [ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/Stairup.tscn" id="2_rj8cl"]
-[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/stairdown.tscn" id="3_gblnm"]
+[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/Stairdown.tscn" id="3_gblnm"]
+[ext_resource type="PackedScene" uid="uid://c7yrnwtrmwdye" path="res://dev/level1_test/level1.tscn" id="4_cphpc"]
+[ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="5_iq8gt"]
 
 [node name="Level2" type="Node2D" unique_id=2053377309]
+script = ExtResource("1_iq8gt")
 
 [node name="Map" parent="." unique_id=382259812 instance=ExtResource("1_e0cvd")]
 
 [node name="StairUp" parent="." unique_id=1145574436 instance=ExtResource("2_rj8cl")]
 position = Vector2(32, 5)
 rotation = -3.1415927
+next_scene = ExtResource("4_cphpc")
+spawn_id = "111"
 
 [node name="StairUp2" parent="." unique_id=972061985 instance=ExtResource("2_rj8cl")]
 position = Vector2(144, 155)
@@ -18,3 +24,9 @@ rotation = -6.2831855
 
 [node name="StairDown" parent="." unique_id=2147323999 instance=ExtResource("3_gblnm")]
 position = Vector2(160, 5)
+
+[node name="orgin" type="Marker2D" parent="." unique_id=1613192873]
+position = Vector2(22, 95)
+
+[node name="Player" parent="." unique_id=129093540 instance=ExtResource("5_iq8gt")]
+position = Vector2(22, 95)

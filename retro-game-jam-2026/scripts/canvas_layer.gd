@@ -115,7 +115,7 @@ func _sync_item_icon() -> void:
 	#只有一帧以上才需要逐帧播放
 	set_process(_anim_frames != null and _anim_frames.get_frame_count(item_anim) > 1)
 
-#按 SpriteFrames 的 fps 和每帧时长给图标换帧
+#按SpriteFrames的fps和每帧时长给图标换帧
 func _process(delta: float) -> void:
 	if _anim_frames == null:
 		set_process(false)

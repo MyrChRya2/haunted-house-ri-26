@@ -76,3 +76,13 @@ func try_pickup(kind: HeldItem) -> bool:
 			invincible_exit.emit()
 	item_taken.emit(kind)
 	return true
+#跨层时储存数据
+func restore(kind: HeldItem) -> void:
+	var old := held
+	held = kind
+	if old != held:
+		held_changed.emit(old, held)
+	if held == HeldItem.SCEPTER:
+		invincible_apply.emit()
+	elif old == HeldItem.SCEPTER:
+		invincible_exit.emit()

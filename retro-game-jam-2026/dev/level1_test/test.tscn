@@ -1,0 +1,105 @@
+[gd_scene format=4 uid="uid://fsgn33l6nu11"]
+
+[ext_resource type="Texture2D" uid="uid://bcd7iclo12ejg" path="res://assets/sprite/tiles/walls/wall_2.png" id="1_86jbs"]
+[ext_resource type="Texture2D" uid="uid://ch34e7t6k0kcp" path="res://assets/sprite/tiles/walls/wall_1.png" id="2_iwvwq"]
+[ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/Stairup.tscn" id="3_7m2om"]
+[ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="4_f4pgw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mmrhl"]
+texture = ExtResource("1_86jbs")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0.7927656, -8, 0.7927656)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.7746792, 8, 8, 8, 8, 1.9819136, 8, 1.7837229, 1.4864349, -8, 0.7927656)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.7746792, 8, 8, 8, 1.0900526, 1.1891489, 0.7927656, -8, 0.7927656)
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0.99095726, -8, 0.7927656)
+1:1/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2hvrx"]
+texture = ExtResource("2_iwvwq")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_4u2dp"]
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_mmrhl")
+sources/1 = SubResource("TileSetAtlasSource_2hvrx")
+
+[node name="Test" type="Node2D" unique_id=1012252131]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1430677507]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAQAAAAAAAIAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAEAAQAAAABAAIAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAAGAAAAAAACAAAAAAAGAAEAAAACAAEAAAAGAAIAAAACAAEAAAAGAAMAAAACAAEAAAAGAAQAAAACAAIAAAAFAAQAAAABAAIAAAABAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAAEAAEAAAABAAEAAAAFAAEAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAACAAIAAAABAAEAAAABAAIAAAABAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAEAAUAAQADAAAAAAAAAAUAAQADAAAAAAABAAUAAQADAAAAAAACAAUAAQADAAAAAAADAAUAAQADAAAAAAAFAAUAAQADAAAAAAAGAAUAAQADAAAAAAA=")
+tile_set = SubResource("TileSet_4u2dp")
+
+[node name="Stairup" parent="." unique_id=1145574436 instance=ExtResource("3_7m2om")]
+position = Vector2(56, 72)
+rotation = 3.1415927
+
+[node name="Player" parent="." unique_id=129093540 instance=ExtResource("4_f4pgw")]
+visible = false
+position = Vector2(87, 72)

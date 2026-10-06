@@ -7,7 +7,7 @@ const STAIR_UP := "res://scenes/Stairup.tscn"
 const STAIR_DOWN := "res://scenes/Stairdown.tscn"
 const DOOR := "res://scenes/door.tscn"
 const KEY := "res://autoload/Key.tscn"
-const SCEPTER := "res://item/Scepter.tscn"
+const SHILD := "res://item/Shild.tscn"
 const VICTORYDOOR := "res://scenes/VictoryDoor.tscn"
 const PIECE := "res://item/Piecem.tscn"
 const PIECES := "res://item/Pieces.tscn"
@@ -54,7 +54,7 @@ const FLOORS := {
 	2: [
 		{"id": "f2_down", "scene": STAIR_DOWN, "room_id": "room_0", "pos": Vector2(40, 10)},
 		{"id": "f2_up", "scene": STAIR_UP, "room_id": "room_5", "pos": Vector2(120, 232)},
-		{"id": "f2_scepter", "scene": SCEPTER, "room_id": "room_2", "pos": Vector2(40, 128)},
+		{"id": "f2_scepter", "scene": SHILD, "room_id": "room_2", "pos": Vector2(40, 128)},
 		{"id": "f2_piece", "scene":PIECE, "room_id": "room_1", "pos": Vector2(120, 32)},
 	],
 	3: [
