@@ -1,13 +1,82 @@
 [gd_scene format=3 uid="uid://dbn2okjqtob6v"]
 
 [ext_resource type="Script" uid="uid://vtp5nlm564pq" path="res://monster/tarantula.gd" id="1_pltir"]
-[ext_resource type="Texture2D" uid="uid://dter3210os4pi" path="res://resources——temper/texture/tarantula.tres" id="2_vvv12"]
+[ext_resource type="Texture2D" uid="uid://c8ov1ebpsqjxs" path="res://assets/sprite/mobs/spider.png" id="2_pltir"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el4oe"]
+atlas = ExtResource("2_pltir")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0edtq"]
+atlas = ExtResource("2_pltir")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww6s6"]
+atlas = ExtResource("2_pltir")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwewf"]
+atlas = ExtResource("2_pltir")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6oxa"]
+atlas = ExtResource("2_pltir")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkq6i"]
+atlas = ExtResource("2_pltir")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5m7o"]
+atlas = ExtResource("2_pltir")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0th8"]
+atlas = ExtResource("2_pltir")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4u2dp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el4oe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0edtq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ww6s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwewf")
+}],
+"loop": 1,
+"name": &"normal_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6oxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkq6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5m7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0th8")
+}],
+"loop": 1,
+"name": &"normal_right",
+"speed": 10.0
+}]
 
 [node name="Tarantula" type="CharacterBody2D" unique_id=1741896096 groups=["monster"]]
 collision_layer = 0
@@ -25,9 +94,11 @@ collision_mask = 25
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" unique_id=2099721425]
 shape = SubResource("CircleShape2D_4u2dp")
 
-[node name="PicturePickup" type="Sprite2D" parent="." unique_id=1668709997]
-light_mask = 0
-scale = Vector2(0.53333336, 0.6)
-texture = ExtResource("2_vvv12")
-
 [node name="Marker2D" type="Marker2D" parent="." unique_id=405583006]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1976096510]
+position = Vector2(-1.1920929e-07, 0)
+scale = Vector2(0.8125, 0.75)
+sprite_frames = SubResource("SpriteFrames_4u2dp")
+animation = &"normal_right"
+autoplay = "normal_right"

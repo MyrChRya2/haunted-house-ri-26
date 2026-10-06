@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbq55fa3epb3a"]
 
 [ext_resource type="Script" uid="uid://cl4y0kmx8nft6" path="res://monster/vampire.gd" id="1_ht4rs"]
-[ext_resource type="Texture2D" uid="uid://c6rji1qx0wsvt" path="res://resources——temper/texture/vampire.tres" id="2_4bxgt"]
+[ext_resource type="Texture2D" uid="uid://bt6tepca4yhm7" path="res://assets/sprite/mobs/vampire.png" id="2_yiyhq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
 radius = 6.0
@@ -9,12 +9,73 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 6.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_84uh6"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b0xq"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idol3"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25mje"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wupcs"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16046"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad48f"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ilc5"]
+atlas = ExtResource("2_yiyhq")
+region = Rect2(48, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_4u2dp"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84uh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b0xq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idol3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25mje")
+}],
 "loop": 1,
-"name": &"new_animation",
-"speed": 5.0
+"name": &"normal_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wupcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16046")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad48f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ilc5")
+}],
+"loop": 1,
+"name": &"normal_right",
+"speed": 10.0
 }]
 
 [node name="Vampire" type="CharacterBody2D" unique_id=717006068 groups=["monster"]]
@@ -34,12 +95,9 @@ shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1629253415]
 
-[node name="Energy" type="Sprite2D" parent="." unique_id=532894032]
-light_mask = 0
-position = Vector2(-0.3875435, -1.1420118)
-scale = Vector2(0.5986159, 0.591716)
-texture = ExtResource("2_4bxgt")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091788441]
+position = Vector2(-1.1920929e-07, 0)
+scale = Vector2(0.8125, 0.6875)
 sprite_frames = SubResource("SpriteFrames_4u2dp")
-animation = &"new_animation"
+animation = &"normal_right"
+autoplay = "normal_left"

@@ -1,13 +1,82 @@
 [gd_scene format=3 uid="uid://bl1n8a534i34u"]
 
 [ext_resource type="Script" uid="uid://ljemukyvsnn8" path="res://monster/ghost.gd" id="1_rcv15"]
-[ext_resource type="Texture2D" uid="uid://cxyo3lybmsmgv" path="res://resources——temper/texture/ghost.tres" id="2_erua2"]
+[ext_resource type="Texture2D" uid="uid://cv6ligty17c5k" path="res://assets/sprite/mobs/ghost.png" id="2_erua2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
-radius = 4.0
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erua2"]
+atlas = ExtResource("2_erua2")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vyy5"]
+atlas = ExtResource("2_erua2")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ttth"]
+atlas = ExtResource("2_erua2")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws2m4"]
+atlas = ExtResource("2_erua2")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt22y"]
+atlas = ExtResource("2_erua2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3psv"]
+atlas = ExtResource("2_erua2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orj6b"]
+atlas = ExtResource("2_erua2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va36u"]
+atlas = ExtResource("2_erua2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4u2dp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erua2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vyy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ttth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws2m4")
+}],
+"loop": 1,
+"name": &"normal_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt22y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3psv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orj6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va36u")
+}],
+"loop": 1,
+"name": &"normal_right",
+"speed": 10.0
+}]
 
 [node name="Ghost" type="CharacterBody2D" unique_id=1951286666 groups=["monster"]]
 collision_layer = 0
@@ -26,8 +95,8 @@ shape = SubResource("CircleShape2D_qg826")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=312283716]
 
-[node name="Ghost" type="Sprite2D" parent="." unique_id=1077288267]
-light_mask = 0
-position = Vector2(1.4901161e-08, -1.0000001)
-scale = Vector2(0.45915395, 0.49991247)
-texture = ExtResource("2_erua2")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=371879515]
+scale = Vector2(0.5625, 0.5)
+sprite_frames = SubResource("SpriteFrames_4u2dp")
+animation = &"normal_left"
+autoplay = "normal_left"
