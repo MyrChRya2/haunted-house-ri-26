@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5fn5upd3dnj6"]
+
+[ext_resource type="Script" uid="uid://dewnoruxi4rm3" path="res://scripts/stairup.gd" id="1_8ktn7"]
+[ext_resource type="Texture2D" uid="uid://d4fm2jkifx4m2" path="res://resources——temper/stairs_art/stair_up_16.png" id="2_enjxs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
+size = Vector2(9, 7.5)
+
+[node name="Stairup" type="Area2D" unique_id=1145574436]
+script = ExtResource("1_8ktn7")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=585728262]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1433262495]
+shape = SubResource("RectangleShape2D_4u2dp")
+
+[node name="StairUp16" type="Sprite2D" parent="." unique_id=60687062]
+position = Vector2(-1.7763568e-15, -3.5527137e-15)
+scale = Vector2(0.6875, 0.625)
+texture = ExtResource("2_enjxs")

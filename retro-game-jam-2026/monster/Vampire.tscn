@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bbq55fa3epb3a"]
+
+[ext_resource type="Script" uid="uid://cl4y0kmx8nft6" path="res://monster/vampire.gd" id="1_ht4rs"]
+[ext_resource type="Texture2D" uid="uid://c6rji1qx0wsvt" path="res://resources——temper/texture/vampire.tres" id="2_4bxgt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4u2dp"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Vampire" type="CharacterBody2D" unique_id=717006068 groups=["monster"]]
+collision_layer = 0
+collision_mask = 25
+script = ExtResource("1_ht4rs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=895274073]
+shape = SubResource("CircleShape2D_qg826")
+
+[node name="HurtArea" type="Area2D" parent="." unique_id=1801624483]
+collision_layer = 4
+collision_mask = 25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" unique_id=474026049]
+shape = SubResource("CircleShape2D_4u2dp")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1629253415]
+
+[node name="Energy" type="Sprite2D" parent="." unique_id=532894032]
+light_mask = 0
+position = Vector2(-0.3875435, -1.1420118)
+scale = Vector2(0.5986159, 0.591716)
+texture = ExtResource("2_4bxgt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091788441]
+sprite_frames = SubResource("SpriteFrames_4u2dp")
+animation = &"new_animation"

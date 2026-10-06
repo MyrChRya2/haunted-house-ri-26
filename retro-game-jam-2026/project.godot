@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=192
 window/size/viewport_height=160
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [global_group]
@@ -26,6 +26,8 @@ window/stretch/aspect="expand"
 player=""
 victory=""
 hub=""
+monster=""
+monsters=""
 
 [input]
 
@@ -60,9 +62,9 @@ light_match={
 2d_render/layer_1="Player"
 2d_render/layer_2="EnemyBody"
 2d_render/layer_3="EnemySensor"
-2d_render/layer_4="World"
+2d_render/layer_4="Scenery"
 2d_render/layer_5="Door"
-2d_render/layer_6="item"
+2d_render/layer_6="Item"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="EnemyBody"
 2d_physics/layer_3="EnemySensor"
@@ -79,5 +81,6 @@ light_match={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.27996668, 0.2799667, 0.27996668, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

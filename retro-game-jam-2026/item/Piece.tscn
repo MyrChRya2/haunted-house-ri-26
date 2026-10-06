@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://kxox7co301ov"]
+
+[ext_resource type="Script" uid="uid://bmmyqniwynso1" path="res://item/piece.gd" id="1_0lekh"]
+[ext_resource type="Texture2D" uid="uid://d0g6xruuf15gn" path="res://resources——temper/texture/piece.tres" id="2_qdtpo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
+radius = 3.0
+
+[node name="Piece" type="Area2D" unique_id=1765561640]
+light_mask = 2
+script = ExtResource("1_0lekh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=611320100]
+shape = SubResource("CircleShape2D_4u2dp")
+
+[node name="Piece" type="Sprite2D" parent="." unique_id=515082786]
+position = Vector2(2.9802322e-08, 2.9802322e-08)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_qdtpo")
