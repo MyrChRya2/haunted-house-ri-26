@@ -68,6 +68,36 @@
 | 引擎配置（`project.godot`、导出预设） | Ray | 独占，避免两人同改导致工程打不开 |
 | Git 写操作 | Ray（由项目管理 Agent 执行） | 提交 / 合并 / 打 tag；**不 force push** |
 
+#### 3.1.1 工程目录规范（提案 · 2026-10-06 · 待 Ray + Illya 确认）
+
+> 背景：Ray 指出"git 文件树太乱"。实际核对后，**乱的主因不是文件放错，而是文档没跟上实际开发** ——
+> Illya 的 `feat/illya-house-content` 已经在工程顶层建了 `data/`、`item/`、`monster/`、`shaders/` 四个目录（**按领域分组，其实是更清楚的做法**），
+> 而本文档 3.1 只写了 `scenes/ scripts/ autoload/ ui/ assets/`，两者从未对齐。
+> **结论：以现状为准写成规范，而不是把文件搬一遍**（大面积移动 `.tscn`/`.gd` 会断 Godot 的 uid 与 `ext_resource` 引用，风险远大于收益）。
+
+**目标结构（以 Illya 现状为基础，只做归一）**
+
+| 路径 | 放什么 | 归属 |
+|------|--------|------|
+| `scenes/` | 通用/入口场景（玩家、楼梯、门、关卡主场景） | Illya |
+| `scripts/` | 通用脚本（玩家、光照、UI 层、门与楼梯逻辑） | Illya |
+| `data/` | **数据与加载器**（楼层/房间/道具表）—— 数据与逻辑分离 | Illya |
+| `item/`、`monster/` | **按领域分组**的场景 + 脚本（一个实体一套） | Illya |
+| `autoload/` | 全局单例 | Ray 独占 |
+| `ui/` | 界面场景 | Illya |
+| `shaders/` | 着色器 | Illya |
+| **`assets/sprite/<类别>/<子类>/`** | **美术资源（现行事实：`player/` `mobs/` `items/` `tiles/{walls,doors,steps}`）** | Ray |
+| `assets/audio/`、`assets/fonts/` | 音频与字体 | Ray |
+| `dev/` | **练手区 —— 加进 `.gitignore`，不进 main** | 谁都能用 |
+
+**待清理（零风险，不涉及引用）**
+
+1. 删 `assets/art/**/.gitkeep` —— 旧约定的空占位，美术已实际落在 `assets/sprite/`
+2. `dev/` 加入 `.gitignore`，并把已跟踪的 `dev/level1_test/` 移出索引（文件保留在本地）
+3. `assets/sprite/items/keys/key_fargments.png` 拼写错误（→ `key_fragments.png`）—— ⚠️ **改名必须连带 `.import` 与引用它的场景**
+
+> ⚠️ 本表是**提案**：Ray 与 Illya 各回一句"认可"即生效，之后 Agent 改本文档正文、Illya 按此迁就。
+
 ### 3.2 视觉与音频规格（Atari 2600 基准）
 
 **已定规格（2026-09-22 由 Ray 定）**
