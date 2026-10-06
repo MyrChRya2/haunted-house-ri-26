@@ -27,7 +27,15 @@ func _ready() -> void:
 	player.floor_changed.connect(_load_floor, CONNECT_DEFERRED)
 	_load_floor(player.current_floor)
 
+## 捡起时调用：掉落物直接从 _drops 删掉，数据表里的物品记进 _taken
 func mark_taken(spawn_id: String) -> void:
+	_spawned.erase(spawn_id)
+	for floor_num in _drops:
+		var list: Array = _drops[floor_num]
+		for i in list.size():
+			if list[i].id == spawn_id:
+				list.remove_at(i)
+				return
 	_taken[spawn_id] = true
 
 func register_drop(packed: PackedScene, pos: Vector2, floor_num: int) -> Node2D:

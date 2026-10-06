@@ -10,10 +10,10 @@ class_name player
 
 #道具功能，玩家转发到Inventory,修改文件名和路径记得改
 @onready var _inventory: HeldItemInventory = $Inventory
-const KEY_SCENE := preload("res://item/Key.tscn")
+const KEY_SCENE := preload("res://autoload/Key.tscn")
 const SCEPTER_SCENE := preload("res://item/Scepter.tscn")
 const WENG_SCENE := preload("res://item/Weng.tscn")
-const PIECE_SCENE := preload("res://item/Piece.tscn")
+const PIECE_SCENE := preload("res://item/Piecem.tscn")
 const PIECES_SCENE := preload("res://item/Pieces.tscn")
 #无敌时间
 @export var invincible_seconds : float = 3.0
@@ -65,6 +65,9 @@ func _ready() -> void:
 	#加组
 	add_to_group("player")
 	_udpdate_animation()
+	#火光烧满时重新判定脚下道具
+	if _match_light and _match_light.has_signal("burn_started"):
+		_match_light.burn_started.connect(_recheck_pickups)
 
 #八向移动
 func _physics_process(delta: float) -> void:
@@ -197,3 +200,11 @@ func try_pickup_at(kind: HeldItemInventory.HeldItem, pos: Vector2) -> bool:
 	if not is_lit_at(pos):
 		return false
 	return _inventory.try_pickup(kind)
+
+#点火前就站在道具上，火光烧满时补捡一次（只捡一个）
+func _recheck_pickups() -> void:
+	for item in get_tree().get_nodes_in_group("pickup"):
+		if item is Area2D and item.overlaps_body(self) and item.has_method("_on_body_entered"):
+			item._on_body_entered(self)
+			if item.is_queued_for_deletion():
+				return

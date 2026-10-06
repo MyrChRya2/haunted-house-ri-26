@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxfhcn6ahrlk8"]
 
-[ext_resource type="Texture2D" uid="uid://c0gtyj0ow3cou" path="res://resources——temper/texture/key.tres" id="1_tlrap"]
-[ext_resource type="Script" uid="uid://bwujj0axs66u1" path="res://item/key.gd" id="1_wupe0"]
+[ext_resource type="Script" uid="uid://bwujj0axs66u1" path="res://item/key.gd" id="1_r1a3d"]
+[ext_resource type="Texture2D" uid="uid://c0gtyj0ow3cou" path="res://resources——temper/texture/key.tres" id="2_ny20g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 2.5
@@ -9,7 +9,7 @@ radius = 2.5
 [node name="key" type="Area2D" unique_id=157284153]
 light_mask = 2
 collision_layer = 16
-script = ExtResource("1_wupe0")
+script = ExtResource("1_r1a3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1084062181]
 shape = SubResource("CircleShape2D_4u2dp")
@@ -17,4 +17,4 @@ shape = SubResource("CircleShape2D_4u2dp")
 [node name="NewAtlasTexture" type="Sprite2D" parent="." unique_id=202555021]
 position = Vector2(-2.3841858e-07, -2.3841858e-07)
 scale = Vector2(0.45454547, 0.45454547)
-texture = ExtResource("1_tlrap")
+texture = ExtResource("2_ny20g")

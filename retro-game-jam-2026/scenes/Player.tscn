@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://co6ves24y5ps5" path="res://scripts/player.gd" id="1_1jryi"]
 [ext_resource type="Script" uid="uid://cu57kijimw77u" path="res://item/held_item.gd" id="1_mdl7e"]
-[ext_resource type="Texture2D" uid="uid://dxdy2tmya01ny" path="res://resources——temper/ligh——texture/match_light_cookie.png" id="3_mdl7e"]
 [ext_resource type="Script" uid="uid://dkg84ssqqppf3" path="res://scripts/match_light.gd" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://wd45o86e1ltc" path="res://assets/sprite/player/player.png" id="4_cw2d6"]
 [ext_resource type="Shader" uid="uid://ytnkc8x28uju" path="res://shaders/vision_mask.gdshader" id="4_vmask"]
 [ext_resource type="Texture2D" uid="uid://mt10cuh6i5cx" path="res://assets/sprite/player/light_spark.png" id="5_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://cmceen1m0tck1" path="res://assets/sprite/effect/filter.png" id="6_mask"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 6.0
@@ -82,8 +82,9 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmask"]
 shader = ExtResource("4_vmask")
+shader_parameter/hframes = 1
+shader_parameter/frame = 0
 shader_parameter/radius = 0.0
-shader_parameter/softness = 14.0
 shader_parameter/rect_size = Vector2(2048, 2048)
 
 [node name="Player" type="CharacterBody2D" unique_id=129093540 groups=["player"]]
@@ -111,6 +112,7 @@ autoplay = "normal_right"
 [node name="MatchLight" type="Node2D" parent="." unique_id=802325956]
 show_behind_parent = true
 script = ExtResource("3_qu4a1")
+mask_sheet = ExtResource("6_mask")
 
 [node name="Light" type="PointLight2D" parent="MatchLight" unique_id=761431707]
 energy = 7.0
@@ -119,7 +121,7 @@ texture = ExtResource("5_cw2d6")
 
 [node name="IgniteFlash" type="Sprite2D" parent="MatchLight" unique_id=1151982448]
 modulate = Color(1.4, 1.25, 0.9, 1)
-texture = ExtResource("3_mdl7e")
+texture = ExtResource("5_cw2d6")
 
 [node name="VisionMask" type="ColorRect" parent="MatchLight" unique_id=1214880723]
 material = SubResource("ShaderMaterial_vmask")

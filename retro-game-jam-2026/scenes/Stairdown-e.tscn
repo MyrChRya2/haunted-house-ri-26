@@ -1,20 +1,22 @@
-[gd_scene format=3 uid="uid://c3li4n3nxhmlm"]
+[gd_scene format=3 uid="uid://dwmu40vt57tj6"]
 
-[ext_resource type="Script" uid="uid://bucobeonikieq" path="res://scripts/stairdown.gd" id="1_si5a3"]
-[ext_resource type="Texture2D" uid="uid://ngoofiat11sw" path="res://assets/sprite/tiles/steps/stair.tres" id="2_8ktn7"]
+[ext_resource type="Script" uid="uid://bucobeonikieq" path="res://scripts/stairdown.gd" id="1_2acts"]
+[ext_resource type="Texture2D" uid="uid://ngoofiat11sw" path="res://assets/sprite/tiles/steps/stair.tres" id="2_3mr4e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
 size = Vector2(16, 16)
 
 [node name="Stairdown" type="Area2D" unique_id=2147323999]
-script = ExtResource("1_si5a3")
+script = ExtResource("1_2acts")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=730644050]
+rotation = -1.5707964
 shape = SubResource("RectangleShape2D_4u2dp")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2111347501]
 
 [node name="Stair" type="Sprite2D" parent="." unique_id=1779880782]
 position = Vector2(2.9802322e-07, -8.34465e-07)
+rotation = -4.712389
 scale = Vector2(1.0000001, 1.9999999)
-texture = ExtResource("2_8ktn7")
+texture = ExtResource("2_3mr4e")

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://tlruhavk5gww"]
+
+[ext_resource type="Texture2D" uid="uid://x3vobmw6ywkl" path="res://assets/sprite/items/keys/key_fargments.png" id="1_jvn8j"]
+
+[resource]
+atlas = ExtResource("1_jvn8j")
+region = Rect2(-0.07117939, -0.117866874, 2.7162943, 4.822966)
