@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dhon7lt1tyq62"]
+
+[ext_resource type="PackedScene" uid="uid://qqaioia33str" path="res://scenes/levels/level3/map.tscn" id="1_3xs1f"]
+
+[node name="Level3" type="Node2D" unique_id=2085121913]
+
+[node name="TileMapLayer" parent="." unique_id=1433778628 instance=ExtResource("1_3xs1f")]
