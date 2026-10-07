@@ -6,7 +6,8 @@
 [ext_resource type="TileSet" uid="uid://cv2k3bbsu1n2q" path="res://assets/sprite/tiles/walls/wall_tile_set.tres" id="3_65gyt"]
 [ext_resource type="PackedScene" uid="uid://d15pu8yv6w8g8" path="res://scenes/doors/victory_door.tscn" id="3_n5jho"]
 [ext_resource type="PackedScene" uid="uid://duslsrowtj2sn" path="res://item/piece_r.tscn" id="4_5pvav"]
-[ext_resource type="PackedScene" uid="uid://dxfhcn6ahrlk8" path="res://item/Key.tscn" id="5_o5tsl"]
+[ext_resource type="PackedScene" uid="uid://dxfhcn6ahrlk8" path="res://item/key.tscn" id="5_o5tsl"]
+[ext_resource type="Script" uid="uid://n322h217bqkh" path="res://scenes/levels/level/map_portal.gd" id="8_1nwpw"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
 b = Vector2(0, 160)
@@ -20,6 +21,9 @@ b = Vector2(192, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_12ix5"]
 b = Vector2(192, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4y6"]
+size = Vector2(10, 20)
 
 [node name="Level1" type="Node2D" unique_id=483314537]
 
@@ -48,8 +52,8 @@ position = Vector2(34, 35)
 [node name="key" parent="." unique_id=157284153 instance=ExtResource("5_o5tsl")]
 position = Vector2(160, 143)
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1878435979]
-position = Vector2(70, 96)
+[node name="SpwanPoint" type="Marker2D" parent="." unique_id=1878435979]
+position = Vector2(72, 96)
 
 [node name="wall" type="Node2D" parent="." unique_id=622478375]
 
@@ -74,3 +78,14 @@ shape = SubResource("SegmentShape2D_n41l7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/d" unique_id=1294580218]
 position = Vector2(0, 160)
 shape = SubResource("SegmentShape2D_12ix5")
+
+[node name="Portal" type="Node" parent="." unique_id=1462737040]
+
+[node name="Portral1" type="Area2D" parent="Portal" unique_id=2638650]
+script = ExtResource("8_1nwpw")
+target_level = "Level2"
+spawn_id = "1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal/Portral1" unique_id=1566347885]
+position = Vector2(187, 96)
+shape = SubResource("RectangleShape2D_cs4y6")

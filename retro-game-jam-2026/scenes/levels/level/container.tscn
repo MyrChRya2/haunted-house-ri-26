@@ -52,6 +52,5 @@ position = Vector2(0, 576)
 position = Vector2(320, 576)
 
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
-visible = false
 position = Vector2(80, 79)
 platform_floor_layers = 4294967041
