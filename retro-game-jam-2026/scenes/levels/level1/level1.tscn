@@ -8,6 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://duslsrowtj2sn" path="res://item/piece_r.tscn" id="4_5pvav"]
 [ext_resource type="PackedScene" uid="uid://dxfhcn6ahrlk8" path="res://item/Key.tscn" id="5_o5tsl"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
+b = Vector2(0, 160)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qg826"]
+a = Vector2(192, 8)
+b = Vector2(192, 168)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_n41l7"]
+b = Vector2(192, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_12ix5"]
+b = Vector2(192, 0)
+
 [node name="Level1" type="Node2D" unique_id=483314537]
 
 [node name="WallAndFloor" parent="." unique_id=864905205 instance=ExtResource("1_xyscq")]
@@ -38,6 +51,26 @@ position = Vector2(160, 143)
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1878435979]
 position = Vector2(70, 96)
 
-[node name="Node2D" type="Node2D" parent="." unique_id=622478375]
+[node name="wall" type="Node2D" parent="." unique_id=622478375]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D" unique_id=1010961445]
+[node name="l" type="StaticBody2D" parent="wall" unique_id=1010961445]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/l" unique_id=98206589]
+shape = SubResource("SegmentShape2D_4u2dp")
+
+[node name="r" type="StaticBody2D" parent="wall" unique_id=1263818728]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/r" unique_id=1165743295]
+position = Vector2(0, -8)
+shape = SubResource("SegmentShape2D_qg826")
+
+[node name="t" type="StaticBody2D" parent="wall" unique_id=2104178590]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/t" unique_id=37694336]
+shape = SubResource("SegmentShape2D_n41l7")
+
+[node name="d" type="StaticBody2D" parent="wall" unique_id=937602710]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/d" unique_id=1294580218]
+position = Vector2(0, 160)
+shape = SubResource("SegmentShape2D_12ix5")
