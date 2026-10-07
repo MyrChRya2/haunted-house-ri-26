@@ -20,7 +20,6 @@ start_level = ""
 start_spawn = "teach"
 
 [node name="Levels" type="Node2D" parent="." unique_id=1041673346]
-y_sort_enabled = true
 
 [node name="Level1" parent="Levels" unique_id=483314537 instance=ExtResource("2_08fun")]
 
@@ -54,3 +53,6 @@ position = Vector2(320, 576)
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
 position = Vector2(80, 79)
 platform_floor_layers = 4294967041
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=800502623]
+color = Color(0, 0, 0, 1)
