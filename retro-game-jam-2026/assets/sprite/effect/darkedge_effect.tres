@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" format=3 uid="uid://cu8tceo5td13x"]
+
+[ext_resource type="Texture2D" uid="uid://de57s7s4bp3qb" path="res://assets/sprite/effect/dark_edge.png" id="1_87vf5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2nm7k"]
+texture = ExtResource("1_87vf5")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_2nm7k")
