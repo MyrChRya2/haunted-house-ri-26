@@ -12,16 +12,17 @@ enum Phase { DARK, FLASH, IGNITING, BURNING, FADING }
 @onready var _vision_mask: ColorRect = $VisionMask
 
 @export var burn_seconds: float = 5.0
-## 光圈半径（像素），一格序列帧铺满这个直径
+#光圈半径（像素），一格序列帧铺满这个直径
 @export var full_radius: float = 64.0
-## 点火火花显示多久（秒），固定时长，不随刷新率变
+#火把持续时间
 @export var flash_seconds: float = 0.05
-## 遮罩序列帧图：所有帧横排一行，白透黑不透
+#遮罩序列帧图：所有帧横排一行，白透黑不透
 @export var mask_sheet: Texture2D
-## 序列帧帧数
+#序列帧帧数
 @export var hframes: int = 5
-## 每秒播放帧数（点火正放、熄灭倒放）
+#每秒播放帧数
 @export var mask_fps: float = 12.0
+
 
 var is_lit: bool = false
 var matches_used: int = 0
@@ -31,19 +32,19 @@ var _phase: Phase = Phase.DARK
 var _frame_time: float = 0.0
 var _frame: int = 0
 
-signal match_used
-## 进入燃烧阶段（光圈停在最大）时发出
+signal match_used(count: int)
+#开始燃烧信号
 signal burn_started
 
 func _ready() -> void:
 	show_behind_parent = true
-	# 停用 PointLight，避免与 VisionMask 双重变亮
+	#停用PointLight，避免与VisionMask双重变亮
 	_light.enabled = false
 	_light.energy = 0.0
 	_ignite_flash.visible = false
 	_ignite_flash.centered = true
 	_ignite_flash.position = Vector2.ZERO
-	# 火花画在遮罩上面：黑底上亮一下，墙不挡它
+	#火花画在遮罩上面：黑底上亮一下，墙不挡它
 	move_child(_ignite_flash, _vision_mask.get_index())
 	_vision_mask.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_vision_mask.size = MASK_SIZE
@@ -54,6 +55,7 @@ func _ready() -> void:
 	if not _burn_timer.timeout.is_connected(_on_burn_timer_timeout):
 		_burn_timer.timeout.connect(_on_burn_timer_timeout)
 	extinguish(&"init")
+
 
 func _process(delta: float) -> void:
 	if _phase != Phase.IGNITING and _phase != Phase.FADING:
@@ -90,7 +92,8 @@ func try_light() -> void:
 	_phase = Phase.FLASH
 	await _play_ignite_flash()
 	if not is_lit:
-		return # 闪光这一帧里被 extinguish 了
+	#闪光这一帧里被extinguish了
+		return 
 	_reset_frames()
 	_set_radius(full_radius)
 	_phase = Phase.IGNITING
@@ -109,7 +112,8 @@ func extinguish(reason: StringName) -> void:
 func _on_burn_timer_timeout() -> void:
 	if _phase != Phase.BURNING:
 		return
-	_busy = true # 倒放期间不能点下一根
+	 #倒放期间不能点下一根
+	_busy = true
 	_frame_time = 0.0
 	_phase = Phase.FADING
 
@@ -127,7 +131,7 @@ func _set_radius(r: float) -> void:
 	if mat:
 		mat.set_shader_parameter("radius", _current_radius)
 
-## 图、帧数、遮罩尺寸只在 _ready 传一次
+#图，帧数，遮罩尺寸只在ready传一次
 func _init_mask_material() -> void:
 	var mat := _vision_mask.material as ShaderMaterial
 	if mat == null:
@@ -149,12 +153,12 @@ func _set_frame(f: int) -> void:
 	if mat:
 		mat.set_shader_parameter("frame", f)
 
-## 每根新火柴都从第 1 帧开始
+#每根新火柴都从第 1 帧开始
 func _reset_frames() -> void:
 	_frame_time = 0.0
 	_set_frame(0)
 
-## 捡道具：只有停在最后一帧的燃烧期间算照亮，正放和倒放时不算
+#捡道具：只有停在最后一帧的燃烧期间算照亮，正放和倒放时不算
 func is_position_illuminated(global_pos: Vector2) -> bool:
 	if _phase != Phase.BURNING or _current_radius <= 0.0:
 		return false

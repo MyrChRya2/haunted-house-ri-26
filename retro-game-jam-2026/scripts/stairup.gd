@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var next_scene: PackedScene
+@export var target_level: String = ""
 @export var spawn_id: String = ""
 
 enum Kind { UP, DOWN }
@@ -15,10 +15,11 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if not body.has_method("try_use_stair"):
 		return
-#上楼，计数器+1
+	#上楼，计数器+1
 	body.try_use_stair(1 if kind == Kind.UP else -1)
-	
-	if next_scene == null:
-		push_warning("map_portal: 没指定 next_scene")
+	#传送用
+	if target_level.is_empty():
 		return
-	get_tree().change_scene_to_packed(next_scene)
+	var run := get_tree().get_first_node_in_group("run")
+	if run and run.has_method("travel_to"):
+		run.travel_to(target_level, spawn_id)

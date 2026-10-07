@@ -1,6 +1,7 @@
 extends Area2D
-#再捡一个piece就合成weng
-@export var item_kind: HeldItemInventory.HeldItem = HeldItemInventory.HeldItem.PIECES
+#两个合成pieces，三个合成weng
+#左
+@export var item_kind: HeldItemInventory.HeldItem = HeldItemInventory.HeldItem.PIECEL
 
 var wait_leave := false
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://duslsrowtj2sn"]
 
-[ext_resource type="Script" uid="uid://bmmyqniwynso1" path="res://item/piece.gd" id="1_mxfmd"]
+[ext_resource type="Script" uid="uid://clwovgmuenp8v" path="res://item/piece_r.gd" id="1_c3ccf"]
 [ext_resource type="Texture2D" uid="uid://dq7r5huqnnga" path="res://assets/sprite/items/keys/piecer.tres" id="2_mxfmd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
@@ -8,7 +8,8 @@ radius = 3.0
 
 [node name="Piecer" type="Area2D" unique_id=1765561640]
 light_mask = 2
-script = ExtResource("1_mxfmd")
+script = ExtResource("1_c3ccf")
+item_kind = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=611320100]
 shape = SubResource("CircleShape2D_4u2dp")

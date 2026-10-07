@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://ci4ht42kp2bml"]
 
+[ext_resource type="Script" uid="uid://i0be42khnhd7" path="res://scripts/door_v.gd" id="1_kw6xa"]
 [ext_resource type="Texture2D" uid="uid://cryjfevvhrp8l" path="res://assets/sprite/tiles/doors/door_h.png" id="1_yjain"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4y6"]
-size = Vector2(4, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bipi0"]
 size = Vector2(2, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4y6"]
+size = Vector2(10, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kw6xa"]
 atlas = ExtResource("1_yjain")
@@ -33,6 +34,10 @@ atlas = ExtResource("1_yjain")
 region = Rect2(20, 0, 4, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tk2u5"]
+atlas = ExtResource("1_yjain")
+region = Rect2(24, 0, 4, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnydk"]
 atlas = ExtResource("1_yjain")
 region = Rect2(24, 0, 4, 20)
 
@@ -66,26 +71,30 @@ animations = [{
 "texture": SubResource("AtlasTexture_tk2u5")
 }],
 "loop": 0,
-"name": &"open",
+"name": &"openanima",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnydk")
+}],
+"loop": 1,
+"name": &"opend",
+"speed": 5.0
 }]
 
 [node name="DoorV" type="StaticBody2D" unique_id=1808965014]
 collision_layer = 16
 collision_mask = 0
+script = ExtResource("1_kw6xa")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=281073474]
+shape = SubResource("RectangleShape2D_bipi0")
 
 [node name="UnlockArea" type="Area2D" parent="." unique_id=1722147892]
 
 [node name="Area1" type="CollisionShape2D" parent="UnlockArea" unique_id=692111325]
-position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_cs4y6")
-
-[node name="Area2" type="CollisionShape2D" parent="UnlockArea" unique_id=1963455195]
-position = Vector2(4, 0)
-shape = SubResource("RectangleShape2D_cs4y6")
-
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=281073474]
-shape = SubResource("RectangleShape2D_bipi0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=762489497]
 sprite_frames = SubResource("SpriteFrames_cs4y6")

@@ -1,11 +1,10 @@
 extends CharacterBody2D
 class_name player
-#玩家脚本
-#目前实现功能：八向移动，受击，道具
 
-#timer节点
+
+
 @onready var _invincible_timer: Timer = $Timer
-#移动速度
+
 @export var move_speed: float = 120.0
 
 #道具功能，玩家转发到Inventory,修改文件名和路径记得改
@@ -13,8 +12,10 @@ class_name player
 const KEY_SCENE := preload("res://item/Key.tscn")
 const SHILD_SCENE := preload("res://item/Shild.tscn")
 const WENG_SCENE := preload("res://item/Weng.tscn")
-const PIECE_SCENE := preload("res://item/piece_m.tscn")
+const PIECEM_SCENE := preload("res://item/piece_m.tscn")
 const PIECES_SCENE := preload("res://item/Pieces.tscn")
+const PIECEL_SCENE := preload("res://item/piece_l.tscn")
+const PIECER_SCENE := preload("res://item/piece_r.tscn")
 #无敌时间
 @export var invincible_seconds : float = 3.0
 #无敌剩余时间
@@ -89,6 +90,7 @@ func _physics_process(delta: float) -> void:
 	if move_input != Vector2.ZERO:
 		facing_suffix =_vector_to_facing_suffix(move_input)
 	_udpdate_animation()
+
 #动画实现
 #前后缀拼出动画名
 func _udpdate_animation()->void:
@@ -176,21 +178,25 @@ func _drop_scene_of(kind: HeldItemInventory.HeldItem) -> PackedScene:
 	match kind:
 		HeldItemInventory.HeldItem.KEY:     return KEY_SCENE
 		HeldItemInventory.HeldItem.SCEPTER: return SHILD_SCENE
-		HeldItemInventory.HeldItem.PIECE:   return PIECE_SCENE        
-		HeldItemInventory.HeldItem.PIECES:  return PIECES_SCENE       
+		HeldItemInventory.HeldItem.PIECEM:  return PIECEM_SCENE
+		HeldItemInventory.HeldItem.PIECEL:  return PIECEL_SCENE
+		HeldItemInventory.HeldItem.PIECER:  return PIECER_SCENE
+		HeldItemInventory.HeldItem.PIECES:  return PIECES_SCENE
 		HeldItemInventory.HeldItem.WENG:    return WENG_SCENE
 		_:                                  
 			return null
 
 
 #丢下物品，交给floor，让floor记录，进行加载和清除
-func _on_item_dropped(kind: HeldItemInventory.HeldItem, count: int) -> void:
+func _on_item_dropped(kind: HeldItemInventory.HeldItem, _count: int) -> void:
 	var packed := _drop_scene_of(kind)
 	if packed == null:
 		return
-	var loader = get_tree().get_first_node_in_group("floor_loader")
-	loader.register_drop(packed, global_position, current_floor)
-#是否点亮火把
+	var node: Node2D = packed.instantiate()
+	if "wait_leave" in node:
+		node.wait_leave = true
+	get_parent().add_child(node)
+	node.global_position = global_position
 func is_lit_at(pos: Vector2) -> bool:
 	if _match_light == null:
 		return false
