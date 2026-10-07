@@ -9,7 +9,6 @@ func _ready() -> void:
 	exit.pressed.connect(_on_exit_pressed)
 
 func _on_game_start_pressed() -> void:
-	MapTravel.clear()
 	if level_scene:
 		get_tree().change_scene_to_packed(level_scene)
 	else:
