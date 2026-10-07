@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://brug7l53n12yb"]
+
+[ext_resource type="PackedScene" uid="uid://dmynygwp67q3c" path="res://scenes/levels/level10/map.tscn" id="1_21ylp"]
+
+[node name="Level10" type="Node2D" unique_id=1434985775]
+
+[node name="TileMapLayer" parent="." unique_id=1321634278 instance=ExtResource("1_21ylp")]
+
+[node name="Label" type="Label" parent="." unique_id=1007043524]
+offset_left = 88.0
+offset_top = -24.0
+offset_right = 128.0
+offset_bottom = -1.0
+text = "9"
+
+[node name="Label2" type="Label" parent="." unique_id=914187828]
+offset_left = -16.0
+offset_top = 40.0
+offset_right = 24.0
+offset_bottom = 63.0
+text = "3"

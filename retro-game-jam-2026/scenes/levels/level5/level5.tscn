@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://dd6j6qnu7mff1"]
 
+[ext_resource type="PackedScene" uid="uid://bg86xpppasbt0" path="res://scenes/levels/level5/map.tscn" id="1_10404"]
+[ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/stairup.tscn" id="2_2a1ig"]
+
 [node name="Level5" type="Node2D" unique_id=1232261549]
+
+[node name="TileMapLayer" parent="." unique_id=1378439067 instance=ExtResource("1_10404")]
+
+[node name="Stairup" parent="." unique_id=1145574436 instance=ExtResource("2_2a1ig")]
+position = Vector2(128, 85)

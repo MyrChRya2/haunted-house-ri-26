@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://oy2xdo8ps8li"]
+
+[ext_resource type="PackedScene" uid="uid://bhrlnu754dreb" path="res://scenes/levels/level8/map.tscn" id="1_fkc71"]
+[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/stairdown.tscn" id="2_o5x6x"]
+
+[node name="Level8" type="Node2D" unique_id=242443227]
+
+[node name="TileMapLayer" parent="." unique_id=991450555 instance=ExtResource("1_fkc71")]
+
+[node name="Stairdown" parent="." unique_id=2147323999 instance=ExtResource("2_o5x6x")]
+position = Vector2(129, 85)
+rotation = 3.1415927
+
+[node name="Label" type="Label" parent="." unique_id=982097859]
+offset_left = 200.0
+offset_top = 96.0
+offset_right = 240.0
+offset_bottom = 119.0
+text = "6"
