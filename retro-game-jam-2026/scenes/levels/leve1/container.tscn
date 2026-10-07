@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b4dx5rb7cvxwu"]
+
+[ext_resource type="Script" uid="uid://gvlawhjhvvj1" path="res://scenes/levels/leve1/run.gd" id="1_nio8k"]
+[ext_resource type="PackedScene" uid="uid://4p60k427qe8i" path="res://scenes/levels/level1/level1.tscn" id="2_guljk"]
+[ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="6_p52np"]
+
+[node name="Container" type="Node2D" unique_id=2024069335]
+script = ExtResource("1_nio8k")
+start_spawn = "teach"
+
+[node name="Levels" type="Node2D" parent="." unique_id=1041673346]
+
+[node name="Level1" parent="Levels" unique_id=483314537 instance=ExtResource("2_guljk")]
+
+[node name="Player" parent="." unique_id=129093540 instance=ExtResource("6_p52np")]
+position = Vector2(80, 79)
+platform_floor_layers = 4294967041

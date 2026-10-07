@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:retro-game-jam-2026/assets/sprite/tiles/walls/wall_tile_set.tres
 [gd_resource type="TileSet" format=3 uid="uid://yugr3s545h2d"]
+========
+[gd_scene format=4 uid="uid://cbpm0qnhurlo"]
+>>>>>>>> main:retro-game-jam-2026/scenes/levels/leve1/map.tscn
 
 [ext_resource type="Texture2D" uid="uid://bcd7iclo12ejg" path="res://assets/sprite/tiles/walls/wall_2.png" id="1_vgvi6"]
 
