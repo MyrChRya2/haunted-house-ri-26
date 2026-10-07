@@ -1,331 +1,299 @@
 extends CharacterBody2D
+#蜘蛛自己的 AI：走导航绕墙，速度较慢
 
-const DOOR_LAYER := 5
-const JOIN_EPS := 1.5
+enum State { WANDER, GO_EXIT, CHASE, FLEE, VANISH }
 
-@export var speed := 30.0
-@export var current_floor := 1
-@export var flee_seconds := 1.0
-@export var stuck_seconds := 1.2
-@export var ignores_locked_doors := false
-@export var ignores_scepter := false
-@export var uses_stairs := false
+@onready var hurt_area: Area2D = $HurtArea
+@onready var body_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
-var room_id := ""
-var _path: Array[Vector2] = []
-var _prev_node := Vector2.INF
-var _floor_delta := 0
-var _skip_stairs := false
-var _flee_left := 0.0
-var _stuck_time := 0.0
-var _last_dist := INF
-var _was_chasing := false
-var _player
-var _loader
+@export var speed: float = 24.0
+#不怕权杖则拿 shild 时仍可追、可打（默认怕）
+@export var ignores_scepter: bool = false
+#穿墙：不走网格、直线飞
+@export var phase_through_walls: bool = false
+#游荡结束时改去出口的概率
+@export var exit_chance: float = 0.35
+@export var flee_seconds: float = 1.5
+@export var arrive_distance: float = 10.0
 
-@onready var _hurt: Area2D = $HurtArea
-
+var freeze: bool = false
+var _player: Node = null
+var _match: Node = null
+var _run: Node = null
+var _state: State = State.WANDER
+var _was_hitter: bool = false
+var _flee_left: float = 0.0
+var _exit: Area2D = null
+var _move_target: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("monsters")
-	if ignores_locked_doors:
-		set_collision_mask_value(DOOR_LAYER, false)
-	await get_tree().process_frame
+	add_to_group("monster")
+	navigation_agent.path_desired_distance = 4.0
+	navigation_agent.target_desired_distance = arrive_distance
+	navigation_agent.avoidance_enabled = false
+	hurt_area.body_entered.connect(_on_hurt_body_entered)
+	#等一帧，导航图和玩家都进树
+	await get_tree().physics_frame
 	_player = get_tree().get_first_node_in_group("player")
-	_loader = get_tree().get_first_node_in_group("floor_loader")
-	_hurt.body_entered.connect(_on_hurt_body_entered)
+	_run = get_tree().get_first_node_in_group("run")
 	if _player:
-		_player.hit_invincible_started.connect(_stop_chase)
-		_player.scepter_invincible_started.connect(_stop_chase)
-		_player.monsters_redeploy.connect(_redeploy)
-	room_id = HouseData.room_at(global_position)
-	_start_patrol()
+		if _player.has_node("MatchLight"):
+			_match = _player.get_node("MatchLight")
+		_player.hit_invincible_started.connect(_on_hit_invincible_started)
+		_player.scepter_invincible_started.connect(_on_scepter_invincible_started)
+		_player.monsters_redeploy.connect(_on_monsters_redeploy)
+		_player.player_dead.connect(_freeze)
+	_start_wander()
 
-var freeze : bool = false
-#冻结行动用
-func _freeze():
+#胜利门 / 玩家死亡冻结
+func _freeze() -> void:
 	freeze = true
-
+	velocity = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	if _player == null:
-		return
-	if freeze == true:
-		return
-	var same_floor: bool = current_floor == _player.current_floor
-	visible = same_floor
-	_hurt.set_deferred("monitoring", same_floor)
-
-	if _flee_left > 0.0:
-		_flee_left -= delta
-		_move((global_position - _player.global_position).normalized(), delta, same_floor)
-		_update_room()
-		_was_chasing = true
-		return
-
-	var chasing := (
-		same_floor
-		and _can_chase()
-		and room_id != ""
-		and room_id == HouseData.room_at(_player.global_position)
-	)
-	if chasing:
-		_was_chasing = true
-		_path.clear()
-		_move(global_position.direction_to(_player.global_position), delta, same_floor)
-		_update_room()
-		return
-
-	if _was_chasing:
-		_was_chasing = false
-		_start_patrol()
-
-	if _path.is_empty():
-		_pick_next()
-		if _path.is_empty():
-			return
-
-	var target: Vector2 = _path[0]
-	if global_position.distance_to(target) <= maxf(JOIN_EPS, speed * delta):
-		global_position = target
-		_path.pop_front()
-		_stuck_time = 0.0
-		_last_dist = INF
-		if _path.is_empty() and _floor_delta != 0:
-			current_floor = clampi(current_floor + _floor_delta, 1, 4)
-			_skip_stairs = true
-			_prev_node = Vector2.INF
-			_start_patrol()
-		elif _path.is_empty():
-			_pick_next()
-		return
-
-	var dist := global_position.distance_to(target)
-	if dist < _last_dist - 0.1:
-		_stuck_time = 0.0
-	else:
-		_stuck_time += delta
-	_last_dist = dist
-	if _stuck_time > stuck_seconds:
-		_start_patrol()
-		return
-
-	_move(global_position.direction_to(target), delta, same_floor)
-	_update_room()
-
-
-func _move(dir: Vector2, delta: float, same_floor: bool) -> void:
-	if same_floor:
-		velocity = dir * speed
-		move_and_slide()
-	else:
+	if freeze or _player == null:
 		velocity = Vector2.ZERO
-		global_position += dir * speed * delta
-
-
-func _update_room() -> void:
-	var r := HouseData.room_at(global_position)
-	if r != "":
-		room_id = r
-
-
-func _stop_chase() -> void:
-	_was_chasing = false
-	_flee_left = 0.0
-	_path.clear()
-	_start_patrol()
-
-
-func _redeploy() -> void:
-	current_floor = randi_range(1, 4)
-	global_position = HouseData.random_patrol_point()
-	room_id = HouseData.room_at(global_position)
-	_prev_node = Vector2.INF
-	_flee_left = 0.0
-	_was_chasing = false
-	_floor_delta = 0
-	_skip_stairs = false
-	_path.clear()
-	_start_patrol()
-
-
-func _start_patrol() -> void:
-	_stuck_time = 0.0
-	_last_dist = INF
-	_floor_delta = 0
-	_path = _join_path(global_position)
-	if _path.is_empty():
-		_pick_next()
-
-
-func _pick_next() -> void:
-	_stuck_time = 0.0
-	_last_dist = INF
-	_floor_delta = 0
-	if _loader == null:
 		return
-
-	var here := _nearest_node(global_position)
-	if global_position.distance_to(here) > JOIN_EPS:
-		_path = _join_path(global_position)
+	if _player.is_dead:
+		_freeze()
 		return
-
-	global_position = here
-	var options: Array[Vector2] = []
-	for n in _neighbors(here):
-		if _edge_open(here, n):
-			options.append(n)
-
-	var forward: Array[Vector2] = []
-	for n in options:
-		if n != _prev_node:
-			forward.append(n)
-	if not forward.is_empty():
-		options = forward
-
-	if uses_stairs and not _skip_stairs:
-		for s in HouseData.get_stairs(current_floor, HouseData.room_at(here)):
-			options.append(s.pos)
-	_skip_stairs = false
-
-	if options.is_empty():
-		if _prev_node != Vector2.INF and _edge_open(here, _prev_node):
-			options.append(_prev_node)
-		else:
+	if _can_chase():
+		_state = State.CHASE
+	elif _state == State.CHASE:
+		_start_wander()
+	match _state:
+		State.CHASE:
+			_set_nav_target(_player.global_position)
+		State.FLEE:
+			_flee_left -= delta
+			if _flee_left <= 0.0:
+				_start_wander()
+			else:
+				_set_nav_target(_flee_point())
+		State.GO_EXIT:
+			if _exit == null or not is_instance_valid(_exit):
+				_start_wander()
+			elif global_position.distance_to(_exit.global_position) <= arrive_distance:
+				_use_exit(_exit)
+				return
+			else:
+				_set_nav_target(_exit.global_position)
+		State.WANDER:
+			if navigation_agent.is_navigation_finished() or global_position.distance_to(_move_target) <= arrive_distance:
+				_pick_next_idle()
+		State.VANISH:
+			velocity = Vector2.ZERO
 			return
+	_move_along_path()
+	_update_facing()
 
-	var pick: Vector2 = options.pick_random()
-	_prev_node = here
-	_path.clear()
-
-	var stair_delta := 0
-	for s in HouseData.get_stairs(current_floor, HouseData.room_at(here)):
-		if s.pos == pick:
-			stair_delta = s.floor_delta
-			break
-	if stair_delta != 0:
-		_path.append(pick)
-		_floor_delta = stair_delta
-	else:
-		_path.append(pick)
-
-
-func _join_path(from: Vector2) -> Array[Vector2]:
-	var path: Array[Vector2] = []
-	var proj := _project_to_rail(from)
-	if from.distance_to(proj) > JOIN_EPS:
-		path.append(proj)
-	var node := _nearest_node(proj)
-	if proj.distance_to(node) > JOIN_EPS:
-		path.append(node)
-	_prev_node = Vector2.INF
-	return path
-
-
-func _project_to_rail(p: Vector2) -> Vector2:
-	var xs: Array = HouseData.PATROL_XS
-	var ys: Array = HouseData.PATROL_YS
-	var best := p
-	var best_d := INF
-	var y0: float = ys[0]
-	var y1: float = ys[ys.size() - 1]
-	var x0: float = xs[0]
-	var x1: float = xs[xs.size() - 1]
-	for x in xs:
-		var q := Vector2(x, clampf(p.y, y0, y1))
-		var d := p.distance_squared_to(q)
-		if d < best_d:
-			best_d = d
-			best = q
-	for y in ys:
-		var q2 := Vector2(clampf(p.x, x0, x1), y)
-		var d2 := p.distance_squared_to(q2)
-		if d2 < best_d:
-			best_d = d2
-			best = q2
-	return best
-
-
-func _nearest_node(p: Vector2) -> Vector2:
-	var xs: Array = HouseData.PATROL_XS
-	var ys: Array = HouseData.PATROL_YS
-	var best := Vector2(xs[0], ys[0])
-	var best_d := INF
-	for x in xs:
-		for y in ys:
-			var n := Vector2(x, y)
-			var d := p.distance_squared_to(n)
-			if d < best_d:
-				best_d = d
-				best = n
-	return best
-
-
-func _neighbors(node: Vector2) -> Array[Vector2]:
-	var xs: Array = HouseData.PATROL_XS
-	var ys: Array = HouseData.PATROL_YS
-	var out: Array[Vector2] = []
-	var xi := xs.find(node.x)
-	var yi := ys.find(node.y)
-	if xi < 0 or yi < 0:
-		return out
-	if xi > 0:
-		out.append(Vector2(xs[xi - 1], node.y))
-	if xi < xs.size() - 1:
-		out.append(Vector2(xs[xi + 1], node.y))
-	if yi > 0:
-		out.append(Vector2(node.x, ys[yi - 1]))
-	if yi < ys.size() - 1:
-		out.append(Vector2(node.x, ys[yi + 1]))
-	return out
-
-
-func _edge_open(a: Vector2, b: Vector2) -> bool:
-	if ignores_locked_doors or _loader == null:
-		return true
-	var door := _door_on_edge(a, b)
-	if door == Vector2.INF:
-		return true
-	return _loader.is_door_open(current_floor, door)
-
-
-func _door_on_edge(a: Vector2, b: Vector2) -> Vector2:
-	for link in HouseData.LINKS:
-		var d: Vector2 = link.door_position
-		if _on_segment(d, a, b):
-			return d
-	return Vector2.INF
-
-
-func _on_segment(p: Vector2, a: Vector2, b: Vector2) -> bool:
-	var ab := b - a
-	var ap := p - a
-	if absf(ab.x) > absf(ab.y):
-		if not is_equal_approx(p.y, a.y):
-			return false
-		var t := ap.x / ab.x
-		return t > 0.05 and t < 0.95
-	if not is_equal_approx(p.x, a.x):
-		return false
-	var t2 := ap.y / ab.y
-	return t2 > 0.05 and t2 < 0.95
-
-
-
+#追击：同图 + 火把燃烧 + 两种无敌都没有
 func _can_chase() -> bool:
+	if _state == State.FLEE or _state == State.VANISH:
+		return false
+	if not _same_level_as_player():
+		return false
 	if _player.is_invincible:
 		return false
 	if not ignores_scepter and _player.scepter_invincible:
 		return false
+	return _torch_burning()
+
+func _torch_burning() -> bool:
+	if _match == null:
+		return false
+	if _match.has_method("is_burning"):
+		return _match.is_burning()
+	return false
+
+func _same_level_as_player() -> bool:
+	var mine := _my_level()
+	if mine == null:
+		return true
+	if _run and _run.has_method("get_current_level"):
+		var cur: Node = _run.get_current_level()
+		if cur:
+			return cur == mine
 	return true
 
+func _my_level() -> Node2D:
+	if _run and _run.has_method("level_of"):
+		return _run.level_of(self)
+	return get_parent() as Node2D
 
-func _can_scare() -> bool:
-	return _can_chase()
+func _on_hit_invincible_started() -> void:
+	if _state == State.VANISH:
+		return
+	if _was_hitter:
+		_state = State.FLEE
+		_flee_left = flee_seconds
+		_set_nav_target(_flee_point())
+	else:
+		_start_wander()
 
+func _on_scepter_invincible_started() -> void:
+	if _state == State.CHASE:
+		_start_wander()
+
+func _on_monsters_redeploy() -> void:
+	if freeze or _player == null or _player.is_dead:
+		return
+	if not _was_hitter:
+		return
+	_was_hitter = false
+	_redeploy()
 
 func _on_hurt_body_entered(body: Node) -> void:
-	if body != _player or current_floor != _player.current_floor or not _can_scare():
+	if body != _player:
 		return
+	if not _same_level_as_player():
+		return
+	if _player.is_invincible:
+		return
+	if not ignores_scepter and _player.scepter_invincible:
+		return
+	_was_hitter = true
 	_player.take_damage()
-	_flee_left = 0.0
+
+func _start_wander() -> void:
+	_state = State.WANDER
+	_exit = null
+	_pick_wander_point()
+
+func _pick_next_idle() -> void:
+	if randf() < exit_chance:
+		var ex := _random_exit()
+		if ex:
+			_exit = ex
+			_state = State.GO_EXIT
+			_set_nav_target(ex.global_position)
+			return
+	_pick_wander_point()
+
+func _pick_wander_point() -> void:
+	var p := _random_nav_point()
+	_move_target = p
+	_set_nav_target(p)
+
+func _random_nav_point() -> Vector2:
+	var map_rid: RID = navigation_agent.get_navigation_map()
+	if map_rid.is_valid():
+		var p: Vector2 = NavigationServer2D.map_get_random_point(map_rid, 1, false)
+		if p != Vector2.ZERO:
+			return p
+	return global_position + Vector2(randf_range(-32.0, 32.0), randf_range(-32.0, 32.0))
+
+func _flee_point() -> Vector2:
+	var away := global_position - _player.global_position
+	if away.length_squared() < 4.0:
+		away = Vector2.RIGHT.rotated(randf() * TAU)
+	return global_position + away.normalized() * 80.0
+
+func _set_nav_target(p: Vector2) -> void:
+	_move_target = p
+	navigation_agent.target_position = p
+
+func _move_along_path() -> void:
+	var next := _move_target
+	if not phase_through_walls:
+		if navigation_agent.is_navigation_finished():
+			velocity = Vector2.ZERO
+			move_and_slide()
+			return
+		next = navigation_agent.get_next_path_position()
+	var dir := global_position.direction_to(next)
+	velocity = dir * speed
+	move_and_slide()
+
+func _update_facing() -> void:
+	if body_sprite == null or velocity.x == 0.0:
+		return
+	var anim := &"normal_right" if velocity.x > 0.0 else &"normal_left"
+	if body_sprite.sprite_frames and body_sprite.sprite_frames.has_animation(anim):
+		if body_sprite.animation != anim:
+			body_sprite.play(anim)
+
+#当前层上填了 target_level 的楼梯/路口
+func _random_exit() -> Area2D:
+	var level := _my_level()
+	var options: Array[Area2D] = []
+	for n in get_tree().get_nodes_in_group("monster_exit"):
+		if not (n is Area2D):
+			continue
+		var area := n as Area2D
+		if str(area.get("target_level")) == "":
+			continue
+		if level and not _is_under(area, level):
+			continue
+		options.append(area)
+	if options.is_empty():
+		return null
+	return options.pick_random()
+
+func _is_under(node: Node, level: Node) -> bool:
+	var p := node
+	while p:
+		if p == level:
+			return true
+		p = p.get_parent()
+	return false
+
+func _use_exit(area: Area2D) -> void:
+	var dest := str(area.get("target_level"))
+	var spawn := str(area.get("spawn_id"))
+	if dest == "" or _run == null or not _run.has_method("teleport_actor"):
+		_start_wander()
+		return
+	_run.teleport_actor(self, dest, spawn)
+	_start_wander()
+
+#只有打中玩家的那只会走到这里
+func _redeploy() -> void:
+	_state = State.VANISH
+	velocity = Vector2.ZERO
+	var zones := _collect_zones()
+	if zones.is_empty():
+		_start_wander()
+		return
+	var zone: Area2D = zones.pick_random()
+	var dest_level = _run.level_of(zone) if _run and _run.has_method("level_of") else zone.get_parent()
+	var pos := _random_point_in_zone(zone)
+	if dest_level is Node2D:
+		if _run and _run.has_method("teleport_actor"):
+			_run.teleport_actor(self, dest_level.name, "")
+		elif get_parent() != dest_level:
+			reparent(dest_level)
+	global_position = pos
+	if not phase_through_walls:
+		var map_rid: RID = navigation_agent.get_navigation_map()
+		if map_rid.is_valid():
+			global_position = NavigationServer2D.map_get_closest_point(map_rid, global_position)
+	_start_wander()
+
+func _collect_zones() -> Array[Area2D]:
+	var out: Array[Area2D] = []
+	for n in get_tree().get_nodes_in_group("spawn_zone"):
+		if n is Area2D:
+			out.append(n)
+	return out
+
+func _random_point_in_zone(area: Area2D) -> Vector2:
+	for child in area.get_children():
+		if child is CollisionShape2D and child.shape is RectangleShape2D:
+			var r: Vector2 = (child.shape as RectangleShape2D).size * 0.5
+			var local := Vector2(randf_range(-r.x, r.x), randf_range(-r.y, r.y))
+			return child.global_transform * local
+		if child is CollisionPolygon2D and child.polygon.size() >= 3:
+			var poly: PackedVector2Array = child.polygon
+			var a := poly[0]
+			var i := randi_range(1, poly.size() - 2)
+			var t := randf()
+			var u := randf()
+			if t + u > 1.0:
+				t = 1.0 - t
+				u = 1.0 - u
+			var p: Vector2 = a + t * (poly[i] - a) + u * (poly[i + 1] - a)
+			return child.global_transform * p
+	return area.global_position

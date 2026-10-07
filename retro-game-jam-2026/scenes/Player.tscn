@@ -6,16 +6,26 @@
 [ext_resource type="Texture2D" uid="uid://wd45o86e1ltc" path="res://assets/sprite/player/player.png" id="4_cw2d6"]
 [ext_resource type="Shader" uid="uid://ytnkc8x28uju" path="res://shaders/vision_mask.gdshader" id="4_vmask"]
 [ext_resource type="Texture2D" uid="uid://mt10cuh6i5cx" path="res://assets/sprite/player/light_spark.png" id="5_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://c7x4xujvsp4bl" path="res://assets/sprite/effect/filters/filter_0.png" id="6_61ith"]
 [ext_resource type="Texture2D" uid="uid://cmceen1m0tck1" path="res://assets/sprite/effect/filter.png" id="6_mask"]
+[ext_resource type="Texture2D" uid="uid://djb5es8msocl6" path="res://assets/sprite/effect/filters/filter_1.png" id="7_ebwui"]
 [ext_resource type="Script" uid="uid://chm0hnlyrsyb1" path="res://scripts/canvas_layer.gd" id="8_lkdrv"]
+[ext_resource type="Texture2D" uid="uid://pu5qjohrbrth" path="res://assets/sprite/effect/filters/filter_2.png" id="8_sfy4j"]
+[ext_resource type="Texture2D" uid="uid://cf1k4k1fjc7pi" path="res://assets/sprite/effect/filters/filter_3.png" id="9_gv3ic"]
 [ext_resource type="Texture2D" uid="uid://bbd1vxjolo6fw" path="res://assets/sprite/items/keys/key_normal.png" id="9_p7iby"]
 [ext_resource type="Texture2D" uid="uid://tlruhavk5gww" path="res://assets/sprite/items/keys/piecel.tres" id="10_0rnld"]
+[ext_resource type="Texture2D" uid="uid://57nq0brvvlq" path="res://assets/sprite/effect/filters/filter_4.png" id="10_b8lor"]
+[ext_resource type="Texture2D" uid="uid://dovf7tfbtfi1e" path="res://assets/sprite/effect/filters/filter_5.png" id="11_sfy4j"]
 [ext_resource type="SpriteFrames" uid="uid://b7ybcgruoruig" path="res://item/shild.tres" id="11_srp4u"]
+[ext_resource type="Texture2D" uid="uid://rdp606h57td4" path="res://assets/sprite/effect/filters/filter_6.png" id="12_gv3ic"]
 [ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="12_jfpux"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="13_61ith"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 3.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b50ct"]
+light_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_khinc"]
 atlas = ExtResource("4_cw2d6")
@@ -86,6 +96,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_lkdrv"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkdrv"]
+gradient = SubResource("Gradient_lkdrv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmask"]
 shader = ExtResource("4_vmask")
 shader_parameter/hframes = 1
@@ -110,6 +129,7 @@ shape = SubResource("CircleShape2D_4u2dp")
 script = ExtResource("1_mdl7e")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=250736260]
+material = SubResource("CanvasItemMaterial_b50ct")
 sprite_frames = SubResource("SpriteFrames_4u2dp")
 animation = &"normal_right"
 autoplay = "normal_right"
@@ -118,17 +138,20 @@ autoplay = "normal_right"
 show_behind_parent = true
 script = ExtResource("3_qu4a1")
 mask_sheet = ExtResource("6_mask")
+light_frames = Array[Texture2D]([ExtResource("6_61ith"), ExtResource("7_ebwui"), ExtResource("8_sfy4j"), ExtResource("9_gv3ic"), ExtResource("10_b8lor"), ExtResource("11_sfy4j"), ExtResource("12_gv3ic")])
 
 [node name="Light" type="PointLight2D" parent="MatchLight" unique_id=761431707]
-energy = 7.0
+enabled = false
 range_item_cull_mask = 3
-texture = ExtResource("5_cw2d6")
+texture = SubResource("GradientTexture2D_lkdrv")
 
 [node name="IgniteFlash" type="Sprite2D" parent="MatchLight" unique_id=1151982448]
 modulate = Color(1.4, 1.25, 0.9, 1)
 texture = ExtResource("5_cw2d6")
 
 [node name="VisionMask" type="ColorRect" parent="MatchLight" unique_id=1214880723]
+z_index = 30
+z_as_relative = false
 material = SubResource("ShaderMaterial_vmask")
 offset_left = -1082.0
 offset_top = -1054.0

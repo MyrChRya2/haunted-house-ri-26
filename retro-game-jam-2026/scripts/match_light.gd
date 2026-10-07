@@ -6,23 +6,24 @@ const MASK_SIZE := Vector2(2048, 2048)
 
 enum Phase { DARK, FLASH, IGNITING, BURNING, FADING }
 
-@onready var _light: PointLight2D = $Light
+#@onready var _light: PointLight2D = $Light
 @onready var _burn_timer: Timer = $BurnTimer
 @onready var _ignite_flash: Sprite2D = $IgniteFlash
 @onready var _vision_mask: ColorRect = $VisionMask
 
 @export var burn_seconds: float = 5.0
 #光圈半径（像素），一格序列帧铺满这个直径
-@export var full_radius: float = 64.0
+@export var full_radius: float = 63.5
 #火把持续时间
 @export var flash_seconds: float = 0.05
 #遮罩序列帧图：所有帧横排一行，白透黑不透
 @export var mask_sheet: Texture2D
 #序列帧帧数
-@export var hframes: int = 5
+@export var hframes: int = 7
 #每秒播放帧数
 @export var mask_fps: float = 12.0
 
+@export var light_frames: Array[Texture2D]
 
 var is_lit: bool = false
 var matches_used: int = 0
@@ -39,8 +40,8 @@ signal burn_started
 func _ready() -> void:
 	show_behind_parent = true
 	#停用PointLight，避免与VisionMask双重变亮
-	_light.enabled = false
-	_light.energy = 0.0
+	#_light.enabled = false
+	#_light.energy = 0.0
 	_ignite_flash.visible = false
 	_ignite_flash.centered = true
 	_ignite_flash.position = Vector2.ZERO
@@ -49,12 +50,13 @@ func _ready() -> void:
 	_vision_mask.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_vision_mask.size = MASK_SIZE
 	_vision_mask.position = -MASK_SIZE * 0.5
-	_vision_mask.color = Color.WHITE
-	_init_mask_material()
+	_vision_mask.color = Color.WHITE	
 	_burn_timer.one_shot = true
 	if not _burn_timer.timeout.is_connected(_on_burn_timer_timeout):
 		_burn_timer.timeout.connect(_on_burn_timer_timeout)
 	extinguish(&"init")
+	
+	_set_frame(0)
 
 
 func _process(delta: float) -> void:
@@ -106,8 +108,8 @@ func extinguish(reason: StringName) -> void:
 	_ignite_flash.visible = false
 	_reset_frames()
 	_set_radius(0.0)
-	_light.enabled = false
-	_light.energy = 0.0
+	#_light.enabled = false
+	#_light.energy = 0.0
 
 func _on_burn_timer_timeout() -> void:
 	if _phase != Phase.BURNING:
@@ -129,34 +131,22 @@ func _set_radius(r: float) -> void:
 	_current_radius = maxf(r, 0.0)
 	var mat := _vision_mask.material as ShaderMaterial
 	if mat:
-		mat.set_shader_parameter("radius", _current_radius)
-
-#图，帧数，遮罩尺寸只在ready传一次
-func _init_mask_material() -> void:
-	var mat := _vision_mask.material as ShaderMaterial
-	if mat == null:
-		push_warning("MatchLight: VisionMask 没有 ShaderMaterial")
-		return
-	if mask_sheet == null:
-		push_warning("MatchLight: 没有设置 mask_sheet，点火后会是全黑")
-	elif mask_sheet.get_width() != maxi(hframes, 1) * mask_sheet.get_height():
-		push_warning("MatchLight: mask_sheet 宽 %d 不等于 帧数 %d × 高 %d，光圈会切歪" % [mask_sheet.get_width(), hframes, mask_sheet.get_height()])
-	mat.set_shader_parameter("mask_tex", mask_sheet)
-	mat.set_shader_parameter("hframes", maxi(hframes, 1))
-	mat.set_shader_parameter("rect_size", MASK_SIZE)
-	_set_frame(0)
-	_set_radius(_current_radius)
+		mat.set_shader_parameter("radius", maxf(r, full_radius))
+		
 
 func _set_frame(f: int) -> void:
 	_frame = f
 	var mat := _vision_mask.material as ShaderMaterial
-	if mat:
-		mat.set_shader_parameter("frame", f)
-
+	mat.set_shader_parameter("mask_tex", light_frames[f])
+	
 #每根新火柴都从第 1 帧开始
 func _reset_frames() -> void:
 	_frame_time = 0.0
 	_set_frame(0)
+
+#怪追击用：只有燃烧阶段算亮着
+func is_burning() -> bool:
+	return _phase == Phase.BURNING
 
 #捡道具：只有停在最后一帧的燃烧期间算照亮，正放和倒放时不算
 func is_position_illuminated(global_pos: Vector2) -> bool:

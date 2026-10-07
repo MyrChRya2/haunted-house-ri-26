@@ -7,6 +7,7 @@ enum Kind { UP, DOWN }
 @export var kind: Kind = Kind.UP
 
 func _ready() -> void:
+	add_to_group("monster_exit")
 	monitoring = true
 	body_entered.connect(_on_body_entered)
 
