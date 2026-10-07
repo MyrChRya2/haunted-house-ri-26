@@ -1,8 +1,10 @@
 [gd_scene format=4 uid="uid://cr2id2npeeocx"]
 
-[ext_resource type="PackedScene" uid="uid://vkijonwgkl5a" path="res://scenes/levels/level2/map.tscn" id="1_e0cvd"]
+[ext_resource type="PackedScene" uid="uid://cj2m0c1207r7u" path="res://scenes/levels/level2/map.tscn" id="1_e0cvd"]
 [ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/stairup.tscn" id="2_rj8cl"]
 [ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/stairdown.tscn" id="3_gblnm"]
+[ext_resource type="PackedScene" uid="uid://b73g5wdag75r0" path="res://scenes/doors/door_h.tscn" id="4_gblnm"]
+[ext_resource type="PackedScene" uid="uid://dxfhcn6ahrlk8" path="res://item/Key.tscn" id="5_iq8gt"]
 
 [node name="Level2" type="Node2D" unique_id=2053377309]
 
@@ -20,3 +22,9 @@ rotation = -3.1415927
 [node name="StairDown" parent="." unique_id=2147323999 instance=ExtResource("3_gblnm")]
 position = Vector2(32, 156)
 rotation = 3.1415927
+
+[node name="DoorH" parent="." unique_id=949085396 instance=ExtResource("4_gblnm")]
+position = Vector2(48, 65)
+
+[node name="key" parent="." unique_id=157284153 instance=ExtResource("5_iq8gt")]
+position = Vector2(25, 81)

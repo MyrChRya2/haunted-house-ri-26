@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://b73g5wdag75r0"]
+
+[ext_resource type="Texture2D" uid="uid://b1j0711tfv22x" path="res://assets/sprite/tiles/doors/door_v.png" id="1_cn1ja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5tsl"]
+size = Vector2(20, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4y6"]
+size = Vector2(20, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq8gt"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 0, 20, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cphpc"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 6, 20, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_expgy"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 12, 20, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t4y1"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 18, 20, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ybc4"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 24, 20, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buef0"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 30, 20, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0tvk"]
+atlas = ExtResource("1_cn1ja")
+region = Rect2(0, 36, 20, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cs4y6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq8gt")
+}],
+"loop": 0,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cphpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_expgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t4y1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ybc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buef0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0tvk")
+}],
+"loop": 0,
+"name": &"open",
+"speed": 20.0
+}]
+
+[node name="DoorH" type="StaticBody2D" unique_id=949085396]
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1802772586]
+shape = SubResource("RectangleShape2D_o5tsl")
+
+[node name="UnlockArea" type="Area2D" parent="." unique_id=919121802]
+
+[node name="Area1" type="CollisionShape2D" parent="UnlockArea" unique_id=1824241969]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_cs4y6")
+
+[node name="Area2" type="CollisionShape2D" parent="UnlockArea" unique_id=899890039]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_cs4y6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1717677919]
+sprite_frames = SubResource("SpriteFrames_cs4y6")
+animation = &"close"
+autoplay = "close"
