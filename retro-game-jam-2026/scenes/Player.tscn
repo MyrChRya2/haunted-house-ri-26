@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://bbd1vxjolo6fw" path="res://assets/sprite/items/keys/key_normal.png" id="9_p7iby"]
 [ext_resource type="Texture2D" uid="uid://tlruhavk5gww" path="res://assets/sprite/items/keys/piecel.tres" id="10_0rnld"]
 [ext_resource type="Texture2D" uid="uid://57nq0brvvlq" path="res://assets/sprite/effect/filters/filter_4.png" id="10_b8lor"]
+[ext_resource type="Texture2D" uid="uid://dovf7tfbtfi1e" path="res://assets/sprite/effect/filters/filter_5.png" id="11_sfy4j"]
 [ext_resource type="SpriteFrames" uid="uid://b7ybcgruoruig" path="res://item/shild.tres" id="11_srp4u"]
+[ext_resource type="Texture2D" uid="uid://rdp606h57td4" path="res://assets/sprite/effect/filters/filter_6.png" id="12_gv3ic"]
 [ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="12_jfpux"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="13_61ith"]
 
@@ -136,9 +138,10 @@ autoplay = "normal_right"
 show_behind_parent = true
 script = ExtResource("3_qu4a1")
 mask_sheet = ExtResource("6_mask")
-light_frames = [ExtResource("6_61ith"), ExtResource("7_ebwui"), ExtResource("8_sfy4j"), ExtResource("9_gv3ic"), ExtResource("10_b8lor")]
+light_frames = Array[Texture2D]([ExtResource("6_61ith"), ExtResource("7_ebwui"), ExtResource("8_sfy4j"), ExtResource("9_gv3ic"), ExtResource("10_b8lor"), ExtResource("11_sfy4j"), ExtResource("12_gv3ic")])
 
 [node name="Light" type="PointLight2D" parent="MatchLight" unique_id=761431707]
+enabled = false
 range_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_lkdrv")
 
@@ -147,8 +150,7 @@ modulate = Color(1.4, 1.25, 0.9, 1)
 texture = ExtResource("5_cw2d6")
 
 [node name="VisionMask" type="ColorRect" parent="MatchLight" unique_id=1214880723]
-visible = false
-z_index = 5
+z_index = 30
 z_as_relative = false
 material = SubResource("ShaderMaterial_vmask")
 offset_left = -1082.0

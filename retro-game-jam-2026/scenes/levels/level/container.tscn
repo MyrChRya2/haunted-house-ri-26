@@ -53,6 +53,3 @@ position = Vector2(320, 576)
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
 position = Vector2(80, 79)
 platform_floor_layers = 4294967041
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=800502623]
-color = Color(0, 0, 0, 1)

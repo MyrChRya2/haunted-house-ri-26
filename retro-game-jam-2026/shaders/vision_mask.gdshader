@@ -9,7 +9,7 @@ uniform vec2 rect_size = vec2(2048.0, 2048.0);
 void fragment() {
 	float a = 1.0; // 默认全黑
 	if (radius >= 0.5) {
-		vec2 local = (UV - vec2(0.5)) * rect_size; // 以玩家为中心的像素坐标
+		vec2 local = (UV - vec2(0.5)) * rect_size - 0.5; // 以玩家为中心的像素坐标
 		vec2 uv = local / (radius * 2.0) + vec2(0.5); // 一格贴图的边长等于直径
 		if (all(greaterThanEqual(uv, vec2(0.0))) && all(lessThan(uv, vec2(1.0)))) {
 			int n = max(hframes, 1);

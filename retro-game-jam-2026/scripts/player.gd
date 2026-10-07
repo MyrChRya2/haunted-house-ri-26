@@ -9,7 +9,7 @@ class_name player
 
 #道具功能，玩家转发到Inventory,修改文件名和路径记得改
 @onready var _inventory: HeldItemInventory = $Inventory
-const KEY_SCENE := preload("res://item/Key.tscn")
+const KEY_SCENE := preload("res://item/key.tscn")
 const SHILD_SCENE := preload("res://item/Shild.tscn")
 const WENG_SCENE := preload("res://item/Weng.tscn")
 const PIECEM_SCENE := preload("res://item/piece_m.tscn")

@@ -6,20 +6,20 @@ const MASK_SIZE := Vector2(2048, 2048)
 
 enum Phase { DARK, FLASH, IGNITING, BURNING, FADING }
 
-@onready var _light: PointLight2D = $Light
+#@onready var _light: PointLight2D = $Light
 @onready var _burn_timer: Timer = $BurnTimer
 @onready var _ignite_flash: Sprite2D = $IgniteFlash
 @onready var _vision_mask: ColorRect = $VisionMask
 
 @export var burn_seconds: float = 5.0
 #光圈半径（像素），一格序列帧铺满这个直径
-@export var full_radius: float = 126.5
+@export var full_radius: float = 63.5
 #火把持续时间
 @export var flash_seconds: float = 0.05
 #遮罩序列帧图：所有帧横排一行，白透黑不透
 @export var mask_sheet: Texture2D
 #序列帧帧数
-@export var hframes: int = 5
+@export var hframes: int = 7
 #每秒播放帧数
 @export var mask_fps: float = 12.0
 
@@ -129,12 +129,16 @@ func _last_frame() -> int:
 
 func _set_radius(r: float) -> void:
 	_current_radius = maxf(r, 0.0)
-	_light.enabled = true if _current_radius > 0.0 else false
+	var mat := _vision_mask.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("radius", maxf(r, full_radius))
+		
 
 func _set_frame(f: int) -> void:
 	_frame = f
-	_light.texture = light_frames[f]
-
+	var mat := _vision_mask.material as ShaderMaterial
+	mat.set_shader_parameter("mask_tex", light_frames[f])
+	
 #每根新火柴都从第 1 帧开始
 func _reset_frames() -> void:
 	_frame_time = 0.0
