@@ -96,15 +96,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_lkdrv"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkdrv"]
-gradient = SubResource("Gradient_lkdrv")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmask"]
 shader = ExtResource("4_vmask")
 shader_parameter/hframes = 1
@@ -140,16 +131,12 @@ script = ExtResource("3_qu4a1")
 mask_sheet = ExtResource("6_mask")
 light_frames = Array[Texture2D]([ExtResource("6_61ith"), ExtResource("7_ebwui"), ExtResource("8_sfy4j"), ExtResource("9_gv3ic"), ExtResource("10_b8lor"), ExtResource("11_sfy4j"), ExtResource("12_gv3ic")])
 
-[node name="Light" type="PointLight2D" parent="MatchLight" unique_id=761431707]
-enabled = false
-range_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_lkdrv")
-
 [node name="IgniteFlash" type="Sprite2D" parent="MatchLight" unique_id=1151982448]
 modulate = Color(1.4, 1.25, 0.9, 1)
 texture = ExtResource("5_cw2d6")
 
 [node name="VisionMask" type="ColorRect" parent="MatchLight" unique_id=1214880723]
+visible = false
 z_index = 30
 z_as_relative = false
 material = SubResource("ShaderMaterial_vmask")

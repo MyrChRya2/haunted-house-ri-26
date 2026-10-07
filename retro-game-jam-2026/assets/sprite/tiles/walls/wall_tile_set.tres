@@ -759,6 +759,6 @@ physics_layer_0/collision_layer = 8
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.11372549, 1, 0, 1)
-sources/1 = SubResource("TileSetAtlasSource_ll1xs")
 navigation_layer_0/layers = 1
+sources/1 = SubResource("TileSetAtlasSource_ll1xs")
 sources/0 = SubResource("TileSetAtlasSource_mjqhi")

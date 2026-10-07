@@ -57,6 +57,8 @@ func _ready() -> void:
 	extinguish(&"init")
 	
 	_set_frame(0)
+	
+	_vision_mask.visible = true
 
 
 func _process(delta: float) -> void:
