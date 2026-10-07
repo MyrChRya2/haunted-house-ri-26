@@ -98,3 +98,9 @@ shape = SubResource("RectangleShape2D_cs4y6")
 sprite_frames = SubResource("SpriteFrames_cs4y6")
 animation = &"close"
 autoplay = "close"
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1717677920]
+vertices = PackedVector2Array(-10, 2, 10, 2, 10, -2, -10, -2)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+

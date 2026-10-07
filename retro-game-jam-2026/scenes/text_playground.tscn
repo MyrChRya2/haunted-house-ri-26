@@ -169,31 +169,31 @@ offset_top = 80.0
 offset_right = 56.0
 offset_bottom = 103.0
 
-[node name="WorldBounds" type="Node2D" parent="." unique_id=164700440]
+[node name="Node2D" type="Node2D" parent="." unique_id=164700440]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="WorldBounds" unique_id=407014902]
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D" unique_id=407014902]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/StaticBody2D" unique_id=1448783352]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D" unique_id=1448783352]
 position = Vector2(8, 0)
 shape = SubResource("SegmentShape2D_4u2dp")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="WorldBounds" unique_id=76672926]
+[node name="StaticBody2D2" type="StaticBody2D" parent="Node2D" unique_id=76672926]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/StaticBody2D2" unique_id=820060770]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D2" unique_id=820060770]
 shape = SubResource("SegmentShape2D_qg826")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="WorldBounds" unique_id=491358768]
+[node name="StaticBody2D3" type="StaticBody2D" parent="Node2D" unique_id=491358768]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/StaticBody2D3" unique_id=2033283005]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D3" unique_id=2033283005]
 shape = SubResource("SegmentShape2D_12ix5")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="WorldBounds" unique_id=1804366726]
+[node name="StaticBody2D4" type="StaticBody2D" parent="Node2D" unique_id=1804366726]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/StaticBody2D4" unique_id=2023994744]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D4" unique_id=2023994744]
 shape = SubResource("SegmentShape2D_n41l7")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1945859548]

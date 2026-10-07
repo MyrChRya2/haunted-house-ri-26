@@ -107,3 +107,6 @@ shape = SubResource("RectangleShape2D_qg826")
 sprite_frames = SubResource("SpriteFrames_4u2dp")
 animation = &"closed"
 autoplay = "closed"
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1825253495]
+vertices = PackedVector2Array(-10, 4, 10, 4, 10, -3, -10, -3)

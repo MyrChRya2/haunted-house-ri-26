@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ci4ht42kp2bml"]
 
 [ext_resource type="Script" uid="uid://i0be42khnhd7" path="res://scripts/door_v.gd" id="1_kw6xa"]
-[ext_resource type="Texture2D" uid="uid://cryjfevvhrp8l" path="res://assets/sprite/tiles/doors/door_h.png" id="1_yjain"]
+[ext_resource type="Texture2D" uid="uid://76hq8uaghemc" path="res://assets/sprite/tiles/doors/door_h.png" id="1_yjain"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bipi0"]
 size = Vector2(2, 20)
@@ -100,3 +100,10 @@ shape = SubResource("RectangleShape2D_cs4y6")
 sprite_frames = SubResource("SpriteFrames_cs4y6")
 animation = &"close"
 autoplay = "close"
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1541721887]
+rotation = 1.5707964
+vertices = PackedVector2Array(-10, 2, 10, 2, 10, -2, -10, -2)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+

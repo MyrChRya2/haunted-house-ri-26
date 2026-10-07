@@ -158,6 +158,10 @@ func _reset_frames() -> void:
 	_frame_time = 0.0
 	_set_frame(0)
 
+#怪追击用：只有燃烧阶段算亮着
+func is_burning() -> bool:
+	return _phase == Phase.BURNING
+
 #捡道具：只有停在最后一帧的燃烧期间算照亮，正放和倒放时不算
 func is_position_illuminated(global_pos: Vector2) -> bool:
 	if _phase != Phase.BURNING or _current_radius <= 0.0:
