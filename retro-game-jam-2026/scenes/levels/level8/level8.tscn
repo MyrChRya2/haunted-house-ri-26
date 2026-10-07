@@ -17,3 +17,17 @@ offset_top = 96.0
 offset_right = 240.0
 offset_bottom = 119.0
 text = "6"
+
+[node name="Label2" type="Label" parent="." unique_id=1688565220]
+offset_left = -16.0
+offset_top = 40.0
+offset_right = 24.0
+offset_bottom = 63.0
+text = "4"
+
+[node name="Label3" type="Label" parent="." unique_id=166929775]
+offset_left = 128.0
+offset_top = 56.0
+offset_right = 168.0
+offset_bottom = 79.0
+text = "5"

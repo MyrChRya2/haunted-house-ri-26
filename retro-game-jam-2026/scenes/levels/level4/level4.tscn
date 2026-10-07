@@ -1,15 +1,35 @@
 [gd_scene format=3 uid="uid://ot02flno2cjc"]
 
 [ext_resource type="PackedScene" uid="uid://br22lkmwwmhog" path="res://scenes/levels/level4/map.tscn" id="1_bon0b"]
-[ext_resource type="PackedScene" uid="uid://dhon7lt1tyq62" path="res://scenes/levels/level3/level3.tscn" id="2_lbn3a"]
-[ext_resource type="PackedScene" uid="uid://cr2id2npeeocx" path="res://scenes/levels/level2/level2.tscn" id="3_pso0i"]
 
 [node name="Level4" type="Node2D" unique_id=572253483]
 
 [node name="TileMapLayer" parent="." unique_id=1299894217 instance=ExtResource("1_bon0b")]
 
-[node name="Level3" parent="." unique_id=2085121913 instance=ExtResource("2_lbn3a")]
-position = Vector2(0, 160)
+[node name="Label" type="Label" parent="." unique_id=985107822]
+offset_left = 40.0
+offset_top = -24.0
+offset_right = 80.0
+offset_bottom = -1.0
+text = "7"
 
-[node name="Level2" parent="." unique_id=2053377309 instance=ExtResource("3_pso0i")]
-position = Vector2(-192, 0)
+[node name="Label2" type="Label" parent="." unique_id=203849431]
+offset_left = -16.0
+offset_top = 72.0
+offset_right = 24.0
+offset_bottom = 95.0
+text = "2"
+
+[node name="Label3" type="Label" parent="." unique_id=1292374831]
+offset_left = 192.0
+offset_top = 40.0
+offset_right = 232.0
+offset_bottom = 63.0
+text = "8"
+
+[node name="Label4" type="Label" parent="." unique_id=616147540]
+offset_left = 88.0
+offset_top = 160.0
+offset_right = 128.0
+offset_bottom = 183.0
+text = "3"

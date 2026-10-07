@@ -5,3 +5,24 @@
 [node name="Level6" type="Node2D" unique_id=1195835220]
 
 [node name="TileMapLayer" parent="." unique_id=1253306405 instance=ExtResource("1_repk1")]
+
+[node name="Label" type="Label" parent="." unique_id=1595533233]
+offset_left = 88.0
+offset_top = 160.0
+offset_right = 128.0
+offset_bottom = 183.0
+text = "1"
+
+[node name="Label2" type="Label" parent="." unique_id=111798868]
+offset_left = 192.0
+offset_top = 8.0
+offset_right = 232.0
+offset_bottom = 31.0
+text = "7"
+
+[node name="Label3" type="Label" parent="." unique_id=1619708016]
+offset_left = -16.0
+offset_top = 104.0
+offset_right = 24.0
+offset_bottom = 127.0
+text = "8"

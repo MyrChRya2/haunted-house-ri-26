@@ -8,4 +8,25 @@
 [node name="TileMapLayer" parent="." unique_id=1378439067 instance=ExtResource("1_10404")]
 
 [node name="Stairup" parent="." unique_id=1145574436 instance=ExtResource("2_2a1ig")]
-position = Vector2(128, 85)
+position = Vector2(129, 85)
+
+[node name="Label" type="Label" parent="." unique_id=1095488234]
+offset_left = 207.0
+offset_top = 40.0
+offset_right = 247.0
+offset_bottom = 63.0
+text = "3"
+
+[node name="Label2" type="Label" parent="." unique_id=63008672]
+offset_left = 25.0
+offset_top = 158.0
+offset_right = 65.0
+offset_bottom = 181.0
+text = "1"
+
+[node name="Label3" type="Label" parent="." unique_id=594486929]
+offset_left = 124.0
+offset_top = 60.0
+offset_right = 164.0
+offset_bottom = 83.0
+text = "8"

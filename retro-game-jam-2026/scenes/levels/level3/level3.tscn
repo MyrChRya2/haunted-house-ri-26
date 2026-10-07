@@ -5,3 +5,38 @@
 [node name="Level3" type="Node2D" unique_id=2085121913]
 
 [node name="TileMapLayer" parent="." unique_id=1433778628 instance=ExtResource("1_3xs1f")]
+
+[node name="Label" type="Label" parent="." unique_id=578138423]
+offset_left = 88.0
+offset_top = -24.0
+offset_right = 128.0
+offset_bottom = -1.0
+text = "4"
+
+[node name="Label2" type="Label" parent="." unique_id=1276600578]
+offset_left = -16.0
+offset_top = 40.0
+offset_right = 24.0
+offset_bottom = 63.0
+text = "5"
+
+[node name="Label3" type="Label" parent="." unique_id=694352423]
+offset_left = -16.0
+offset_top = 104.0
+offset_right = 24.0
+offset_bottom = 127.0
+text = "6"
+
+[node name="Label5" type="Label" parent="." unique_id=1661674399]
+offset_left = 24.0
+offset_top = 160.0
+offset_right = 64.0
+offset_bottom = 183.0
+text = "2"
+
+[node name="Label6" type="Label" parent="." unique_id=331527707]
+offset_left = 152.0
+offset_top = 160.0
+offset_right = 192.0
+offset_bottom = 183.0
+text = "2"
