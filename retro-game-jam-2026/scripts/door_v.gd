@@ -1,58 +1,31 @@
 extends StaticBody2D
 
-var _collision: CollisionShape2D
-var _sprite: AnimatedSprite2D
-var _detect: Area2D
+@onready var _collision: CollisionShape2D = $Collision
+@onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _detect: Area2D = $UnlockArea
+@onready var navigation_obstacle_2d: NavigationObstacle2D = $NavigationObstacle2D
+
+#门的状态
 var is_open: bool = false
 
 func _ready() -> void:
-	_collision = _find_shape()
-	_detect = _find_area()
-	_sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
-	if _detect:
-		_detect.monitoring = true
-		if not _detect.body_entered.is_connected(_on_detect_body_entered):
-			_detect.body_entered.connect(_on_detect_body_entered)
-	if _sprite and not _sprite.animation_finished.is_connected(_on_anim_finished):
-		_sprite.animation_finished.connect(_on_anim_finished)
+	_detect.monitoring = true
+	_detect.body_entered.connect(_on_detect_body_entered)
+	_sprite.animation_finished.connect(_on_anim_finished)
 	if is_open:
-		_set_blocked(false)
-		_play([&"opend", &"opened"])
+		_collision.disabled = true
+		_sprite.play(&"opend")
 	else:
-		_set_blocked(true)
-		_play([&"close", &"closed"])
-
-func _find_shape() -> CollisionShape2D:
-	for name in ["Collision", "CollisionShape2D"]:
-		var node := get_node_or_null(name)
-		if node is CollisionShape2D:
-			return node
-	return null
-
-func _find_area() -> Area2D:
-	for name in ["UnlockArea", "Area2D"]:
-		var node := get_node_or_null(name)
-		if node is Area2D:
-			return node
-	return null
-
-func _set_blocked(blocked: bool) -> void:
-	if _collision:
-		_collision.set_deferred("disabled", not blocked)
-
-func _play(names: Array[StringName]) -> void:
-	if _sprite == null or _sprite.sprite_frames == null:
-		return
-	for n in names:
-		if _sprite.sprite_frames.has_animation(n):
-			_sprite.play(n)
-			return
+		_collision.disabled = false
+		_sprite.play(&"close")
+	_sync_nav_obstacle()
 
 func _on_detect_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
 	try_unlock(body)
 
+#开门
 func try_unlock(player: Node) -> bool:
 	if is_open:
 		return true
@@ -65,9 +38,16 @@ func try_unlock(player: Node) -> bool:
 
 func _open() -> void:
 	is_open = true
-	_set_blocked(false)
-	_play([&"openanima"])
+	_collision.set_deferred("disabled", true)
+	_sprite.play(&"openanima")
+	_sync_nav_obstacle()
 
+#播放动画
 func _on_anim_finished() -> void:
-	if _sprite and _sprite.animation == &"openanima":
-		_play([&"opend", &"opened"])
+	if _sprite.animation == &"openanima":
+		_sprite.play(&"opend")
+
+#关门挡路，开了就从寻路里拿掉
+func _sync_nav_obstacle() -> void:
+	navigation_obstacle_2d.avoidance_enabled = not is_open
+	navigation_obstacle_2d.affect_navigation_mesh = not is_open

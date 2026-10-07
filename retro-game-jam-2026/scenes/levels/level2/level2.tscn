@@ -2,10 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://cj2m0c1207r7u" path="res://scenes/levels/level2/map.tscn" id="1_e0cvd"]
 [ext_resource type="TileSet" uid="uid://cu8tceo5td13x" path="res://assets/sprite/effect/darkedge_effect.tres" id="2_cphpc"]
-[ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/stairup.tscn" id="2_rj8cl"]
+[ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/Stairup.tscn" id="2_rj8cl"]
 [ext_resource type="TileSet" uid="uid://cv2k3bbsu1n2q" path="res://assets/sprite/tiles/walls/wall_tile_set.tres" id="3_cphpc"]
-[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/stairdown.tscn" id="3_gblnm"]
+[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/Stairdown.tscn" id="3_gblnm"]
 [ext_resource type="PackedScene" uid="uid://b73g5wdag75r0" path="res://scenes/doors/door_h.tscn" id="4_gblnm"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cphpc"]
+b = Vector2(0, 160)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_expgy"]
+a = Vector2(192, 8)
+b = Vector2(192, 168)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8t4y1"]
+b = Vector2(192, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0ybc4"]
+b = Vector2(192, 0)
 
 [node name="Level2" type="Node2D" unique_id=2053377309]
 
@@ -63,7 +76,35 @@ offset_right = 24.0
 offset_bottom = 103.0
 text = "1"
 
-[node name="PortalLocate" type="Node" parent="." unique_id=2124319860]
+[node name="PortalLocate" type="Node2D" parent="." unique_id=2124319860]
 
-[node name="1" type="Marker2D" parent="PortalLocate" unique_id=914634382]
-position = Vector2(8, 96)
+[node name="3" type="Marker2D" parent="PortalLocate" unique_id=914634382]
+position = Vector2(38, 95)
+
+[node name="wall" type="Node2D" parent="." unique_id=1762754724]
+
+[node name="l" type="StaticBody2D" parent="wall" unique_id=1262265434]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/l" unique_id=454887549]
+shape = SubResource("SegmentShape2D_cphpc")
+
+[node name="r" type="StaticBody2D" parent="wall" unique_id=1352841295]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/r" unique_id=1841815131]
+position = Vector2(0, -8)
+shape = SubResource("SegmentShape2D_expgy")
+
+[node name="t" type="StaticBody2D" parent="wall" unique_id=1825487124]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/t" unique_id=2095125832]
+shape = SubResource("SegmentShape2D_8t4y1")
+
+[node name="d" type="StaticBody2D" parent="wall" unique_id=1225872478]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/d" unique_id=1520171902]
+position = Vector2(0, 160)
+shape = SubResource("SegmentShape2D_0ybc4")

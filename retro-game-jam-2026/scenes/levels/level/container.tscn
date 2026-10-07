@@ -16,8 +16,7 @@
 [node name="Container" type="Node2D" unique_id=2024069335]
 y_sort_enabled = true
 script = ExtResource("1_042s0")
-start_level = ""
-start_spawn = "teach"
+start_spawn = "SpwanPoint"
 
 [node name="Levels" type="Node2D" parent="." unique_id=1041673346]
 

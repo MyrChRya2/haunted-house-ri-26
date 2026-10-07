@@ -78,7 +78,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Vampire" type="CharacterBody2D" unique_id=717006068 groups=["monster"]]
+[node name="Vampire" type="CharacterBody2D" unique_id=717006068 groups=["monster", "monsters"]]
 collision_layer = 0
 collision_mask = 25
 script = ExtResource("1_ht4rs")
@@ -94,6 +94,11 @@ collision_mask = 25
 shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1629253415]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 4.0
+target_desired_distance = 10.0
+avoidance_enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091788441]
 position = Vector2(-1.1920929e-07, 0)
