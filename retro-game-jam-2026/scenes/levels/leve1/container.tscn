@@ -14,10 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://brug7l53n12yb" path="res://scenes/levels/level10/level10.tscn" id="11_12135"]
 
 [node name="Container" type="Node2D" unique_id=2024069335]
+y_sort_enabled = true
 script = ExtResource("1_nio8k")
 start_spawn = "teach"
 
 [node name="Levels" type="Node2D" parent="." unique_id=1041673346]
+y_sort_enabled = true
 
 [node name="Level1" parent="Levels" unique_id=483314537 instance=ExtResource("2_guljk")]
 
