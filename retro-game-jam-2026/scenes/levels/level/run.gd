@@ -31,8 +31,9 @@ func _travel(level_name: String, spawn_id: String, player: Node2D, is_boot: bool
 	if target == null:
 		push_warning("Run: 找不到层 %s" % level_name)
 		return
+	# 方案 A：层已错开摆放，全部保持可见，走过去就能进邻图。
 	for child in levels.get_children():
-		_set_layer_active(child, child == target)
+		child.visible = true
 	_current = target
 	if spawn_id != "":
 		var marker := target.find_child(spawn_id, true, false) as Marker2D
@@ -42,6 +43,3 @@ func _travel(level_name: String, spawn_id: String, player: Node2D, is_boot: bool
 			push_warning("Run: 层 %s 没有 Marker2D「%s」" % [level_name, spawn_id])
 	elif is_boot:
 		pass
-
-func _set_layer_active(layer: Node, on: bool) -> void:
-	layer.visible = on

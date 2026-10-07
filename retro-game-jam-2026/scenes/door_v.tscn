@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4o280c8q0o5j"]
 
-[ext_resource type="Script" uid="uid://uhu6745knccn" path="res://scripts/door.gd" id="1_6p5mf"]
+[ext_resource type="Script" uid="uid://bkkwate3mi485" path="res://scripts/victorydoor.gd" id="1_6p5mf"]
 [ext_resource type="Texture2D" uid="uid://d3nddx2bhgq1f" path="res://assets/sprite/tiles/doors/door_final.png" id="2_uvdjg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83dcw"]
@@ -40,7 +40,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_83dcw")
+}],
+"loop": 0,
+"name": &"closed",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_la1wf")
 }, {
@@ -58,13 +63,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kgbum")
+}],
+"loop": 0,
+"name": &"openanima",
+"speed": 20.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pg2b6")
 }],
 "loop": 1,
-"name": &"default",
-"speed": 10.0
+"name": &"opened",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8gb5"]
@@ -73,14 +83,15 @@ size = Vector2(20, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4u2dp"]
 size = Vector2(20, 4)
 
-[node name="DoorV" type="StaticBody2D" unique_id=1261577480]
-collision_layer = 24
+[node name="VictoryDoor" type="StaticBody2D" unique_id=1261577480 groups=["victory"]]
+collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_6p5mf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1260376492]
 sprite_frames = SubResource("SpriteFrames_4u2dp")
-autoplay = "default"
+animation = &"closed"
+autoplay = "closed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=166119394]
 shape = SubResource("RectangleShape2D_y8gb5")

@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b4dx5rb7cvxwu"]
+
+[ext_resource type="Script" uid="uid://gvlawhjhvvj1" path="res://scenes/levels/level/run.gd" id="1_042s0"]
+[ext_resource type="PackedScene" uid="uid://4p60k427qe8i" path="res://scenes/levels/level1/level1.tscn" id="2_08fun"]
+[ext_resource type="PackedScene" uid="uid://cr2id2npeeocx" path="res://scenes/levels/level2/level2.tscn" id="3_v5auo"]
+[ext_resource type="PackedScene" uid="uid://dhon7lt1tyq62" path="res://scenes/levels/level3/level3.tscn" id="4_f847r"]
+[ext_resource type="PackedScene" uid="uid://ot02flno2cjc" path="res://scenes/levels/level4/level4.tscn" id="5_8cuyj"]
+[ext_resource type="PackedScene" uid="uid://dd6j6qnu7mff1" path="res://scenes/levels/level5/level5.tscn" id="6_f1xvd"]
+[ext_resource type="PackedScene" uid="uid://c5tv0svv74tkg" path="res://scenes/levels/level6/level6.tscn" id="7_7iguj"]
+[ext_resource type="PackedScene" uid="uid://gv5f1rhiv1sk" path="res://scenes/levels/level7/level7.tscn" id="8_8770u"]
+[ext_resource type="PackedScene" uid="uid://oy2xdo8ps8li" path="res://scenes/levels/level8/level8.tscn" id="9_flgc0"]
+[ext_resource type="PackedScene" uid="uid://ncwdbbvd6j0q" path="res://scenes/levels/level9/level9.tscn" id="10_iv03y"]
+[ext_resource type="PackedScene" uid="uid://brug7l53n12yb" path="res://scenes/levels/level10/level10.tscn" id="11_8w7g4"]
+[ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="12_syc5e"]
+
+[node name="Container" type="Node2D" unique_id=2024069335]
+y_sort_enabled = true
+script = ExtResource("1_042s0")
+start_level = ""
+start_spawn = "teach"
+
+[node name="Levels" type="Node2D" parent="." unique_id=1041673346]
+y_sort_enabled = true
+
+[node name="Level1" parent="Levels" unique_id=483314537 instance=ExtResource("2_08fun")]
+
+[node name="Level2" parent="Levels" unique_id=2053377309 instance=ExtResource("3_v5auo")]
+position = Vector2(320, 0)
+
+[node name="Level3" parent="Levels" unique_id=2085121913 instance=ExtResource("4_f847r")]
+position = Vector2(640, 0)
+
+[node name="Level4" parent="Levels" unique_id=572253483 instance=ExtResource("5_8cuyj")]
+position = Vector2(960, 0)
+
+[node name="Level5" parent="Levels" unique_id=1232261549 instance=ExtResource("6_f1xvd")]
+position = Vector2(0, 288)
+
+[node name="Level6" parent="Levels" unique_id=1195835220 instance=ExtResource("7_7iguj")]
+position = Vector2(320, 288)
+
+[node name="Level7" parent="Levels" unique_id=445202046 instance=ExtResource("8_8770u")]
+position = Vector2(640, 288)
+
+[node name="Level8" parent="Levels" unique_id=242443227 instance=ExtResource("9_flgc0")]
+position = Vector2(960, 288)
+
+[node name="Level9" parent="Levels" unique_id=784815637 instance=ExtResource("10_iv03y")]
+position = Vector2(0, 576)
+
+[node name="Level10" parent="Levels" unique_id=1434985775 instance=ExtResource("11_8w7g4")]
+position = Vector2(320, 576)
+
+[node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
+visible = false
+position = Vector2(80, 79)
+platform_floor_layers = 4294967041

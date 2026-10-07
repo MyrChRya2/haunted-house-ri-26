@@ -7,7 +7,7 @@
 size = Vector2(20, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qg826"]
-size = Vector2(20, 6)
+size = Vector2(20, 13.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dp87m"]
 atlas = ExtResource("2_qprpi")
@@ -38,6 +38,10 @@ atlas = ExtResource("2_qprpi")
 region = Rect2(0, 60, 20, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wi3yo"]
+atlas = ExtResource("2_qprpi")
+region = Rect2(0, 70, 20, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qprpi"]
 atlas = ExtResource("2_qprpi")
 region = Rect2(0, 70, 20, 10)
 
@@ -74,8 +78,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_wi3yo")
 }],
 "loop": 0,
-"name": &"open",
+"name": &"openanima",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qprpi")
+}],
+"loop": 1,
+"name": &"opened",
+"speed": 5.0
 }]
 
 [node name="VictoryDoor" type="StaticBody2D" unique_id=1760742482 groups=["victory"]]
@@ -89,7 +101,6 @@ shape = SubResource("RectangleShape2D_rb6h8")
 [node name="Area2D" type="Area2D" parent="." unique_id=1558870171]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1180748309]
-position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_qg826")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=314121105]

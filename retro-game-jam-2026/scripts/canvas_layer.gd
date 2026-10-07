@@ -17,7 +17,7 @@ extends CanvasLayer
 @onready var item_icon: TextureRect = $ItemIcon
 #道具图片枚举
 @export var item_icons: Array[Texture2D] = []
-#道具动画（同样按枚举顺序；有动画的填 SpriteFrames，会优先于上面的静态图）
+#道具动画枚举
 @export var item_frames: Array[SpriteFrames] = []
 #播放的动画名
 @export var item_anim: StringName = &"default"
