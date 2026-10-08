@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://duslsrowtj2sn" path="res://item/piece_r.tscn" id="4_5pvav"]
 [ext_resource type="PackedScene" uid="uid://dxfhcn6ahrlk8" path="res://item/Key.tscn" id="5_o5tsl"]
 [ext_resource type="Script" uid="uid://n322h217bqkh" path="res://scenes/levels/level/map_portal.gd" id="8_1nwpw"]
+[ext_resource type="PackedScene" uid="uid://cgg2wmr8wey4n" path="res://item/Weng.tscn" id="9_5bog2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_4u2dp"]
 b = Vector2(0, 160)
@@ -65,7 +66,7 @@ position = Vector2(64, 16)
 position = Vector2(80, 146)
 
 [node name="Piecer" parent="." unique_id=1765561640 instance=ExtResource("4_5pvav")]
-position = Vector2(34, 35)
+position = Vector2(33, 44)
 
 [node name="key" parent="." unique_id=157284153 instance=ExtResource("5_o5tsl")]
 position = Vector2(160, 143)
@@ -162,3 +163,6 @@ offset_top = 120.0
 offset_right = 232.0
 offset_bottom = 143.0
 text = "2"
+
+[node name="Weng" parent="." unique_id=1273580505 instance=ExtResource("9_5bog2")]
+position = Vector2(90, 112)

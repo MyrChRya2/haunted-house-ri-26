@@ -146,5 +146,5 @@ offset_bottom = -25.0
 theme_override_fonts/font = ExtResource("4_xgydr")
 theme_override_font_sizes/font_size = 6
 text = "make flexible use of E 
-they just can find who  in light"
+they can only find whoever is in the light."
 horizontal_alignment = 1

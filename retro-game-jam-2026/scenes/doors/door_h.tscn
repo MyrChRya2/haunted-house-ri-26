@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1j0711tfv22x" path="res://assets/sprite/tiles/doors/door_v.png" id="1_cn1ja"]
 [ext_resource type="Script" uid="uid://uhu6745knccn" path="res://scripts/door_h.gd" id="1_rprvo"]
+[ext_resource type="AudioStream" uid="uid://bmt088lmr8bkx" path="res://assets/audio/open_the_door.ogg" id="3_0wkrd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5tsl"]
 size = Vector2(20, 4)
@@ -105,4 +106,4 @@ affect_navigation_mesh = true
 carve_navigation_mesh = true
 
 [node name="open" type="AudioStreamPlayer" parent="." unique_id=1717677921]
-
+stream = ExtResource("3_0wkrd")

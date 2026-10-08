@@ -12,6 +12,12 @@ const RESULT_OK_BUTTON_TEXT := "return"
 #血量，三格同一张图
 @onready var lives_row: HBoxContainer = $Lives
 @export var heart_tex: Texture2D
+#生命精灵图：上面一排是扣血动画、下面一排是回血动画（给了它就用它，没给就退回上面那张单图）
+@export var heart_sheet: Texture2D
+#一格多少像素，列数/行数按图片尺寸自动算
+@export var heart_frame_size: Vector2i = Vector2i(8, 8)
+#生命动画速度（帧/秒）
+@export var heart_fps: float = 12.0
 #楼层
 #@onready var floor: Label = $Floor
 #结算弹窗
@@ -39,6 +45,14 @@ var _match: Node
 var _anim_frames: SpriteFrames = null
 var _anim_index := 0
 var _anim_time := 0.0
+#每一格生命：贴图区域 + 正在播的行/帧/计时（行 0=扣血排 1=回血排，-1=不播）
+var _heart_atlas: Array[AtlasTexture] = []
+var _heart_row: Array[int] = []
+var _heart_col: Array[int] = []
+var _heart_time: Array[float] = []
+var _heart_cols: int = 1
+var _heart_rows: int = 1
+var _lives_shown: int = -1
 
 #获取player组里面的player节点，监听lives_changed信号，显示初始生命
 func _ready() -> void:
@@ -49,6 +63,7 @@ func _ready() -> void:
 		push_warning("player 组里没有节点：检查 Player 是否加入 player 组")
 		return
 	_player.lives_changed.connect(_on_lives_changed)
+	_setup_hearts()
 	_refresh_lives(_player.lives)
 	#监听floor_changed信号，显示初始楼层
 	#_player.floor_changed.connect(_on_floor_changed)
@@ -74,16 +89,28 @@ func _ready() -> void:
 func _on_lives_changed(current: int) -> void:
 	_refresh_lives(current)
 
+#更新血量：掉血那格播上排、回血那格播下排，其余按"满/空"静止摆好
 func _refresh_lives(current: int) -> void:
-	var i := 0
-	for heart in lives_row.get_children():
-		if not (heart is TextureRect):
+	var prev := _lives_shown
+	_lives_shown = current
+	var last_col: int = _heart_cols - 1
+	#有精灵图才画得出"空格子"，否则退回"剩几格亮几格"
+	var show_empty: bool = heart_sheet != null and _heart_rows >= 2
+	for i in _heart_atlas.size():
+		var lit: bool = i < current
+		var slot := lives_row.get_child(i) as TextureRect
+		if slot:
+			slot.visible = lit or show_empty
+		if not (lit or show_empty):
 			continue
-		var slot := heart as TextureRect
-		if heart_tex:
-			slot.texture = heart_tex
-		slot.visible = i < current
-		i += 1
+		var changed: bool = prev >= 0 and i >= mini(prev, current) and i < maxi(prev, current)
+		if changed and _heart_cols > 1:
+			_play_heart(i, 1 if current > prev else 0)
+		elif lit:
+			_set_heart(i, mini(1, _heart_rows - 1), last_col)
+		else:
+			_set_heart(i, 0, last_col)
+	set_process(true)
 #func _on_floor_changed(current_f: int) -> void:
 	#if _player == null:
 		#return
@@ -154,30 +181,102 @@ func _sync_item_icon() -> void:
 	item_icon.texture = tex
 	item_icon.visible = (tex != null)
 	#只有一帧以上才需要逐帧播放
-	set_process(_anim_frames != null and _anim_frames.get_frame_count(item_anim) > 1)
+	#道具只有一帧以上才需要逐帧播；生命格动画共用 _process，所以这里只开不关
+	if _anim_frames != null and _anim_frames.get_frame_count(item_anim) > 1:
+		set_process(true)
 
-#按SpriteFrames的fps和每帧时长给图标换帧
+#按SpriteFrames的fps和每帧时长给图标换帧；生命格动画也在这里推进
 func _process(delta: float) -> void:
+	var busy: bool = _step_item_icon(delta)
+	if _step_hearts(delta):
+		busy = true
+	set_process(busy)
+
+#道具图标：返回是否还在播
+func _step_item_icon(delta: float) -> bool:
 	if _anim_frames == null:
-		set_process(false)
-		return
+		return false
 	var fps: float = _anim_frames.get_animation_speed(item_anim)
 	var count: int = _anim_frames.get_frame_count(item_anim)
 	if fps <= 0.0 or count <= 1:
-		return
+		return false
+	var keep := true
 	_anim_time += delta
 	var dur: float = _anim_frames.get_frame_duration(item_anim, _anim_index) / fps
 	while _anim_time >= dur:
 		_anim_time -= dur
 		if _anim_index + 1 >= count:
 			if not _anim_frames.get_animation_loop(item_anim):
-				set_process(false)
+				keep = false
 				break
 			_anim_index = 0
 		else:
 			_anim_index += 1
 		dur = _anim_frames.get_frame_duration(item_anim, _anim_index) / fps
 	item_icon.texture = _anim_frames.get_frame_texture(item_anim, _anim_index)
+	return keep
+
+#准备每一格：挂 AtlasTexture；给了精灵图就按格子尺寸算列数/行数
+func _setup_hearts() -> void:
+	if heart_sheet:
+		_heart_cols = maxi(1, heart_sheet.get_width() / maxi(1, heart_frame_size.x))
+		_heart_rows = maxi(1, heart_sheet.get_height() / maxi(1, heart_frame_size.y))
+	else:
+		#没图就当作只有一帧
+		_heart_cols = 1
+		_heart_rows = 1
+	var tex: Texture2D = heart_sheet if heart_sheet else heart_tex
+	_heart_atlas.clear()
+	_heart_row.clear()
+	_heart_col.clear()
+	_heart_time.clear()
+	for heart in lives_row.get_children():
+		if not (heart is TextureRect):
+			continue
+		var slot := heart as TextureRect
+		var atlas := AtlasTexture.new()
+		atlas.atlas = tex
+		atlas.region = Rect2(Vector2.ZERO, Vector2(heart_frame_size))
+		slot.texture = atlas
+		_heart_atlas.append(atlas)
+		_heart_row.append(-1)
+		_heart_col.append(0)
+		_heart_time.append(0.0)
+
+#把第 i 格摆到某一帧（静止，不播）
+func _set_heart(i: int, row: int, col: int) -> void:
+	_set_heart_region(i, row, col)
+	_heart_row[i] = -1
+	_heart_col[i] = col
+
+func _set_heart_region(i: int, row: int, col: int) -> void:
+	_heart_atlas[i].region = Rect2(Vector2(col * heart_frame_size.x, row * heart_frame_size.y), Vector2(heart_frame_size))
+
+#从某排第 0 帧开始播（0=扣血排，1=回血排）
+func _play_heart(i: int, row: int) -> void:
+	_heart_col[i] = 0
+	_heart_time[i] = 0.0
+	_heart_row[i] = row
+	_set_heart_region(i, row, 0)
+
+#推进生命格动画，返回是否还有格子在播
+func _step_hearts(delta: float) -> bool:
+	var busy := false
+	for i in _heart_row.size():
+		if _heart_row[i] < 0:
+			continue
+		_heart_time[i] += delta
+		var dur: float = 1.0 / maxf(1.0, heart_fps)
+		while _heart_time[i] >= dur:
+			_heart_time[i] -= dur
+			if _heart_col[i] + 1 >= _heart_cols:
+				_heart_row[i] = -1
+				break
+			_heart_col[i] += 1
+			_set_heart_region(i, _heart_row[i], _heart_col[i])
+		if _heart_row[i] >= 0:
+			busy = true
+	return busy
 #火把使用数显示
 func match_used_count(matches_used):
 	matchuse.text = "%d" % matches_used

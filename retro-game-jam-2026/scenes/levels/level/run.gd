@@ -14,7 +14,6 @@ func _ready() -> void:
 		return
 	add_to_group("run")
 	_bind_level_nav_maps()
-	_ensure_debug_camera()
 	var player := get_tree().get_first_node_in_group("player")
 	_travel(start_level, start_spawn, player, true)
 
@@ -55,16 +54,6 @@ func nav_map_of(level: Node) -> RID:
 	if level and level.has_meta("nav_map"):
 		return level.get_meta("nav_map") as RID
 	return RID()
-
-#调试总览相机：场景里没有就补一个，F3 切换
-func _ensure_debug_camera() -> void:
-	if get_node_or_null("DebugCamera") != null:
-		return
-	var cam := Camera2D.new()
-	cam.name = "DebugCamera"
-	cam.enabled = false
-	cam.set_script(preload("res://scenes/levels/level/debug_camera.gd"))
-	add_child(cam)
 
 func _process(delta: float) -> void:
 	if _cool > 0.0:
