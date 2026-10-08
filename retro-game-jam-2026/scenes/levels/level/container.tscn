@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ncwdbbvd6j0q" path="res://scenes/levels/level9/level9.tscn" id="10_iv03y"]
 [ext_resource type="PackedScene" uid="uid://brug7l53n12yb" path="res://scenes/levels/level10/level10.tscn" id="11_8w7g4"]
 [ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="12_syc5e"]
+[ext_resource type="PackedScene" uid="uid://80dfunghwf5c" path="res://scenes/levels/level/scene_wipe.tscn" id="13_wipe"]
 
 [node name="Container" type="Node2D" unique_id=2024069335]
 y_sort_enabled = true
@@ -50,5 +51,6 @@ position = Vector2(0, 576)
 position = Vector2(320, 576)
 
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
-position = Vector2(80, 79)
-platform_floor_layers = 4294967041
+position = Vector2(72, 105)
+
+[node name="SceneWipe" parent="." unique_id=189239467 instance=ExtResource("13_wipe")]

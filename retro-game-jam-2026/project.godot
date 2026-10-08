@@ -29,6 +29,7 @@ victory=""
 hub=""
 monster=""
 monsters=""
+spawn_zone=""
 
 [input]
 

@@ -11,7 +11,7 @@ enum Phase { DARK, FLASH, IGNITING, BURNING, FADING }
 @onready var _ignite_flash: Sprite2D = $IgniteFlash
 @onready var _vision_mask: ColorRect = $VisionMask
 
-@export var burn_seconds: float = 5.0
+@export var burn_seconds: float = 15.0
 #光圈半径（像素），一格序列帧铺满这个直径
 @export var full_radius: float = 63.5
 #火把持续时间

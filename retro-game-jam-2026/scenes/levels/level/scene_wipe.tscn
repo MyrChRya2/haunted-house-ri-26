@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://80dfunghwf5c"]
+
+[ext_resource type="Script" uid="uid://cg7iw05aiusek" path="res://scenes/levels/level/scene_wipe.gd" id="1_wipe"]
+[ext_resource type="Texture2D" uid="uid://bnjr84wc8j777" path="res://assets/sprite/effect/wipe_sheet.png" id="2_sheet"]
+
+[node name="SceneWipe" type="CanvasLayer" unique_id=900855277]
+process_mode = 3
+layer = 128
+script = ExtResource("1_wipe")
+sheet = ExtResource("2_sheet")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=93616390]
+hframes = 21
