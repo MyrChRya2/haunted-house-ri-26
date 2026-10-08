@@ -23,12 +23,12 @@
 [ext_resource type="Texture2D" uid="uid://rdp606h57td4" path="res://assets/sprite/effect/filters/filter_6.png" id="12_gv3ic"]
 [ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="12_jfpux"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="13_61ith"]
-[ext_resource type="Texture2D" uid="uid://y2qsk0iwe2k2" path="res://assets/sprite/ui/life.png" id="14_heart"]
 [ext_resource type="AudioStream" uid="uid://bhpn3q3j30ax" path="res://assets/audio/step.ogg" id="15_step"]
 [ext_resource type="AudioStream" uid="uid://cs3ojx1xfh3ua" path="res://assets/audio/light.ogg" id="16_light"]
 [ext_resource type="AudioStream" uid="uid://be4ka7oxqay4f" path="res://assets/audio/no_light.ogg" id="17_nolight"]
 [ext_resource type="AudioStream" uid="uid://4vfn4m0papjx" path="res://assets/audio/combine.ogg" id="18_combine"]
 [ext_resource type="AudioStream" uid="uid://bfvp6g70l07ga" path="res://assets/audio/pickup.ogg" id="28_axnmu"]
+[ext_resource type="Texture2D" uid="uid://cvaps73jywg7w" path="res://assets/sprite/ui/heart.png" id="28_fvsjc"]
 [ext_resource type="AudioStream" uid="uid://breedopitlrkp" path="res://assets/audio/deadly_damege.ogg" id="29_fvsjc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
@@ -289,6 +289,136 @@ shader_parameter/frame = 0
 shader_parameter/radius = 0.0
 shader_parameter/rect_size = Vector2(2048, 2048)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk6la"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrxk4"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg1p0"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(21, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2u8p"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(28, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv10x"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(35, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdxpi"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(42, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b437"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(49, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nyu3"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(0, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_priom"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(7, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt3gi"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(14, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akpgi"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(21, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kumhx"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(28, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_100hb"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(35, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7odld"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(42, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axtmv"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(49, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu4mg"]
+atlas = ExtResource("28_fvsjc")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cs4y6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk6la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrxk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg1p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2u8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv10x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdxpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b437")
+}],
+"loop": 0,
+"name": &"broken",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nyu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_priom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt3gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akpgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kumhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_100hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7odld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axtmv")
+}],
+"loop": 0,
+"name": &"heal",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu4mg")
+}],
+"loop": 0,
+"name": &"normal",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=129093540 groups=["player"]]
 collision_mask = 24
 script = ExtResource("1_1jryi")
@@ -358,73 +488,46 @@ stream = ExtResource("17_nolight")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1746974270 groups=["hub"]]
 script = ExtResource("8_lkdrv")
-heart_tex = ExtResource("14_heart")
 item_icons = Array[Texture2D]([null, ExtResource("9_p7iby"), null, null, ExtResource("10_0rnld"), null])
 item_frames = Array[SpriteFrames]([null, null, ExtResource("11_srp4u"), ExtResource("12_jfpux"), null, ExtResource("13_61ith")])
 
-[node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer" unique_id=1849080872]
-process_mode = 2
-oversampling_override = 1.0
-title = "win"
-size = Vector2i(169, 100)
-unresizable = true
-ok_button_text = "exit"
-dialog_text = "Escape successful！"
-
 [node name="Lives" type="HBoxContainer" parent="CanvasLayer" unique_id=2104809965]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 50.0
-offset_bottom = 10.0
+offset_left = 24.0
+offset_top = 144.0
+offset_right = 72.0
+offset_bottom = 152.0
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="Heart1" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809966]
-texture_filter = 1
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("14_heart")
-expand_mode = 1
-stretch_mode = 5
+[node name="Heart1" type="AnimatedSprite2D" parent="CanvasLayer/Lives" unique_id=1349970556]
+position = Vector2(-2, -2)
+sprite_frames = SubResource("SpriteFrames_cs4y6")
+animation = &"normal"
+autoplay = "normal"
 
-[node name="Heart2" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809967]
-texture_filter = 1
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("14_heart")
-expand_mode = 1
-stretch_mode = 5
+[node name="Heart2" type="AnimatedSprite2D" parent="CanvasLayer/Lives" unique_id=156902058]
+position = Vector2(6, -2)
+sprite_frames = SubResource("SpriteFrames_cs4y6")
+animation = &"normal"
+autoplay = "normal"
 
-[node name="Heart3" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809968]
-texture_filter = 1
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("14_heart")
-expand_mode = 1
-stretch_mode = 5
+[node name="Heart3" type="AnimatedSprite2D" parent="CanvasLayer/Lives" unique_id=30342294]
+position = Vector2(14, -2)
+sprite_frames = SubResource("SpriteFrames_cs4y6")
+animation = &"normal"
+autoplay = "normal"
 
-[node name="Heart4" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809969]
-visible = false
-texture_filter = 1
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("14_heart")
-expand_mode = 1
-stretch_mode = 5
+[node name="Heart4" type="AnimatedSprite2D" parent="CanvasLayer/Lives" unique_id=657002989]
+position = Vector2(22, -2)
+sprite_frames = SubResource("SpriteFrames_cs4y6")
+animation = &"normal"
+autoplay = "normal"
 
-[node name="Heart5" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809970]
-visible = false
-texture_filter = 1
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("14_heart")
-expand_mode = 1
-stretch_mode = 5
+[node name="Heart5" type="AnimatedSprite2D" parent="CanvasLayer/Lives" unique_id=791092495]
+position = Vector2(30, -2)
+sprite_frames = SubResource("SpriteFrames_cs4y6")
+animation = &"normal"
+autoplay = "normal"
 
 [node name="Floor" type="Label" parent="CanvasLayer" unique_id=891988332]
 visible = false
@@ -453,10 +556,11 @@ grow_vertical = 2
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -17.321854
-offset_bottom = 16.340675
+offset_left = -88.0
+offset_top = 72.0
+offset_right = -88.0
+offset_bottom = 72.0
 grow_horizontal = 0
-rotation = 0.0066482257
 
 [node name="gameover" type="Label" parent="CanvasLayer" unique_id=978164956]
 visible = false

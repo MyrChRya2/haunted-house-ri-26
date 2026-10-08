@@ -190,6 +190,7 @@ func take_damage() -> void:
 		is_dead = true
 		_stop_move_sfx()
 		player_dead.emit()
+		return
 	#ui用，接受这个信号改变血量
 	lives_changed.emit(lives)#广播掉血信号
 	_invincible_timer.start(invincible_seconds)

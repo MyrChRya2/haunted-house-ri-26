@@ -53,8 +53,8 @@ func try_win(player: Node) -> bool:
 	if _sfx_open and _sfx_open.stream:
 		_sfx_open.play()
 	#胜利音效
-	if _sfx_win and _sfx_win.stream:
-		_sfx_win.play()
+	#if _sfx_win and _sfx_win.stream:
+		#_sfx_win.play()
 	win.emit()
 	return true
 

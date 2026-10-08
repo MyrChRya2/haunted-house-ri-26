@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bxcknqkuibxcf"]
+
+[ext_resource type="Texture2D" uid="uid://df72lm0nbrsf3" path="res://assets/sprite/ui/Title/title_0.png" id="1_1xwrq"]
+[ext_resource type="Script" uid="uid://dxfhxdsp0xpni" path="res://scenes/levels/level/title/title.gd" id="1_m4k2k"]
+[ext_resource type="Texture2D" uid="uid://b884yuf06essg" path="res://assets/sprite/ui/Title/title_1.png" id="2_m4k2k"]
+[ext_resource type="Texture2D" uid="uid://d01c2qljemdxm" path="res://assets/sprite/ui/Title/white.png" id="3_tewwh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_injq6"]
+atlas = ExtResource("1_1xwrq")
+region = Rect2(0, 0, 192, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tchtl"]
+atlas = ExtResource("2_m4k2k")
+region = Rect2(0, 0, 192, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1abh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_injq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tchtl")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Title" type="Control" unique_id=347456886]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m4k2k")
+
+[node name="Title" type="AnimatedSprite2D" parent="." unique_id=1916533115]
+sprite_frames = SubResource("SpriteFrames_v1abh")
+centered = false
+
+[node name="WhiteShot" type="Sprite2D" parent="." unique_id=661831686]
+visible = false
+texture = ExtResource("3_tewwh")
+centered = false
+
+[node name="Timer" type="Timer" parent="." unique_id=2087999728]
+wait_time = 0.5
+one_shot = true
