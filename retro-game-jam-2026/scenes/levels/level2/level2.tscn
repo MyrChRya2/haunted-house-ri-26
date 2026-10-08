@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://cr2id2npeeocx"]
 
-[ext_resource type="PackedScene" uid="uid://cj2m0c1207r7u" path="res://assets/sprite/player/map.tscn" id="1_e0cvd"]
+[ext_resource type="PackedScene" uid="uid://cj2m0c1207r7u" path="res://scenes/levels/level2/map.tscn" id="1_e0cvd"]
 [ext_resource type="TileSet" uid="uid://cu8tceo5td13x" path="res://assets/sprite/effect/darkedge_effect.tres" id="2_cphpc"]
-[ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/Stairup.tscn" id="2_rj8cl"]
+[ext_resource type="PackedScene" uid="uid://c5fn5upd3dnj6" path="res://scenes/stairup.tscn" id="2_rj8cl"]
 [ext_resource type="TileSet" uid="uid://cv2k3bbsu1n2q" path="res://assets/sprite/tiles/walls/wall_tile_set.tres" id="3_cphpc"]
-[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/Stairdown.tscn" id="3_gblnm"]
+[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/stairdown.tscn" id="3_gblnm"]
 [ext_resource type="PackedScene" uid="uid://b73g5wdag75r0" path="res://scenes/doors/door_h.tscn" id="4_gblnm"]
 [ext_resource type="Script" uid="uid://n322h217bqkh" path="res://scenes/levels/level/map_portal.gd" id="5_expgy"]
 [ext_resource type="PackedScene" uid="uid://568uvqrdummj" path="res://item/Shild.tscn" id="8_8t4y1"]

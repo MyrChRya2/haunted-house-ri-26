@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://dbdsoqkwgd4q7"]
 
-[ext_resource type="Script" uid="uid://ddix2mf05xj8j" path="res://ui/start.gd" id="1_ufdov"]
-[ext_resource type="Texture2D" uid="uid://d1asniovo0sgi" path="res://ui/82a56431b681e1db0be88de467735b80.png" id="2_qg5q4"]
-[ext_resource type="FontFile" uid="uid://gqas1v6r84es" path="res://ui/Cairopixel.ttf" id="3_g3wcc"]
-[ext_resource type="FontFile" uid="uid://dc5dphsbsovk5" path="res://ui/bulletinV1.ttf" id="4_xgydr"]
+[ext_resource type="Script" uid="uid://ddix2mf05xj8j" path="res://ui/thanks.gd" id="1_cbs7n"]
+[ext_resource type="Texture2D" uid="uid://d1asniovo0sgi" path="res://ui/thank_bg.png" id="2_yvb8q"]
+[ext_resource type="FontFile" uid="uid://gqas1v6r84es" path="res://ui/Cairopixel.ttf" id="3_0c1co"]
+[ext_resource type="FontFile" uid="uid://dc5dphsbsovk5" path="res://ui/bulletinV1.ttf" id="4_eqh62"]
+[ext_resource type="AudioStream" uid="uid://7anxgl547023" path="res://assets/audio/victory.ogg" id="5_yvb8q"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4u2dp"]
-texture = ExtResource("2_qg5q4")
+texture = ExtResource("2_yvb8q")
 modulate_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u2dp"]
@@ -36,32 +37,6 @@ corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgydr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufdov"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.40960324, 0.40960327, 0.40960324, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3wcc"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 16
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_etp51"]
-
 [node name="Start" type="Control" unique_id=633220389]
 layout_mode = 3
 anchors_preset = 8
@@ -71,7 +46,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ufdov")
+script = ExtResource("1_cbs7n")
 
 [node name="Panel" type="Panel" parent="." unique_id=1206321284]
 layout_mode = 1
@@ -95,56 +70,52 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = -20.0
-offset_right = 44.0
-offset_bottom = 20.0
+offset_left = -40.0
+offset_top = 32.0
+offset_right = 48.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 2
+alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=343145806]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_g3wcc")
+theme_override_fonts/font = ExtResource("3_0c1co")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_4u2dp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qg5q4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_28tta")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4u2dp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xgydr")
-text = "gamestart"
-
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=655522999]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_g3wcc")
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_4u2dp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ufdov")
-theme_override_styles/hover = SubResource("StyleBoxFlat_g3wcc")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4u2dp")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_etp51")
-text = "exit"
+text = "replay"
 
 [node name="title" type="Label" parent="." unique_id=414823704]
 layout_mode = 0
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 72.0
-offset_bottom = -16.0
-theme_override_fonts/font = ExtResource("3_g3wcc")
+offset_left = -80.0
+offset_top = -88.0
+offset_right = 81.0
+offset_bottom = -40.0
+theme_override_fonts/font = ExtResource("3_0c1co")
 theme_override_font_sizes/font_size = 22
-text = "HAUNTED HOUSE"
+text = "Thanks for playing!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="guid" type="Label" parent="." unique_id=2000120761]
 layout_mode = 0
-offset_left = -200.0
+offset_left = -88.0
 offset_top = -48.0
-offset_right = 200.0
-offset_bottom = -25.0
-theme_override_fonts/font = ExtResource("4_xgydr")
-theme_override_font_sizes/font_size = 6
-text = "make flexible use of E 
-they can only find whoever is in the light."
-horizontal_alignment = 1
+offset_right = 88.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("4_eqh62")
+theme_override_font_sizes/font_size = 4
+text = "This is the first game projet to us.
+Sorry for the rough gaming experience. 
+We were try our best to do it as perfect as posible though the deadline was too strick for us. Anyway thank for your playing and thank for Retro Game Jam witch give us the opportunity to practice. Best wishes for all the player! <3"
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1106769353]
+stream = ExtResource("5_yvb8q")
+autoplay = true
