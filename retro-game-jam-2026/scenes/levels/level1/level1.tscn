@@ -99,7 +99,6 @@ position = Vector2(0, 160)
 shape = SubResource("SegmentShape2D_12ix5")
 
 [node name="Portal" type="Node2D" parent="." unique_id=1462737040]
-visible = false
 
 [node name="2" type="Area2D" parent="Portal" unique_id=2022306529]
 script = ExtResource("8_1nwpw")
@@ -143,6 +142,7 @@ position = Vector2(97, 10)
 position = Vector2(31, 10)
 
 [node name="Label" type="Label" parent="." unique_id=1496109494]
+visible = false
 offset_left = 16.0
 offset_top = -32.0
 offset_right = 56.0
