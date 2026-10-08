@@ -54,6 +54,7 @@ tile_set = ExtResource("3_pso0i")
 collision_enabled = false
 
 [node name="Label" type="Label" parent="." unique_id=985107822]
+visible = false
 offset_left = 40.0
 offset_top = -24.0
 offset_right = 80.0
@@ -61,6 +62,7 @@ offset_bottom = -1.0
 text = "7"
 
 [node name="Label2" type="Label" parent="." unique_id=203849431]
+visible = false
 offset_left = -16.0
 offset_top = 72.0
 offset_right = 24.0
@@ -68,6 +70,7 @@ offset_bottom = 95.0
 text = "2"
 
 [node name="Label3" type="Label" parent="." unique_id=1292374831]
+visible = false
 offset_left = 192.0
 offset_top = 40.0
 offset_right = 232.0
@@ -75,6 +78,7 @@ offset_bottom = 63.0
 text = "8"
 
 [node name="Label4" type="Label" parent="." unique_id=616147540]
+visible = false
 offset_left = 88.0
 offset_top = 160.0
 offset_right = 128.0

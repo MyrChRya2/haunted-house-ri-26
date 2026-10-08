@@ -55,6 +55,7 @@ tile_set = ExtResource("3_q5mbk")
 collision_enabled = false
 
 [node name="Label" type="Label" parent="." unique_id=1007043524]
+visible = false
 offset_left = 88.0
 offset_top = -24.0
 offset_right = 128.0
@@ -62,6 +63,7 @@ offset_bottom = -1.0
 text = "9"
 
 [node name="Label2" type="Label" parent="." unique_id=914187828]
+visible = false
 offset_left = -16.0
 offset_top = 40.0
 offset_right = 24.0

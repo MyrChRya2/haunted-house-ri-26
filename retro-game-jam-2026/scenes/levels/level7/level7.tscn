@@ -54,6 +54,7 @@ collision_enabled = false
 navigation_enabled = false
 
 [node name="Label" type="Label" parent="." unique_id=1361779184]
+visible = false
 offset_left = -16.0
 offset_top = 8.0
 offset_right = 24.0
@@ -61,6 +62,7 @@ offset_bottom = 31.0
 text = "6"
 
 [node name="Label2" type="Label" parent="." unique_id=1046570122]
+visible = false
 offset_left = 40.0
 offset_top = 160.0
 offset_right = 80.0
@@ -68,6 +70,7 @@ offset_bottom = 183.0
 text = "4"
 
 [node name="Label3" type="Label" parent="." unique_id=518870348]
+visible = false
 offset_left = 88.0
 offset_top = 160.0
 offset_right = 128.0
