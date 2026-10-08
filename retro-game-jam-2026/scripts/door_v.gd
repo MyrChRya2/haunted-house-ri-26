@@ -4,6 +4,7 @@ extends StaticBody2D
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _detect: Area2D = $UnlockArea
 @onready var navigation_obstacle_2d: NavigationObstacle2D = $NavigationObstacle2D
+@onready var _sfx_open: AudioStreamPlayer = $open
 
 #门的状态
 var is_open: bool = false
@@ -40,6 +41,8 @@ func _open() -> void:
 	is_open = true
 	_collision.set_deferred("disabled", true)
 	_sprite.play(&"openanima")
+	if _sfx_open and _sfx_open.stream:
+		_sfx_open.play()
 	_sync_nav_obstacle()
 
 #播放动画

@@ -13,6 +13,9 @@ signal item_taken(kind: HeldItem)
 signal invincible_apply
 #放下权杖退出无敌
 signal invincible_exit
+#两片合成 pieces、三片合成 weng
+signal pieces_crafted
+signal weng_crafted
 var wait_leave := false
 #空手
 var held: HeldItem = HeldItem.NONE
@@ -50,12 +53,14 @@ func try_pickup(kind: HeldItem) -> bool:
 			var old_pair := held
 			held = HeldItem.PIECES
 			held_changed.emit(old_pair, held)
+			pieces_crafted.emit()
 			return true
 		if (held == HeldItem.PIECES and _is_single_piece(kind)) or (_is_single_piece(held) and kind == HeldItem.PIECES):
 			var old_tri := held
 			held = HeldItem.WENG
 			held_changed.emit(old_tri, held)
 			item_taken.emit(held)
+			weng_crafted.emit()
 			return true
 		if held == HeldItem.WENG:
 			return false

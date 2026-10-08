@@ -5,6 +5,7 @@ class_name victorydoor
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 @onready var _detect: Area2D = $Area2D
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _sfx_open: AudioStreamPlayer = $open
 
 #信号发给玩家冻结操作，发给label显示youwin
 signal win
@@ -47,6 +48,8 @@ func try_win(player: Node) -> bool:
 	is_win = true
 	_collision.set_deferred("disabled", true)
 	_sprite.play(&"openanima")
+	if _sfx_open and _sfx_open.stream:
+		_sfx_open.play()
 	win.emit()
 	return true
 

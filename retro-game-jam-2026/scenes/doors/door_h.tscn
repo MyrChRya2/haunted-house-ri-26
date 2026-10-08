@@ -104,3 +104,5 @@ vertices = PackedVector2Array(-10, 2, 10, 2, 10, -2, -10, -2)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 
+[node name="open" type="AudioStreamPlayer" parent="." unique_id=1717677921]
+

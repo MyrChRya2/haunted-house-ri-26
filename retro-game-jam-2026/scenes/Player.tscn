@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co6ves24y5ps5" path="res://scripts/player.gd" id="1_1jryi"]
 [ext_resource type="Script" uid="uid://cu57kijimw77u" path="res://item/held_item.gd" id="1_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://d2xpjfoy5g0y8" path="res://assets/sprite/effect/shild_effect.png" id="3_p7iby"]
 [ext_resource type="Script" uid="uid://dkg84ssqqppf3" path="res://scripts/match_light.gd" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://wd45o86e1ltc" path="res://assets/sprite/player/player.png" id="4_cw2d6"]
 [ext_resource type="Shader" uid="uid://ytnkc8x28uju" path="res://shaders/vision_mask.gdshader" id="4_vmask"]
@@ -20,9 +21,186 @@
 [ext_resource type="Texture2D" uid="uid://rdp606h57td4" path="res://assets/sprite/effect/filters/filter_6.png" id="12_gv3ic"]
 [ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="12_jfpux"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="13_61ith"]
+[ext_resource type="Texture2D" uid="uid://y2qsk0iwe2k2" path="res://assets/sprite/ui/life.png" id="14_heart"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srp4u"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfpux"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(15, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61ith"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(30, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebwui"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(45, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfy4j"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(60, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv3ic"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(75, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8lor"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(90, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e537"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(105, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p07f3"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(0, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viqgg"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(15, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgkxt"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(30, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsi7p"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(45, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jpwa"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(60, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfeki"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(75, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axnmu"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(90, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvsjc"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(105, 15, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxdpb"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(0, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agngo"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(15, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrixf"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(30, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmt83"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(45, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4as6"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(60, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1r6t"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(75, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0asu"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(90, 30, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq1a3"]
+atlas = ExtResource("3_p7iby")
+region = Rect2(105, 30, 15, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qg826"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srp4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfpux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61ith")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebwui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfy4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv3ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8lor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e537")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p07f3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viqgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgkxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsi7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jpwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfeki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axnmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvsjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxdpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agngo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrixf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmt83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4as6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1r6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0asu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq1a3")
+}],
+"loop": 1,
+"name": &"shild",
+"speed": 10.0
+}]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b50ct"]
 light_mode = 1
@@ -96,15 +274,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_lkdrv"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkdrv"]
-gradient = SubResource("Gradient_lkdrv")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmask"]
 shader = ExtResource("4_vmask")
 shader_parameter/hframes = 1
@@ -115,7 +284,6 @@ shader_parameter/rect_size = Vector2(2048, 2048)
 [node name="Player" type="CharacterBody2D" unique_id=129093540 groups=["player"]]
 collision_mask = 24
 script = ExtResource("1_1jryi")
-lives = 6
 
 [node name="Timer" type="Timer" parent="." unique_id=311276830]
 one_shot = true
@@ -128,11 +296,24 @@ shape = SubResource("CircleShape2D_4u2dp")
 [node name="Inventory" type="Node" parent="." unique_id=273272589]
 script = ExtResource("1_mdl7e")
 
+[node name="Shild" type="AnimatedSprite2D" parent="." unique_id=1058688419]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qg826")
+animation = &"shild"
+autoplay = "shild"
+frame_progress = 0.95089716
+
 [node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=250736260]
 material = SubResource("CanvasItemMaterial_b50ct")
 sprite_frames = SubResource("SpriteFrames_4u2dp")
 animation = &"normal_right"
 autoplay = "normal_right"
+
+[node name="walk" type="AudioStreamPlayer" parent="." unique_id=250736261]
+
+[node name="hit" type="AudioStreamPlayer" parent="." unique_id=250736262]
+
+[node name="wall" type="AudioStreamPlayer" parent="." unique_id=250736263]
 
 [node name="MatchLight" type="Node2D" parent="." unique_id=802325956]
 show_behind_parent = true
@@ -140,16 +321,12 @@ script = ExtResource("3_qu4a1")
 mask_sheet = ExtResource("6_mask")
 light_frames = Array[Texture2D]([ExtResource("6_61ith"), ExtResource("7_ebwui"), ExtResource("8_sfy4j"), ExtResource("9_gv3ic"), ExtResource("10_b8lor"), ExtResource("11_sfy4j"), ExtResource("12_gv3ic")])
 
-[node name="Light" type="PointLight2D" parent="MatchLight" unique_id=761431707]
-enabled = false
-range_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_lkdrv")
-
 [node name="IgniteFlash" type="Sprite2D" parent="MatchLight" unique_id=1151982448]
 modulate = Color(1.4, 1.25, 0.9, 1)
 texture = ExtResource("5_cw2d6")
 
 [node name="VisionMask" type="ColorRect" parent="MatchLight" unique_id=1214880723]
+visible = false
 z_index = 30
 z_as_relative = false
 material = SubResource("ShaderMaterial_vmask")
@@ -164,17 +341,76 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1746974270 groups=["hub"]]
 script = ExtResource("8_lkdrv")
+heart_tex = ExtResource("14_heart")
 item_icons = Array[Texture2D]([null, ExtResource("9_p7iby"), null, null, ExtResource("10_0rnld"), null])
 item_frames = Array[SpriteFrames]([null, null, ExtResource("11_srp4u"), ExtResource("12_jfpux"), null, ExtResource("13_61ith")])
 
-[node name="Lives" type="Label" parent="CanvasLayer" unique_id=2104809965]
-light_mask = 0
-visibility_layer = 1023
-offset_right = 36.0
-offset_bottom = 23.0
-size_flags_horizontal = 2
+[node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer" unique_id=1849080872]
+process_mode = 2
+oversampling_override = 1.0
+title = "win"
+size = Vector2i(200, 100)
+unresizable = true
+ok_button_text = "exit"
+dialog_text = "Escape successful！"
+
+[node name="Lives" type="HBoxContainer" parent="CanvasLayer" unique_id=2104809965]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 50.0
+offset_bottom = 10.0
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Heart1" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809966]
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809967]
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809968]
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart4" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809969]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart5" type="TextureRect" parent="CanvasLayer/Lives" unique_id=2104809970]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_heart")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Floor" type="Label" parent="CanvasLayer" unique_id=891988332]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -184,6 +420,7 @@ offset_bottom = 11.5
 grow_vertical = 2
 
 [node name="Item" type="Label" parent="CanvasLayer" unique_id=593783033]
+visible = false
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -196,19 +433,17 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="ItemIcon" type="TextureRect" parent="CanvasLayer" unique_id=1928790074]
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -29.667297
 offset_top = -11.408119
-offset_bottom = 11.408119
-grow_horizontal = 0
+offset_right = 17.32185
+offset_bottom = -0.0002593994
 grow_vertical = 2
 rotation = 0.0066482257
 
 [node name="gameover" type="Label" parent="CanvasLayer" unique_id=978164956]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -223,6 +458,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="winthegame" type="Label" parent="CanvasLayer" unique_id=284676861]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -236,11 +472,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="match" type="Label" parent="CanvasLayer" unique_id=1008497429]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
+offset_left = -192.0
+offset_top = 31.0
+offset_right = -152.0
+offset_bottom = 54.0
 grow_horizontal = 0
 metadata/_edit_use_anchors_ = true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ek70qf6d5u7s"
-path="res://.godot/imported/deepnight_dungeon_tileset_cc0.png-2f1095ac3d9bb0555cd820abc7434b8b.ctex"
+uid="uid://bnjr84wc8j777"
+path="res://.godot/imported/wipe_sheet.png-51e2b1ddb7759606d60b56b39104c590.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/stairs/deepnight_dungeon_tileset_cc0.png"
-dest_files=["res://.godot/imported/deepnight_dungeon_tileset_cc0.png-2f1095ac3d9bb0555cd820abc7434b8b.ctex"]
+source_file="res://assets/sprite/effect/wipe_sheet.png"
+dest_files=["res://.godot/imported/wipe_sheet.png-51e2b1ddb7759606d60b56b39104c590.ctex"]
 
 [params]
 
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
