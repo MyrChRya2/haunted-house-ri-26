@@ -76,11 +76,16 @@ animations = [{
 "loop": 1,
 "name": &"normal_right",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"reset",
+"speed": 5.0
 }]
 
 [node name="Ghost" type="CharacterBody2D" unique_id=1951286666 groups=["monster", "monsters"]]
 collision_layer = 0
-collision_mask = 25
+collision_mask = 0
 script = ExtResource("1_rcv15")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=18646193]
@@ -95,8 +100,8 @@ shape = SubResource("CircleShape2D_qg826")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=312283716]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 4.0
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=895573481]
+path_desired_distance = 6.0
 target_desired_distance = 10.0
 avoidance_enabled = false
 
@@ -105,3 +110,5 @@ scale = Vector2(0.5625, 0.5)
 sprite_frames = SubResource("SpriteFrames_4u2dp")
 animation = &"normal_left"
 autoplay = "normal_left"
+
+[node name="wind" type="AudioStreamPlayer" parent="." unique_id=371879516]

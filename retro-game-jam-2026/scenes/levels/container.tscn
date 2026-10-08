@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://brug7l53n12yb" path="res://scenes/levels/level10/level10.tscn" id="11_ayqxu"]
 [ext_resource type="PackedScene" uid="uid://dd1332vaidldb" path="res://scenes/Player.tscn" id="12_dwpxo"]
 [ext_resource type="PackedScene" uid="uid://80dfunghwf5c" path="res://scenes/levels/level/scene_wipe.tscn" id="13_wipe"]
+[ext_resource type="Script" path="res://scenes/levels/level/debug_camera.gd" id="14_dbgcam"]
 
 [node name="Container" type="Node2D" unique_id=2024069335]
 y_sort_enabled = true
@@ -56,3 +57,7 @@ position = Vector2(80, 79)
 platform_floor_layers = 4294967041
 
 [node name="SceneWipe" parent="." unique_id=1261495484 instance=ExtResource("13_wipe")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+script = ExtResource("14_dbgcam")

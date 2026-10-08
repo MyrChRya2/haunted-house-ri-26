@@ -76,11 +76,16 @@ animations = [{
 "loop": 1,
 "name": &"normal_right",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"reset",
+"speed": 5.0
 }]
 
 [node name="Tarantula" type="CharacterBody2D" unique_id=1741896096 groups=["monster", "monsters"]]
 collision_layer = 0
-collision_mask = 25
+collision_mask = 24
 script = ExtResource("1_pltir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=852571815]
@@ -96,7 +101,7 @@ shape = SubResource("CircleShape2D_4u2dp")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=405583006]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 4.0
+path_desired_distance = 6.0
 target_desired_distance = 10.0
 avoidance_enabled = false
 
@@ -106,3 +111,5 @@ scale = Vector2(0.8125, 0.75)
 sprite_frames = SubResource("SpriteFrames_4u2dp")
 animation = &"normal_right"
 autoplay = "normal_right"
+
+[node name="wind" type="AudioStreamPlayer" parent="." unique_id=1976096511]

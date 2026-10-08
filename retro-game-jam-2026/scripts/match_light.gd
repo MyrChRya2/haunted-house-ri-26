@@ -1,6 +1,7 @@
 extends Node2D
 # 火柴：IgniteFlash 火花闪一下 + VisionMask 乘算遮罩（序列帧贴图挖洞），不叠 PointLight
 # 点火：正序播一遍并停在最后一帧；燃烧：保持最后一帧；熄灭：倒序播回第 1 帧后全黑
+# 主动熄灭：燃烧中再按 E（light_match），走和燃尽相同的倒序，不另耗火柴；怪在倒序时就不追了
 
 const MASK_SIZE := Vector2(2048, 2048)
 
@@ -11,7 +12,7 @@ enum Phase { DARK, FLASH, IGNITING, BURNING, FADING }
 @onready var _ignite_flash: Sprite2D = $IgniteFlash
 @onready var _vision_mask: ColorRect = $VisionMask
 
-@export var burn_seconds: float = 15.0
+@export var burn_seconds: float = 20.0
 #光圈半径（像素），一格序列帧铺满这个直径
 @export var full_radius: float = 63.5
 #火把持续时间
@@ -83,7 +84,12 @@ func _process(delta: float) -> void:
 			_set_frame(last - steps)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("light_match"):
+	if not event.is_action_pressed("light_match"):
+		return
+	#E：灭着点火，烧着掐灭
+	if _phase == Phase.BURNING:
+		try_snuff()
+	else:
 		try_light()
 
 func try_light() -> void:
@@ -101,6 +107,14 @@ func try_light() -> void:
 	_reset_frames()
 	_set_radius(full_radius)
 	_phase = Phase.IGNITING
+
+#主动掐灭：只有烧着才能按，倒放期间要等播完才能再点 E
+func try_snuff() -> void:
+	if _phase != Phase.BURNING:
+		return
+	_burn_timer.stop()
+	#和计时燃尽走同一段倒序
+	_on_burn_timer_timeout()
 
 func extinguish(reason: StringName) -> void:
 	_busy = false

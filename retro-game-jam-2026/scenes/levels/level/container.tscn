@@ -17,7 +17,6 @@
 [node name="Container" type="Node2D" unique_id=2024069335]
 y_sort_enabled = true
 script = ExtResource("1_042s0")
-start_spawn = "SpwanPoint"
 
 [node name="Levels" type="Node2D" parent="." unique_id=1041673346]
 
@@ -51,6 +50,7 @@ position = Vector2(0, 576)
 position = Vector2(320, 576)
 
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
-position = Vector2(72, 105)
+position = Vector2(680, 114.00003)
+rotation = -0.0031163492
 
 [node name="SceneWipe" parent="." unique_id=189239467 instance=ExtResource("13_wipe")]

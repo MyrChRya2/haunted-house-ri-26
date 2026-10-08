@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bt6tepca4yhm7" path="res://assets/sprite/mobs/vampire.png" id="2_yiyhq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
-radius = 6.0
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84uh6"]
 atlas = ExtResource("2_yiyhq")
@@ -76,11 +76,16 @@ animations = [{
 "loop": 1,
 "name": &"normal_right",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"reset",
+"speed": 5.0
 }]
 
 [node name="Vampire" type="CharacterBody2D" unique_id=717006068 groups=["monster", "monsters"]]
 collision_layer = 0
-collision_mask = 25
+collision_mask = 24
 script = ExtResource("1_ht4rs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=895274073]
@@ -96,11 +101,13 @@ shape = SubResource("CircleShape2D_4u2dp")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1629253415]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1953644265]
-path_desired_distance = 4.0
+path_desired_distance = 6.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091788441]
-position = Vector2(-1.1920929e-07, 0)
-scale = Vector2(0.8125, 0.6875)
+position = Vector2(0, -3.5527137e-15)
+scale = Vector2(0.71875, 0.59375)
 sprite_frames = SubResource("SpriteFrames_4u2dp")
-animation = &"normal_left"
+animation = &"reset"
 autoplay = "normal_left"
+
+[node name="wind" type="AudioStreamPlayer" parent="." unique_id=1900560656]
