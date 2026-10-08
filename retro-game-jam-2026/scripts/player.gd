@@ -1,13 +1,10 @@
 extends CharacterBody2D
 class_name player
 
-
-
 @onready var _invincible_timer: Timer = $Timer
+@export var move_speed: float = 80.0
 
-@export var move_speed: float = 120.0
-
-#道具功能，玩家转发到Inventory,修改文件名和路径记得改
+#道具功能，玩家转发到Inventory
 @onready var _inventory: HeldItemInventory = $Inventory
 const KEY_SCENE := preload("res://item/key.tscn")
 const SHILD_SCENE := preload("res://item/Shild.tscn")
@@ -18,8 +15,11 @@ const PIECEL_SCENE := preload("res://item/piece_l.tscn")
 const PIECER_SCENE := preload("res://item/piece_r.tscn")
 #无敌时间
 @export var invincible_seconds : float = 3.0
+#受击无敌闪烁间隔
+@export var hit_blink_interval: float = 0.1
 #无敌剩余时间
 var _invincible_left: float = 0.0
+var _blink_t: float = 0.0
 #无敌状态
 var is_invincible : bool = false
 #权杖无敌
@@ -46,6 +46,7 @@ const FLOOR_MAX := 4
 #游戏胜利
 var is_win = false
 #动画节点
+@onready var _shild: AnimatedSprite2D = $Shild
 @onready var body_sprite: AnimatedSprite2D = $BodySprite
 #动画名前缀
 const NORMAL_ANIMATION_PREFIX := &"normal"
@@ -63,23 +64,28 @@ func _ready() -> void:
 #权杖无敌信号
 	_inventory.invincible_apply.connect(scepter_invincible_apply)
 	_inventory.invincible_exit.connect(scepter_invincible_exit)
-	#加组
+#加组
 	add_to_group("player")
 	_udpdate_animation()
-	#火光烧满时重新判定脚下道具
+#火光烧完重新点亮时重新判定脚下道具
 	if _match_light and _match_light.has_signal("burn_started"):
 		_match_light.burn_started.connect(_recheck_pickups)
+#受击闪烁
+func _process(delta: float) -> void:
+	if is_invincible and not is_dead:
+		_blink_t += delta
+		if _blink_t >= hit_blink_interval:
+			_blink_t = 0.0
+			body_sprite.visible = not body_sprite.visible
+	else:
+		_stop_hit_blink()
 
 #八向移动
 func _physics_process(delta: float) -> void:
-	#生命归零冻结操作
-	if is_dead == true:
-		return
-	#游戏胜利冻结操作
-	if is_win == true:
-		return
-	#受击后无敌时间内不可移动
-	if is_invincible == true:
+	#生命归零 / 胜利 / 受击无敌：站住，但仍要 move_and_slide 把碰撞结算掉
+	if is_dead or is_win or is_invincible:
+		velocity = Vector2.ZERO
+		move_and_slide()
 		return
 	var move_input := Input.get_vector("move_left","move_right","move_up","move_down")
 	velocity = move_speed* move_input
@@ -108,6 +114,15 @@ func _vector_to_facing_suffix (direction: Vector2) -> StringName:
 		
 	return &"down" if direction.y > 0.0 else &"up"
 
+func shild():
+	if scepter_invincible == true:
+		_shild.visible = true
+	if scepter_invincible == false:
+		_shild.visible = false
+	pass
+
+
+
 #改变状态
 func win():
 	is_win = true
@@ -123,6 +138,8 @@ func take_damage() -> void:
 		return
 	is_invincible = true
 	_invincible_left = invincible_seconds
+	_blink_t = 0.0
+	body_sprite.visible = false
 	lives -= 1
 	#死亡
 	if lives <= 0:
@@ -135,7 +152,13 @@ func take_damage() -> void:
 #退出无敌
 func invincible_out() -> void:
 	is_invincible = false
+	_stop_hit_blink()
 	monsters_redeploy.emit()
+
+func _stop_hit_blink() -> void:
+	_blink_t = 0.0
+	if body_sprite and not body_sprite.visible:
+		body_sprite.visible = true
 #无敌时间归0
 func _on_invincible_seconds () -> void:
 	invincible_out()
@@ -187,7 +210,7 @@ func _drop_scene_of(kind: HeldItemInventory.HeldItem) -> PackedScene:
 			return null
 
 
-#丢下物品，交给floor，让floor记录，进行加载和清除
+#丢下物品
 func _on_item_dropped(kind: HeldItemInventory.HeldItem, _count: int) -> void:
 	var packed := _drop_scene_of(kind)
 	if packed == null:

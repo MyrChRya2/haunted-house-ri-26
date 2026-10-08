@@ -6,6 +6,7 @@ extends Node2D
 
 var _current: Node2D
 var _cool: float = 0.0
+var _wiping: bool = false
 
 func _ready() -> void:
 	if get_node_or_null("Levels") == null:
@@ -20,18 +21,31 @@ func _process(delta: float) -> void:
 		_cool -= delta
 
 func travel_to(level_name: String, spawn_id: String) -> void:
-	if _cool > 0.0:
+	if _wiping or _cool > 0.0:
 		return
 	var player := get_tree().get_first_node_in_group("player")
 	if player == null:
 		return
+	#进门那一帧的移动方向，用来转蒙版
+	var move: Vector2 = player.velocity
+	_wiping = true
+	player.set_physics_process(false)
+	player.velocity = Vector2.ZERO
+	var wipe := get_node_or_null("SceneWipe")
+	if wipe and wipe.has_method("play_cover"):
+		await wipe.play_cover(move)
 	_travel(level_name, spawn_id, player, false)
+	if wipe and wipe.has_method("play_reveal"):
+		await wipe.play_reveal(move)
+	player.set_physics_process(true)
 	_cool = travel_cooldown
+	_wiping = false
 
 func _levels() -> Node2D:
 	return get_node_or_null("Levels") as Node2D
 
-# Marker 若夹在普通 Node 下面，自带的 global_position 不会带上所在层在容器里的偏移
+#Marker若夹在普通Node下面，自带的global_position不会带上所在层在容器里的偏移
+#必须使用node2d
 func _world_pos(node: Node2D) -> Vector2:
 	var xform := Transform2D.IDENTITY
 	var n: Node = node
@@ -50,7 +64,7 @@ func _travel(level_name: String, spawn_id: String, player: Node2D, is_boot: bool
 	if target == null:
 		push_warning("Run: 找不到层 %s" % level_name)
 		return
-	# 方案 A：层已错开摆放，全部保持可见，走过去就能进邻图。
+	#打开其他地图的可视
 	for child in levels.get_children():
 		child.visible = true
 	_current = target

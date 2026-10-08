@@ -1,5 +1,5 @@
 extends CharacterBody2D
-#幽灵自己的 AI：穿墙直线飞，不走导航网格
+#幽灵：穿墙直线飞，不走导航网格
 
 enum State { WANDER, GO_EXIT, CHASE, FLEE, VANISH }
 
@@ -186,7 +186,9 @@ func _random_nav_point() -> Vector2:
 	return global_position + Vector2(randf_range(-32.0, 32.0), randf_range(-32.0, 32.0))
 
 func _flee_point() -> Vector2:
-	var away := global_position - _player.global_position
+	if _player == null:
+		return global_position
+	var away: Vector2 = global_position - (_player as Node2D).global_position
 	if away.length_squared() < 4.0:
 		away = Vector2.RIGHT.rotated(randf() * TAU)
 	return global_position + away.normalized() * 80.0
@@ -207,8 +209,12 @@ func _move_along_path() -> void:
 	velocity = dir * speed
 	move_and_slide()
 
+#动画
 func _update_facing() -> void:
-	if body_sprite == null or velocity.x == 0.0:
+	if body_sprite == null:
+		return
+	# 上下为主或几乎静止：沿用上一套左右动画
+	if absf(velocity.x) < absf(velocity.y) or absf(velocity.x) < 0.01:
 		return
 	var anim := &"normal_right" if velocity.x > 0.0 else &"normal_left"
 	if body_sprite.sprite_frames and body_sprite.sprite_frames.has_animation(anim):
