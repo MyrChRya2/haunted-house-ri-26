@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://dbdsoqkwgd4q7"]
 
-[ext_resource type="Texture2D" uid="uid://bahqldik6q2j6" path="res://ui/8c797bfa0d730cdeb475f61a3d1f7cbc.jpg" id="1_28tta"]
-[ext_resource type="FontFile" uid="uid://c2ryymtte231c" path="res://ui/WritePix16.ttf" id="1_sfp55"]
 [ext_resource type="Script" uid="uid://ddix2mf05xj8j" path="res://ui/start.gd" id="1_ufdov"]
+[ext_resource type="Texture2D" uid="uid://d1asniovo0sgi" path="res://ui/82a56431b681e1db0be88de467735b80.png" id="2_qg5q4"]
+[ext_resource type="FontFile" uid="uid://gqas1v6r84es" path="res://ui/Cairopixel.ttf" id="3_g3wcc"]
+[ext_resource type="FontFile" uid="uid://dc5dphsbsovk5" path="res://ui/bulletinV1.ttf" id="4_xgydr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4u2dp"]
-texture = ExtResource("1_28tta")
+texture = ExtResource("2_qg5q4")
 modulate_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u2dp"]
@@ -73,11 +74,18 @@ grow_vertical = 2
 script = ExtResource("1_ufdov")
 
 [node name="Panel" type="Panel" parent="." unique_id=1206321284]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -96.0
 offset_top = -80.0
 offset_right = 96.0
 offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4u2dp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1089326669]
@@ -88,8 +96,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -44.0
+offset_top = -20.0
 offset_right = 44.0
-offset_bottom = 40.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 2
@@ -97,7 +106,7 @@ theme_override_constants/separation = 2
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=343145806]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_sfp55")
+theme_override_fonts/font = ExtResource("3_g3wcc")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_4u2dp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qg5q4")
@@ -109,7 +118,7 @@ text = "gamestart"
 [node name="Button2" type="Button" parent="VBoxContainer" unique_id=655522999]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_sfp55")
+theme_override_fonts/font = ExtResource("3_g3wcc")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_4u2dp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ufdov")
@@ -117,3 +126,25 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_g3wcc")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4u2dp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_etp51")
 text = "exit"
+
+[node name="title" type="Label" parent="." unique_id=414823704]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = -16.0
+theme_override_fonts/font = ExtResource("3_g3wcc")
+theme_override_font_sizes/font_size = 22
+text = "HAUNTED HOUSE"
+
+[node name="guid" type="Label" parent="." unique_id=2000120761]
+layout_mode = 0
+offset_left = -200.0
+offset_top = -48.0
+offset_right = 200.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("4_xgydr")
+theme_override_font_sizes/font_size = 6
+text = "make flexible use of E 
+they just can find who  in light"
+horizontal_alignment = 1

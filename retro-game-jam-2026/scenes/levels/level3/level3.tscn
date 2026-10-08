@@ -157,7 +157,7 @@ position = Vector2(183, 48)
 position = Vector2(12, 114)
 
 [node name="2-33" type="Marker2D" parent="PortalLocate" unique_id=1551809428]
-position = Vector2(-71, 122)
+position = Vector2(182, 113)
 
 [node name="portal" type="Node2D" parent="." unique_id=52793873]
 
@@ -214,7 +214,7 @@ shape = SubResource("RectangleShape2D_ohtdt")
 position = Vector2(83, 48)
 
 [node name="Stairup" parent="." unique_id=1145574436 instance=ExtResource("8_hjakd")]
-position = Vector2(-71, 141)
-rotation = 1.5707964
+position = Vector2(189, 113)
+rotation = -1.5707964
 target_level = "Level2"
 spawn_id = "3-23"

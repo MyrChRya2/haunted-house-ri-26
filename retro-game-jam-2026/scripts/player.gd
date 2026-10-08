@@ -89,6 +89,9 @@ func _ready() -> void:
 		_match_light.burn_started.connect(_recheck_pickups)
 #受击闪烁
 func _process(delta: float) -> void:
+	#传送时物理帧被关掉，走路音效要在这里收尾
+	if not is_physics_processing():
+		_stop_move_sfx()
 	if is_invincible and not is_dead:
 		_blink_t += delta
 		if _blink_t >= hit_blink_interval:

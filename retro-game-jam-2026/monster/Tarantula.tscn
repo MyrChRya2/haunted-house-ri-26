@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vtp5nlm564pq" path="res://monster/tarantula.gd" id="1_pltir"]
 [ext_resource type="Texture2D" uid="uid://c8ov1ebpsqjxs" path="res://assets/sprite/mobs/spider.png" id="2_pltir"]
+[ext_resource type="AudioStream" uid="uid://d1ujyrmippbsx" path="res://assets/audio/chasing.ogg" id="3_el4oe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
 radius = 4.0
@@ -100,10 +101,8 @@ shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=405583006]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1604082819]
 path_desired_distance = 6.0
-target_desired_distance = 10.0
-avoidance_enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1976096510]
 position = Vector2(-1.1920929e-07, 0)
@@ -113,3 +112,4 @@ animation = &"normal_right"
 autoplay = "normal_right"
 
 [node name="wind" type="AudioStreamPlayer" parent="." unique_id=1976096511]
+stream = ExtResource("3_el4oe")

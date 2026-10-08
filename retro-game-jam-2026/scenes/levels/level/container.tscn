@@ -50,7 +50,7 @@ position = Vector2(0, 576)
 position = Vector2(320, 576)
 
 [node name="Player" parent="." unique_id=129093540 instance=ExtResource("12_syc5e")]
-position = Vector2(680, 114.00003)
+position = Vector2(70, 128)
 rotation = -0.0031163492
 
 [node name="SceneWipe" parent="." unique_id=189239467 instance=ExtResource("13_wipe")]

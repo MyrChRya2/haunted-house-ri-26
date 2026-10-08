@@ -148,16 +148,17 @@ offset_right = 56.0
 offset_bottom = -9.0
 text = "6"
 
-[node name="Label2" type="Label" parent="." unique_id=1532792914]
-offset_left = 88.0
-offset_top = -32.0
-offset_right = 128.0
-offset_bottom = -9.0
+[node name="Label2" type="Label" parent="Label" unique_id=1532792914]
+layout_mode = 0
+offset_left = 72.0
+offset_right = 112.0
+offset_bottom = 23.0
 text = "5"
 
-[node name="Label3" type="Label" parent="." unique_id=1647806665]
-offset_left = 208.0
-offset_top = 88.0
-offset_right = 248.0
-offset_bottom = 111.0
+[node name="Label3" type="Label" parent="Label" unique_id=1647806665]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 120.0
+offset_right = 232.0
+offset_bottom = 143.0
 text = "2"

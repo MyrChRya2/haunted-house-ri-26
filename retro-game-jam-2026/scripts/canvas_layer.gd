@@ -180,4 +180,4 @@ func _process(delta: float) -> void:
 	item_icon.texture = _anim_frames.get_frame_texture(item_anim, _anim_index)
 #火把使用数显示
 func match_used_count(matches_used):
-	matchuse.text = "match: %d" % matches_used
+	matchuse.text = "%d" % matches_used

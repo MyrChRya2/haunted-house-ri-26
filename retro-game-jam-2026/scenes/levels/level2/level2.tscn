@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/Stairdown.tscn" id="3_gblnm"]
 [ext_resource type="PackedScene" uid="uid://b73g5wdag75r0" path="res://scenes/doors/door_h.tscn" id="4_gblnm"]
 [ext_resource type="Script" uid="uid://n322h217bqkh" path="res://scenes/levels/level/map_portal.gd" id="5_expgy"]
+[ext_resource type="PackedScene" uid="uid://568uvqrdummj" path="res://item/Shild.tscn" id="8_8t4y1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cphpc"]
 size = Vector2(173, 95)
@@ -59,33 +60,44 @@ collision_enabled = false
 [node name="DoorH" parent="." unique_id=949085396 instance=ExtResource("4_gblnm")]
 position = Vector2(48, 65)
 
-[node name="Label" type="Label" parent="." unique_id=695776476]
-offset_left = 24.0
-offset_top = -24.0
-offset_right = 64.0
-offset_bottom = -1.0
-text = "3"
-
-[node name="Label2" type="Label" parent="." unique_id=1505056226]
-offset_left = 152.0
-offset_top = -24.0
-offset_right = 192.0
-offset_bottom = -1.0
-text = "3"
-
-[node name="Label3" type="Label" parent="." unique_id=964423121]
-offset_left = 192.0
-offset_top = 72.0
-offset_right = 232.0
-offset_bottom = 95.0
-text = "4"
-
 [node name="Label4" type="Label" parent="." unique_id=851054868]
 offset_left = -16.0
 offset_top = 80.0
 offset_right = 24.0
 offset_bottom = 103.0
 text = "1"
+
+[node name="Label5" type="Label" parent="Label4" unique_id=2113074304]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 90.0
+offset_right = 80.0
+offset_bottom = 113.0
+text = "3"
+
+[node name="Label3" type="Label" parent="Label4" unique_id=964423121]
+layout_mode = 0
+offset_left = 208.0
+offset_top = -8.0
+offset_right = 248.0
+offset_bottom = 15.0
+text = "4"
+
+[node name="Label2" type="Label" parent="Label4" unique_id=1505056226]
+layout_mode = 0
+offset_left = 168.0
+offset_top = -104.0
+offset_right = 208.0
+offset_bottom = -81.0
+text = "3"
+
+[node name="Label" type="Label" parent="Label4" unique_id=695776476]
+layout_mode = 0
+offset_left = 40.0
+offset_top = -104.0
+offset_right = 80.0
+offset_bottom = -81.0
+text = "3"
 
 [node name="spawn_zone" type="Area2D" parent="." unique_id=347179154 groups=["spawn_zone"]]
 visible = false
@@ -134,7 +146,7 @@ position = Vector2(32, 12)
 position = Vector2(160, 12)
 
 [node name="3-23" type="Marker2D" parent="PortalLocate" unique_id=1189132945]
-position = Vector2(32, 153)
+position = Vector2(145, 150)
 
 [node name="4-21" type="Marker2D" parent="PortalLocate" unique_id=1422835718]
 position = Vector2(184, 80)
@@ -151,7 +163,7 @@ position = Vector2(0.5, 95)
 shape = SubResource("RectangleShape2D_8t4y1")
 
 [node name="StairDown" parent="portal" unique_id=2147323999 instance=ExtResource("3_gblnm")]
-position = Vector2(32, 160)
+position = Vector2(145, 160)
 rotation = 3.1415927
 target_level = "Level3"
 spawn_id = "2-33"
@@ -177,9 +189,5 @@ spawn_id = "2-41"
 position = Vector2(192, 80)
 shape = SubResource("RectangleShape2D_8t4y1")
 
-[node name="Label5" type="Label" parent="." unique_id=2113074304]
-offset_left = 24.0
-offset_top = 170.0
-offset_right = 64.0
-offset_bottom = 193.0
-text = "3"
+[node name="Scepter" parent="." unique_id=151734560 instance=ExtResource("8_8t4y1")]
+position = Vector2(61, 47)

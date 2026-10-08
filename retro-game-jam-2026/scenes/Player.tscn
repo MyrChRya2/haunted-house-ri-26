@@ -8,8 +8,10 @@
 [ext_resource type="Shader" uid="uid://ytnkc8x28uju" path="res://shaders/vision_mask.gdshader" id="4_vmask"]
 [ext_resource type="Texture2D" uid="uid://mt10cuh6i5cx" path="res://assets/sprite/player/light_spark.png" id="5_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://c7x4xujvsp4bl" path="res://assets/sprite/effect/filters/filter_0.png" id="6_61ith"]
+[ext_resource type="AudioStream" uid="uid://b21ikpipk011f" path="res://assets/audio/damege.ogg" id="6_fgkxt"]
 [ext_resource type="Texture2D" uid="uid://cmceen1m0tck1" path="res://assets/sprite/effect/filter.png" id="6_mask"]
 [ext_resource type="Texture2D" uid="uid://djb5es8msocl6" path="res://assets/sprite/effect/filters/filter_1.png" id="7_ebwui"]
+[ext_resource type="AudioStream" uid="uid://byii3qaolyw8n" path="res://assets/audio/knock_wall.ogg" id="7_xsi7p"]
 [ext_resource type="Script" uid="uid://chm0hnlyrsyb1" path="res://scripts/canvas_layer.gd" id="8_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://pu5qjohrbrth" path="res://assets/sprite/effect/filters/filter_2.png" id="8_sfy4j"]
 [ext_resource type="Texture2D" uid="uid://cf1k4k1fjc7pi" path="res://assets/sprite/effect/filters/filter_3.png" id="9_gv3ic"]
@@ -310,8 +312,10 @@ animation = &"normal_right"
 autoplay = "normal_right"
 
 [node name="walk" type="AudioStreamPlayer" parent="." unique_id=250736261]
+stream = ExtResource("7_xsi7p")
 
 [node name="hit" type="AudioStreamPlayer" parent="." unique_id=250736262]
+stream = ExtResource("6_fgkxt")
 
 [node name="wall" type="AudioStreamPlayer" parent="." unique_id=250736263]
 
@@ -349,7 +353,7 @@ item_frames = Array[SpriteFrames]([null, null, ExtResource("11_srp4u"), ExtResou
 process_mode = 2
 oversampling_override = 1.0
 title = "win"
-size = Vector2i(200, 100)
+size = Vector2i(169, 100)
 unresizable = true
 ok_button_text = "exit"
 dialog_text = "Escape successful！"
@@ -433,13 +437,12 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="ItemIcon" type="TextureRect" parent="CanvasLayer" unique_id=1928790074]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -11.408119
-offset_right = 17.32185
-offset_bottom = -0.0002593994
-grow_vertical = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.321854
+offset_bottom = 16.340675
+grow_horizontal = 0
 rotation = 0.0066482257
 
 [node name="gameover" type="Label" parent="CanvasLayer" unique_id=978164956]
@@ -480,4 +483,5 @@ offset_top = 31.0
 offset_right = -152.0
 offset_bottom = 54.0
 grow_horizontal = 0
-metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=28102368]

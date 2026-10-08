@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ljemukyvsnn8" path="res://monster/ghost.gd" id="1_rcv15"]
 [ext_resource type="Texture2D" uid="uid://cv6ligty17c5k" path="res://assets/sprite/mobs/ghost.png" id="2_erua2"]
+[ext_resource type="AudioStream" uid="uid://d1ujyrmippbsx" path="res://assets/audio/chasing.ogg" id="3_0vyy5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 4.0
@@ -102,8 +103,6 @@ shape = SubResource("CircleShape2D_qg826")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=895573481]
 path_desired_distance = 6.0
-target_desired_distance = 10.0
-avoidance_enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=371879515]
 scale = Vector2(0.5625, 0.5)
@@ -112,3 +111,4 @@ animation = &"normal_left"
 autoplay = "normal_left"
 
 [node name="wind" type="AudioStreamPlayer" parent="." unique_id=371879516]
+stream = ExtResource("3_0vyy5")

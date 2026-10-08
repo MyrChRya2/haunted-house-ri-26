@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cl4y0kmx8nft6" path="res://monster/vampire.gd" id="1_ht4rs"]
 [ext_resource type="Texture2D" uid="uid://bt6tepca4yhm7" path="res://assets/sprite/mobs/vampire.png" id="2_yiyhq"]
+[ext_resource type="AudioStream" uid="uid://d1ujyrmippbsx" path="res://assets/audio/chasing.ogg" id="3_84uh6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg826"]
 radius = 4.0
@@ -111,3 +112,4 @@ animation = &"reset"
 autoplay = "normal_left"
 
 [node name="wind" type="AudioStreamPlayer" parent="." unique_id=1900560656]
+stream = ExtResource("3_84uh6")

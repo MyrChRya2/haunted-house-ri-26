@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2owtxi0lu05o" path="res://item/pieces.gd" id="1_kew4n"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="2_kew4n"]
+[ext_resource type="Script" path="res://item/pickup_bob.gd" id="9_bob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 3.0
@@ -14,6 +15,7 @@ script = ExtResource("1_kew4n")
 shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=320620131]
+script = ExtResource("9_bob")
 sprite_frames = ExtResource("2_kew4n")
 autoplay = "default"
 frame_progress = 0.939727

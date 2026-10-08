@@ -11,3 +11,7 @@ sheet = ExtResource("2_sheet")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=93616390]
 hframes = 21
+
+[node name="sfx_vertical" type="AudioStreamPlayer" parent="." unique_id=93616395]
+
+[node name="sfx_horizontal" type="AudioStreamPlayer" parent="." unique_id=93616396]

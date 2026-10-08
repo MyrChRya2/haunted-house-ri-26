@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clwovgmuenp8v" path="res://item/piece_r.gd" id="1_c3ccf"]
 [ext_resource type="Texture2D" uid="uid://dq7r5huqnnga" path="res://assets/sprite/items/keys/piecer.tres" id="2_mxfmd"]
+[ext_resource type="Script" path="res://item/pickup_bob.gd" id="9_bob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 3.0
@@ -15,4 +16,5 @@ item_kind = 4
 shape = SubResource("CircleShape2D_4u2dp")
 
 [node name="Piecer" type="Sprite2D" parent="." unique_id=1979964476]
+script = ExtResource("9_bob")
 texture = ExtResource("2_mxfmd")
