@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cg7iw05aiusek" path="res://scenes/levels/level/scene_wipe.gd" id="1_wipe"]
 [ext_resource type="Texture2D" uid="uid://bnjr84wc8j777" path="res://assets/sprite/effect/wipe_sheet.png" id="2_sheet"]
+[ext_resource type="AudioStream" uid="uid://d2lhan3qqppal" path="res://assets/audio/upstairs.ogg" id="3_2xowe"]
+[ext_resource type="AudioStream" uid="uid://c5i0vaksnsgrp" path="res://assets/audio/downstairs.ogg" id="4_1lv0f"]
 
 [node name="SceneWipe" type="CanvasLayer" unique_id=900855277]
 process_mode = 3
@@ -13,5 +15,7 @@ sheet = ExtResource("2_sheet")
 hframes = 21
 
 [node name="sfx_vertical" type="AudioStreamPlayer" parent="." unique_id=93616395]
+stream = ExtResource("3_2xowe")
 
 [node name="sfx_horizontal" type="AudioStreamPlayer" parent="." unique_id=93616396]
+stream = ExtResource("4_1lv0f")

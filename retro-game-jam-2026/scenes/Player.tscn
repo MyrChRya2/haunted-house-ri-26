@@ -24,6 +24,12 @@
 [ext_resource type="SpriteFrames" uid="uid://bbq2gulx8baw8" path="res://item/weng_frames.tres" id="12_jfpux"]
 [ext_resource type="SpriteFrames" uid="uid://b12qjeafft2ua" path="res://item/pieces_frames.tres" id="13_61ith"]
 [ext_resource type="Texture2D" uid="uid://y2qsk0iwe2k2" path="res://assets/sprite/ui/life.png" id="14_heart"]
+[ext_resource type="AudioStream" uid="uid://bhpn3q3j30ax" path="res://assets/audio/step.ogg" id="15_step"]
+[ext_resource type="AudioStream" uid="uid://cs3ojx1xfh3ua" path="res://assets/audio/light.ogg" id="16_light"]
+[ext_resource type="AudioStream" uid="uid://be4ka7oxqay4f" path="res://assets/audio/no_light.ogg" id="17_nolight"]
+[ext_resource type="AudioStream" uid="uid://4vfn4m0papjx" path="res://assets/audio/combine.ogg" id="18_combine"]
+[ext_resource type="AudioStream" uid="uid://bfvp6g70l07ga" path="res://assets/audio/pickup.ogg" id="28_axnmu"]
+[ext_resource type="AudioStream" uid="uid://breedopitlrkp" path="res://assets/audio/deadly_damege.ogg" id="29_fvsjc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4u2dp"]
 radius = 3.0
@@ -312,12 +318,13 @@ animation = &"normal_right"
 autoplay = "normal_right"
 
 [node name="walk" type="AudioStreamPlayer" parent="." unique_id=250736261]
-stream = ExtResource("7_xsi7p")
+stream = ExtResource("15_step")
 
 [node name="hit" type="AudioStreamPlayer" parent="." unique_id=250736262]
 stream = ExtResource("6_fgkxt")
 
 [node name="wall" type="AudioStreamPlayer" parent="." unique_id=250736263]
+stream = ExtResource("7_xsi7p")
 
 [node name="MatchLight" type="Node2D" parent="." unique_id=802325956]
 show_behind_parent = true
@@ -342,6 +349,12 @@ mouse_filter = 2
 
 [node name="BurnTimer" type="Timer" parent="MatchLight" unique_id=30644840]
 one_shot = true
+
+[node name="light_on" type="AudioStreamPlayer" parent="MatchLight" unique_id=-1787604591]
+stream = ExtResource("16_light")
+
+[node name="light_off" type="AudioStreamPlayer" parent="MatchLight" unique_id=-1787604590]
+stream = ExtResource("17_nolight")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1746974270 groups=["hub"]]
 script = ExtResource("8_lkdrv")
@@ -484,4 +497,14 @@ offset_right = -152.0
 offset_bottom = 54.0
 grow_horizontal = 0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=28102368]
+[node name="pickup" type="AudioStreamPlayer" parent="." unique_id=-1787604595]
+stream = ExtResource("28_axnmu")
+
+[node name="low_life" type="AudioStreamPlayer" parent="." unique_id=-1787604594]
+stream = ExtResource("29_fvsjc")
+
+[node name="craft_pieces" type="AudioStreamPlayer" parent="." unique_id=-1787604593]
+stream = ExtResource("18_combine")
+
+[node name="craft_weng" type="AudioStreamPlayer" parent="." unique_id=-1787604592]
+stream = ExtResource("18_combine")

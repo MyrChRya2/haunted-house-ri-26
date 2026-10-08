@@ -61,7 +61,14 @@ const HIT_ANIMATION := &"hit"
 @onready var _sfx_walk: AudioStreamPlayer = $walk
 @onready var _sfx_hit: AudioStreamPlayer = $hit
 @onready var _sfx_wall: AudioStreamPlayer = $wall
+#拾取 / 一滴血 / 合成
+@onready var _sfx_pickup: AudioStreamPlayer = $pickup
+@onready var _sfx_low_life: AudioStreamPlayer = $low_life
+@onready var _sfx_craft_pieces: AudioStreamPlayer = $craft_pieces
+@onready var _sfx_craft_weng: AudioStreamPlayer = $craft_weng
 var _wall_sfx_on: bool = false
+#走路音效上次停下的位置
+var _walk_resume: float = 0.0
 
 func _ready() -> void:
 	#timer初始化
@@ -75,6 +82,10 @@ func _ready() -> void:
 #合成 pieces / weng 加一格血
 	_inventory.pieces_crafted.connect(add_life)
 	_inventory.weng_crafted.connect(add_life)
+#拾取道具 / 两片合成 / 三片合成 各一个音效
+	_inventory.item_taken.connect(_on_item_taken_sfx)
+	_inventory.pieces_crafted.connect(_on_craft_pieces_sfx)
+	_inventory.weng_crafted.connect(_on_craft_weng_sfx)
 #加组
 	add_to_group("player")
 	hit_invincible_started.connect(_on_hit_fx)
@@ -171,6 +182,9 @@ func take_damage() -> void:
 	_blink_t = 0.0
 	body_sprite.visible = false
 	lives -= 1
+	#只剩一滴血
+	if lives == 1:
+		_play_sfx(_sfx_low_life, true)
 	#死亡
 	if lives <= 0:
 		is_dead = true
@@ -232,12 +246,30 @@ func _ensure_loop(sfx: AudioStreamPlayer) -> void:
 	elif sfx.stream is AudioStreamMP3:
 		(sfx.stream as AudioStreamMP3).loop = true
 
+#拾取道具（捡起 / 换手 / 拿到 weng 都会发）
+func _on_item_taken_sfx(_kind: int) -> void:
+	_play_sfx(_sfx_pickup, true)
+
+#两片合成 pieces
+func _on_craft_pieces_sfx() -> void:
+	_play_sfx(_sfx_craft_pieces, true)
+
+#三片合成 weng
+func _on_craft_weng_sfx() -> void:
+	_play_sfx(_sfx_craft_weng, true)
+
+#停走路音效但记住播到哪，擦墙后接着播、不重头响
+func _stop_walk_sfx() -> void:
+	if _sfx_walk and _sfx_walk.playing:
+		_walk_resume = _sfx_walk.get_playback_position()
+		_sfx_walk.stop()
+
 #有输入：走路循环；顶墙改碰墙；停下/死亡停掉
 func _update_move_sfx(move_input: Vector2) -> void:
 	var moving := move_input != Vector2.ZERO
 	var hitting_wall := moving and get_slide_collision_count() > 0
 	if hitting_wall:
-		_stop_sfx(_sfx_walk)
+		_stop_walk_sfx()
 		if not _wall_sfx_on:
 			_play_sfx(_sfx_wall, true)
 			_wall_sfx_on = true
@@ -245,12 +277,16 @@ func _update_move_sfx(move_input: Vector2) -> void:
 	_wall_sfx_on = false
 	_stop_sfx(_sfx_wall)
 	if moving:
-		_play_sfx(_sfx_walk, false)
+		#接着上次停下的位置播，擦墙后不会重头响
+		if _sfx_walk and _sfx_walk.stream and not _sfx_walk.playing:
+			_sfx_walk.play(_walk_resume)
 	else:
-		_stop_sfx(_sfx_walk)
+		_stop_walk_sfx()
+		_walk_resume = 0.0
 
 func _stop_move_sfx() -> void:
 	_wall_sfx_on = false
+	_walk_resume = 0.0
 	_stop_sfx(_sfx_walk)
 	_stop_sfx(_sfx_wall)
 

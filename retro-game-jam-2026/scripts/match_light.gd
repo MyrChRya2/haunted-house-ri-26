@@ -11,6 +11,9 @@ enum Phase { DARK, FLASH, IGNITING, BURNING, FADING }
 @onready var _burn_timer: Timer = $BurnTimer
 @onready var _ignite_flash: Sprite2D = $IgniteFlash
 @onready var _vision_mask: ColorRect = $VisionMask
+#点火 / 熄灭音效
+@onready var _sfx_light_on: AudioStreamPlayer = $light_on
+@onready var _sfx_light_off: AudioStreamPlayer = $light_off
 
 @export var burn_seconds: float = 20.0
 #光圈半径（像素），一格序列帧铺满这个直径
@@ -100,6 +103,9 @@ func try_light() -> void:
 	match_used.emit(matches_used)
 	is_lit = true
 	_phase = Phase.FLASH
+	#点火音效
+	if _sfx_light_on and _sfx_light_on.stream:
+		_sfx_light_on.play()
 	await _play_ignite_flash()
 	if not is_lit:
 	#闪光这一帧里被extinguish了
@@ -117,6 +123,9 @@ func try_snuff() -> void:
 	_on_burn_timer_timeout()
 
 func extinguish(reason: StringName) -> void:
+	#开局那次不算（_ready 里会带 init 调一次）
+	if reason != &"init" and _sfx_light_off and _sfx_light_off.stream:
+		_sfx_light_off.play()
 	_busy = false
 	is_lit = false
 	_phase = Phase.DARK

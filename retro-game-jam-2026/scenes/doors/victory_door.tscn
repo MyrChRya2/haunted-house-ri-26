@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bkkwate3mi485" path="res://scripts/victorydoor.gd" id="1_gbmfw"]
 [ext_resource type="Texture2D" uid="uid://d3nddx2bhgq1f" path="res://assets/sprite/tiles/doors/door_final.png" id="2_qprpi"]
+[ext_resource type="AudioStream" uid="uid://7anxgl547023" path="res://assets/audio/victory.ogg" id="9_win"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rb6h8"]
 size = Vector2(20, 6)
@@ -112,3 +113,7 @@ autoplay = "closed"
 vertices = PackedVector2Array(-10, 4, 10, 4, 10, -3, -10, -3)
 
 [node name="open" type="AudioStreamPlayer" parent="." unique_id=1825253496]
+
+[node name="win" type="AudioStreamPlayer" parent="." unique_id=1825253497]
+process_mode = 3
+stream = ExtResource("9_win")

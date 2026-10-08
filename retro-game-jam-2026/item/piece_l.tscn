@@ -10,7 +10,6 @@ radius = 3.0
 [node name="Piecel" type="Area2D" unique_id=1765561640]
 light_mask = 2
 script = ExtResource("1_24x3n")
-item_kind = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=611320100]
 shape = SubResource("CircleShape2D_4u2dp")
