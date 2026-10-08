@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://oy2xdo8ps8li"]
 
 [ext_resource type="PackedScene" uid="uid://bhrlnu754dreb" path="res://scenes/levels/level8/map.tscn" id="1_fkc71"]
-[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/Stairdown.tscn" id="2_o5x6x"]
+[ext_resource type="PackedScene" uid="uid://c3li4n3nxhmlm" path="res://scenes/stairdown.tscn" id="2_o5x6x"]
 [ext_resource type="TileSet" uid="uid://cu8tceo5td13x" path="res://assets/sprite/effect/darkedge_effect.tres" id="2_s2i63"]
 [ext_resource type="TileSet" uid="uid://cv2k3bbsu1n2q" path="res://assets/sprite/tiles/walls/wall_tile_set.tres" id="3_qv888"]
 [ext_resource type="Script" uid="uid://n322h217bqkh" path="res://scenes/levels/level/map_portal.gd" id="5_qv888"]
@@ -32,6 +32,7 @@ size = Vector2(12, 20)
 navigation_enabled = false
 
 [node name="Darkedge" type="TileMapLayer" parent="WallAndFloor" unique_id=2063271075]
+z_index = 21
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAQAAAAAAAEAAAAAAAUAAAAAAAEAAAAAAAYAAAAAAAEAAAAAAAcAAAAAAAEAAAAAAAgAAAAAAAEAAAAAAAkAAAAAAAIAAAABAAkAAAABAAIAAAACAAkAAAABAAIAAAADAAkAAAABAAIAAAAEAAkAAAABAAIAAAAFAAkAAAABAAIAAAAGAAkAAAABAAIAAAAHAAkAAAABAAIAAAAIAAkAAAABAAIAAAAJAAkAAAABAAIAAAAKAAkAAAABAAIAAAALAAkAAAACAAIAAAALAAEAAAACAAEAAAALAAIAAAACAAEAAAALAAMAAAACAAEAAAALAAQAAAACAAEAAAALAAUAAAACAAEAAAALAAYAAAACAAEAAAALAAcAAAACAAEAAAALAAgAAAACAAEAAAALAAAAAAACAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAA=")
 tile_set = ExtResource("2_s2i63")
 navigation_enabled = false

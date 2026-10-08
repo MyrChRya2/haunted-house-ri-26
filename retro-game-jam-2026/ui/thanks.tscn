@@ -116,6 +116,18 @@ Sorry for the rough gaming experience.
 We were try our best to do it as perfect as posible though the deadline was too strick for us. Anyway thank for your playing and thank for Retro Game Jam witch give us the opportunity to practice. Best wishes for all the player! <3"
 autowrap_mode = 3
 
+[node name="Copyright" type="Label" parent="." unique_id=629840409]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 69.0
+offset_right = 88.0
+offset_bottom = 85.0
+theme_override_fonts/font = ExtResource("4_eqh62")
+theme_override_font_sizes/font_size = 2
+text = "Cairopixel by GGBotNet — SIL Open Font License 1.1
+Bulletin by NetherStarMCforREAL (FontStruct) — Open Font License"
+autowrap_mode = 3
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1106769353]
 stream = ExtResource("5_yvb8q")
 autoplay = true
