@@ -1,0 +1,48 @@
+MIT License
+
+Copyright (c) 2026 R&I — Ray & Illya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Scope note / 适用范围说明
+
+This license covers the source code and the original assets (pixel art,
+animation, audio) of this project, created by Ray and Illya during Retro Game
+Jam 2026.
+
+本许可覆盖本项目的源代码与自研素材（像素美术、动画、音效），均由 Ray 与 Illya
+在 Retro Game Jam 2026 期间创作。
+
+NOT covered by this license / 不在本许可范围内：
+
+- Fonts bundled in `retro-game-jam-2026/ui/` — `Cairopixel.ttf` (© 2025 GGBotNet)
+  and `bulletinV1.ttf` (NetherStarMCforREAL). Both are licensed under the
+  SIL Open Font License, Version 1.1; see `LICENSES/OFL-1.1.txt`.
+- The Godot Engine runtime (MIT License, © Godot Engine contributors).
+- "Haunted House" (Atari, 1982) and any related trademarks. This project is an
+  unofficial, non-commercial fan remake and uses no assets from the original game.
+
+- `retro-game-jam-2026/ui/` 下的两款字体：`Cairopixel.ttf`（© 2025 GGBotNet）、
+  `bulletinV1.ttf`（NetherStarMCforREAL），均按 SIL Open Font License 1.1 授权，
+  全文见 `LICENSES/OFL-1.1.txt`。
+- Godot 引擎运行时（MIT License，© Godot Engine contributors）。
+- “Haunted House”（Atari, 1982）及其相关商标。本项目为非官方、非商业同人重制，
+  未使用原作的任何素材。
