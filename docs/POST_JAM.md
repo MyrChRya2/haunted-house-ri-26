@@ -136,3 +136,34 @@
 4. **别人说"已经清掉了"时，去验引用** —— 逐项 `git grep` 归零 + 查悬空 `.import` + 查入口配置。
 5. **改名 / 移动要连带处理 `.import` 与引用**；`git diff` 里的 `R`（改名）条目要核对两端路径。
 6. **AI 边界**：Agent 做项目管理、台账、Git、工程配置与构建，不写游戏代码、不生成素材、不代建场景；"能不能玩"必须由人在真机验。
+
+---
+
+## 五、公开仓库（镜像）与刷新流程
+
+- **工作仓（私有）** `retro-game-jam-2026`：日常开发、内部文档、完整历史（含已被清理的第三方素材提交）。
+- **公开仓（镜像）** <https://github.com/MyrChRya2/haunted-house-ri-26>：面向公众与主办方核验，历史经 `git filter-repo` 清理（157 提交、时间戳全保留、第三方素材零命中）。
+- **清理前的完整镜像备份**：`SOURCE/repo-backup.git` —— **不要删**。
+
+刷新（把工作仓的最新状态同步到公开仓）：
+
+1. `git clone --mirror . SOURCE\tmp-mirror.git` —— 从工作仓取全量
+2. 在副本里执行 `python -m git_filter_repo --path-glob 'retro-game-jam-2026/resources*temper*' --invert-paths --force`
+3. 校验两条：`git log --all --oneline -- 'retro-game-jam-2026/resources——temper'` 为 **0**；`git rev-parse main^{tree}` 与工作仓 `main^{tree}` **相同**
+4. `git remote add origin https://github.com/MyrChRya2/haunted-house-ri-26.git` → `git push -f origin main --tags`
+5. 完成后**匿名**复核：`git clone --mirror https://github.com/MyrChRya2/haunted-house-ri-26.git` 再搜一遍第三方文件名
+
+> ⚠️ 第 4 步的 `force push` 是**镜像仓专属例外**（它与工作仓不同源、只承载公开版本）；**工作仓仍严格禁 force push**。
+> ⚠️ 两仓共存期间**别在公开仓上直接改代码**，否则下次刷新会把改动冲掉。
+
+---
+
+## 六、给主办方的核验链接（一键）
+
+| 用途 | 链接 |
+|---|---|
+| **只看游戏本体的提交时间线（最关键）** | <https://github.com/MyrChRya2/haunted-house-ri-26/commits/main/retro-game-jam-2026> |
+| 发布点（tag `v1.0.2`） | <https://github.com/MyrChRya2/haunted-house-ri-26/releases/tag/v1.0.2> |
+| 仓库首页 | <https://github.com/MyrChRya2/haunted-house-ri-26> |
+
+**核验要点（可直接引用）：** Jam 窗口 **2026-09-30 06:00 → 2026-10-08 22:00 UTC**；**最后一条改动游戏本体的提交是 2026-10-09 05:01 (UTC+8) ＝ 10-08 21:01 UTC，距截止 59 分钟**；其后所有提交**只动文档**（ROADMAP / LICENSE / README / POST_JAM）；**Jam 开始时仓库里零美术、零音频、零游戏脚本**（只有工程骨架与策划文档）。
